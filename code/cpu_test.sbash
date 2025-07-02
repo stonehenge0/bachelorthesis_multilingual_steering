@@ -1,14 +1,22 @@
 #!/bin/bash
-#SBATCH --job-name=cpu_test
+#SBATCH --job-name=cpu_test_multijail
 #SBATCH -p scc-cpu
 #SBATCH -t 00:10:00
 
 
-# Initialize conda (source the conda setup)
+
+# conda
 source /mnt/vast-standard/home/stein65/u14374/miniforge3/etc/profile.d/conda.sh
+conda activate /mnt/vast-standard/home/stein65/u14374/miniforge3/envs/myenv
 
-# Activate your conda environment
-conda activate /user/stein65/u14374/envs/myenv
 
-# Run script
-sleep 3600  # runs for 1 hour
+# log GPU resources with nvitop in background
+nvitop --mode batch --interval 10 --log-file ${SLURM_JOB_ID}_gpu_usage.log &
+NVITOP_PID=$!
+
+# script
+python multijail_baseline.py
+
+# kill background nvitop after run finished
+kill $NVITOP_PID
+
