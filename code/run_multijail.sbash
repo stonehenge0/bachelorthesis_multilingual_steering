@@ -1,5 +1,4 @@
 #!/bin/bash
-#SBATCH --job-name=multijail
 #SBATCH -c 8
 #SBATCH --mem 45G
 #SBATCH -p scc-gpu
@@ -11,13 +10,5 @@
 source /mnt/vast-standard/home/stein65/u14374/miniforge3/etc/profile.d/conda.sh
 conda activate /mnt/vast-standard/home/stein65/u14374/miniforge3/envs/myenv
 
-
-# log GPU resources with nvitop in background
-nvitop --mode batch --interval 10 --log-file ${SLURM_JOB_ID}_gpu_usage.log &
-NVITOP_PID=$!
-
 # script
 python multijail_baseline.py
-
-# kill background nvitop after run finished
-kill $NVITOP_PID

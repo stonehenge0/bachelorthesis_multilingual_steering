@@ -55,62 +55,54 @@ def load_model_and_tokenizer(MODEL):
 
 
 # get batched responses for prompts for one lang. column
-def get_batched_responses_for_language(
-    prompts, model, tokenizer, batch_size=8
-):
-    """Generate model responses for batches of prompts in one specific language column."""
-    responses = []
-    for i in range(0, len(prompts), BATCH_SIZE):
-        batch_prompts = prompts[i : i + BATCH_SIZE]
-
-        batch_messages = [
-            [
-                {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": prompt},
-            ]
-            for prompt in batch_prompts
+def get_batched_responses_for_language(prompts, model, tokenizer):
+    """Generate model responses for a single batch of prompts."""
+    batch_messages = [
+        [
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": prompt},
         ]
+        for prompt in prompts
+    ]
 
-        texts = [
-            tokenizer.apply_chat_template(
-                messages, tokenize=False, add_generation_prompt=True
-            )
-            for messages in batch_messages
-        ]
-
-        tokenizer.padding_side = "left"
-        tokenizer.pad_token = tokenizer.eos_token
-
-        model_inputs = tokenizer(
-            texts, return_tensors="pt", padding=True, truncation=True, max_length=2048
-        ).to(model.device)
-
-        with torch.no_grad():
-            generated_ids = model.generate(
-                **model_inputs,
-                max_new_tokens=50,
-                do_sample=True,
-                temperature=0.7,
-                top_p=0.9,
-                top_k=50,
-                eos_token_id=tokenizer.eos_token_id,
-                pad_token_id=tokenizer.eos_token_id
-                )
-
-        generated_ids = [
-            output_ids[len(input_ids) :]
-            for input_ids, output_ids in zip(model_inputs.input_ids, generated_ids)
-        ]
-
-        batch_responses = tokenizer.batch_decode(
-            generated_ids, skip_special_tokens=True
+    texts = [
+        tokenizer.apply_chat_template(
+            messages, tokenize=False, add_generation_prompt=True
         )
-        responses.extend(batch_responses)
+        for messages in batch_messages
+    ]
 
-        if torch.cuda.is_available():
-            torch.cuda.empty_cache()
+    tokenizer.padding_side = "left"
+    tokenizer.pad_token = tokenizer.eos_token
+
+    model_inputs = tokenizer(
+        texts, return_tensors="pt", padding=True, truncation=True, max_length=2048
+    ).to(model.device)
+
+    with torch.no_grad():
+        generated_ids = model.generate(
+            **model_inputs,
+            max_new_tokens=50,
+            do_sample=True,
+            temperature=0.7,
+            top_p=0.9,
+            top_k=50,
+            eos_token_id=tokenizer.eos_token_id,
+            pad_token_id=tokenizer.eos_token_id
+        )
+
+    generated_ids = [
+        output_ids[len(input_ids):]
+        for input_ids, output_ids in zip(model_inputs.input_ids, generated_ids)
+    ]
+
+    responses = tokenizer.batch_decode(generated_ids, skip_special_tokens=True)
+
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
 
     return responses
+
 
 # apply get_batched_responses_for_language to every column
 def process_dataframe(df, model, tokenizer, lang_ids, batch_size=8):
@@ -131,9 +123,8 @@ def process_dataframe(df, model, tokenizer, lang_ids, batch_size=8):
             batch_responses = get_batched_responses_for_language(
                 prompts=batch_prompts,
                 model=model,
-                tokenizer=tokenizer,
-                batch_size=batch_size,
-            )
+                tokenizer=tokenizer
+                )
 
             for prompt, response in zip(batch_prompts, batch_responses):
                 results_for_lang.append({"prompt": prompt, "response": response})
@@ -156,7 +147,7 @@ if __name__ == "__main__":
 
     # 3. generate responses for every language
     text_data= process_dataframe(
-        df, loaded_model, loaded_tokenizer, lang_ids, batch_size=BATCH_SIZE ## das batching hier muss besser werden, lul
+        df, loaded_model, loaded_tokenizer, lang_ids, batch_size=BATCH_SIZE
     )
 
     # 4. save outputs
@@ -168,4 +159,3 @@ if __name__ == "__main__":
     print("Model:", loaded_model)
     print()
     print(f"Output has been written to: {OUT_FILE}")
-
