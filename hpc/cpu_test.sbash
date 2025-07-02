@@ -1,0 +1,14 @@
+#!/bin/bash
+#SBATCH --job-name=cpu_test
+#SBATCH -p scc-cpu
+#SBATCH -t 00:10:00
+
+
+# Initialize conda (source the conda setup)
+source /mnt/vast-standard/home/stein65/u14374/miniforge3/etc/profile.d/conda.sh
+
+# Activate your conda environment
+conda activate /user/stein65/u14374/envs/myenv
+
+# Run script
+sleep 3600  # runs for 1 hour

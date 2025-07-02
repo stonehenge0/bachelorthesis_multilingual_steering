@@ -1,0 +1,11 @@
+#! /bin/bash
+#SBATCH -c 8
+#SBATCH --mem 8G
+#SBATCH -p scc-gpu
+#SBATCH -t 10:00 
+#SBATCH -G A100:1
+
+source /mnt/vast-standard/home/stein65/u14374/miniforge3/etc/profile.d/conda.sh
+conda activate /user/stein65/u14374/envs/myenv
+
+python mmlu_eval_harness.py

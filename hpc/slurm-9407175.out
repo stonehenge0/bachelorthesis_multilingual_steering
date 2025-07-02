@@ -1,0 +1,17 @@
+================================================================================
+JobID = 9407175
+User = u14374, Account = ag_gipp
+Partition = scc-cpu, Nodelist = c0003
+================================================================================
+
+EnvironmentLocationNotFound: Not a conda environment: /user/stein65/u14374/envs/myenv
+
+slurmstepd: error: *** JOB 9407175 ON c0003 CANCELLED AT 2025-06-25T14:08:35 DUE TO TIME LIMIT ***
+============ Job Information ===================================================
+Submitted: 2025-06-25T13:58:06
+Started: 2025-06-25T13:58:11
+Ended: 2025-06-25T14:08:35
+Elapsed: 11 min, Limit: 10 min, Difference: -1 min
+CPUs: 2, Nodes: 1
+Estimated Consumption: 0.37 core-hours
+================================================================================
