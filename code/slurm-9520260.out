@@ -1,0 +1,46 @@
+================================================================================
+JobID = 9520260
+User = u14374, Account = ag_gipp
+Partition = scc-gpu, Nodelist = ggpu199
+================================================================================
+/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/myenv/lib/python3.9/site-packages/pandas/core/computation/expressions.py:21: UserWarning: Pandas requires version '2.8.4' or newer of 'numexpr' (version '2.7.3' currently installed).
+  from pandas.core.computation.check import NUMEXPR_INSTALLED
+Downloading shards:   0%|          | 0/4 [00:00<?, ?it/s]Downloading shards:  75%|███████▌  | 3/4 [00:13<00:04,  4.47s/it]Downloading shards: 100%|██████████| 4/4 [00:20<00:00,  5.39s/it]Downloading shards: 100%|██████████| 4/4 [00:20<00:00,  5.19s/it]
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:08<00:25,  8.43s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:15<00:15,  7.56s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:23<00:07,  7.62s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:25<00:00,  5.55s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:25<00:00,  6.36s/it]
+Processing languages:   0%|          | 0/10 [00:00<?, ?it/s]Processing languages:  10%|█         | 1/10 [01:45<15:49, 105.53s/it]Processing languages:  20%|██        | 2/10 [03:32<14:09, 106.22s/it]Processing languages:  30%|███       | 3/10 [05:22<12:34, 107.85s/it]Processing languages:  40%|████      | 4/10 [07:11<10:50, 108.41s/it]Processing languages:  50%|█████     | 5/10 [09:00<09:04, 108.82s/it]Processing languages:  60%|██████    | 6/10 [10:50<07:15, 108.94s/it]Processing languages:  70%|███████   | 7/10 [12:38<05:26, 108.67s/it]Processing languages:  80%|████████  | 8/10 [14:28<03:38, 109.29s/it]Processing languages:  90%|█████████ | 9/10 [16:24<01:51, 111.22s/it]Processing languages: 100%|██████████| 10/10 [18:19<00:00, 112.53s/it]Processing languages: 100%|██████████| 10/10 [18:19<00:00, 109.97s/it]
+Model: LlamaForCausalLM(
+  (model): LlamaModel(
+    (embed_tokens): Embedding(128256, 4096)
+    (layers): ModuleList(
+      (0-31): 32 x LlamaDecoderLayer(
+        (self_attn): LlamaAttention(
+          (q_proj): Linear(in_features=4096, out_features=4096, bias=False)
+          (k_proj): Linear(in_features=4096, out_features=1024, bias=False)
+          (v_proj): Linear(in_features=4096, out_features=1024, bias=False)
+          (o_proj): Linear(in_features=4096, out_features=4096, bias=False)
+        )
+        (mlp): LlamaMLP(
+          (gate_proj): Linear(in_features=4096, out_features=14336, bias=False)
+          (up_proj): Linear(in_features=4096, out_features=14336, bias=False)
+          (down_proj): Linear(in_features=14336, out_features=4096, bias=False)
+          (act_fn): SiLU()
+        )
+        (input_layernorm): LlamaRMSNorm((4096,), eps=1e-05)
+        (post_attention_layernorm): LlamaRMSNorm((4096,), eps=1e-05)
+      )
+    )
+    (norm): LlamaRMSNorm((4096,), eps=1e-05)
+    (rotary_emb): LlamaRotaryEmbedding()
+  )
+  (lm_head): Linear(in_features=4096, out_features=128256, bias=False)
+)
+
+Output has been written to: MultiJail_results.csv
+============ Job Information ===================================================
+Submitted: 2025-07-02T17:17:11
+Started: 2025-07-02T17:20:10
+Ended: 2025-07-02T17:40:08
+Elapsed: 20 min, Limit: 210 min, Difference: 190 min
+CPUs: 8, Nodes: 1
+Estimated Consumption: 50.00 core-hours
+================================================================================
