@@ -41,6 +41,12 @@ if not os.path.exists(out_path):
     print(f"Created output directory: {out_path}")
     print(f"Your results will be saved to: {os.path.abspath(out_path)}")
 
+# Wandb logging
+wandb_user = wandb.api.default_entity
+print(f"=== Wandb Information ===")
+print(f"Logged in as: {wandb_user}")
+print(f"Project: {wandb_project}")
+
 
 def create_steering_config(layer_num, strength):
     """Create steering config for given layer and strength"""
@@ -73,6 +79,7 @@ def run_evaluation(model_type, model_args, run_name):
         "auto",
         "--seed",
         "42",
+        "--predict_only",  # for modified_lm_eval we use predict only, since we will evaluate with our own llm judge later.
         "--wandb_args",
         f"project={wandb_project},name={run_name}",
         "--log_samples",
@@ -104,10 +111,15 @@ for strength in steering_strengths:
 
     # steer config for that specific steering strength
     steer_config = create_steering_config(steering_layer, strength)
+    print(f"=== Steering Configs ===")
+    print()
+
     config_filename = (
         run_name_baseline + f"steer_config_layer{steering_layer}_strength{strength}.pt"
     )
-    torch.save(steer_config, config_filename)
+    config_filepath = os.path.join(out_path, config_filename)
+
+    torch.save(steer_config, config_filepath)
 
     # Run eval
     run_name = f"steered_layer{steering_layer}_strength{strength}"

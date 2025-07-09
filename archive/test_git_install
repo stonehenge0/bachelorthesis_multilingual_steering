@@ -1,0 +1,15 @@
+import subprocess
+import os
+
+# Clone the repo
+subprocess.run(
+    ["git", "clone", "https://github.com/stonehenge0/modified_llm_eval_harness.git"],
+    check=True,
+)
+
+# Change to the directory and install
+os.chdir("modified_llm_eval_harness")
+subprocess.run(["pip", "install", "-e", "."], check=True)
+
+# Now you can import from the package
+import modified_lm_eval
