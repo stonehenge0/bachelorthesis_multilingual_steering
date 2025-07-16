@@ -1,0 +1,23 @@
+INFO:lm_eval.__main__:Selected Tasks: ['multijail']
+INFO:lm_eval.evaluator:Setting random seed to 0 | Setting numpy seed to 1234 | Setting torch manual seed to 1234 | Setting fewshot manual seed to 1234
+INFO:lm_eval.evaluator:Initializing steered model, with arguments: {'pretrained': 'meta-llama/meta-llama-3-8b-instruct', 'steer_path': '/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/multijail/meta-llama__meta-llama-3-8b-instruct/multijail_steer_config_layer12_strength0.33.pt'}
+WARNING:accelerate.utils.other:Detected kernel version 4.18.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+INFO:lm_eval.models.huggingface:Using device 'cuda:0'
+INFO:lm_eval.models.huggingface:Model parallel was set to False, max memory was not set, and device map was set to {'': 'cuda:0'}
+Loading checkpoint shards: 100%|██████████| 4/4 [00:02<00:00,  1.41it/s]
+WARNING:lm_eval.api.task:multijail: No `until` specified in `generation_kwargs`! Defaulting to the fewshot_delimiter='\n\n'
+INFO:lm_eval.evaluator:multijail: Using gen_kwargs: {'max_gen_toks': 100, 'temperature': 0.7, 'do_sample': True, 'until': ['\n\n']}
+INFO:lm_eval.evaluator:Processing multijail in output-only mode. Metrics will not be calculated!
+WARNING:lm_eval.evaluator:Chat template formatting change affects loglikelihood and multiple-choice tasks. See docs/chat-template-readme.md for details.
+INFO:lm_eval.api.task:Building contexts for multijail on rank 0...
+100%|██████████| 3150/3150 [00:00<00:00, 3216.69it/s]
+INFO:lm_eval.evaluator:Running generate_until requests
+Running generate_until requests: 100%|██████████| 3150/3150 [12:46<00:00,  4.11it/s]
+Passed argument batch_size = auto. Detecting largest batch size
+Determined Largest batch size: 8
+INFO:lm_eval.loggers.evaluation_tracker:Saving results aggregated
+INFO:lm_eval.loggers.evaluation_tracker:Saving per-sample results for: multijail
+steered (pretrained=meta-llama/meta-llama-3-8b-instruct,steer_path=/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/multijail/meta-llama__meta-llama-3-8b-instruct/multijail_steer_config_layer12_strength0.33.pt), gen_kwargs: (None), limit: None, num_fewshot: None, batch_size: auto
+|  Tasks  |Version|Filter|n-shot|Metric|   |Value|   |Stderr|
+|---------|-------|------|-----:|------|---|----:|---|------|
+|multijail|Yaml   |none  |     0|bypass|↑  |  999|±  |   N/A|
