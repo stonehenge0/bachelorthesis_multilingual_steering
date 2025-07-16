@@ -5,6 +5,6 @@
 
 # conda
 source /mnt/vast-standard/home/stein65/u14374/miniforge3/etc/profile.d/conda.sh
-conda activate modified_lm_eval_env
+conda activate /mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env
 
 python multijail.py
