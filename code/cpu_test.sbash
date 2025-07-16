@@ -1,14 +1,10 @@
 #!/bin/bash
-#SBATCH --job-name=cpu_test_multijail
+#SBATCH --job-name=medium_test_multijail
 #SBATCH -p medium
 #SBATCH -t 00:15:00
 
 # conda
 source /mnt/vast-standard/home/stein65/u14374/miniforge3/etc/profile.d/conda.sh
-conda activate /mnt/vast-standard/home/stein65/u14374/miniforge3/envs/myenv
+conda activate modified_lm_eval_env
 
-python -m lm_eval \
-    --model hf \
-    --model_args pretrained=meta-llama/Llama-3.2-1B-Instruct \
-    --tasks multijail \
-    --limit 10
+python multijail.py

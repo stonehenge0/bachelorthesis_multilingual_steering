@@ -1,0 +1,41 @@
+================================================================================
+JobID = 9683875
+User = u14374, Account = ag_gipp
+Partition = scc-gpu, Nodelist = ggpu147
+================================================================================
+wandb: Currently logged in as: stonehenge0 (stonehenge0-university-of-goettingen) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+=== Wandb Information ===
+Logged in as: stonehenge0-university-of-goettingen
+Project: bachelorarbeit
+=== Running Baseline Model ===
+Running: multijail_unsteered
+Command: lm_eval --model hf --model_args pretrained=meta-llama/meta-llama-3-8b-instruct --tasks multijail --output_path /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/multijail --device cuda:0 --batch_size auto --seed 42 --predict_only --wandb_args project=bachelorarbeit,name=multijail_unsteered --log_samples
+Running: multijail_unsteeredCommand: lm_eval --model hf --model_args pretrained=meta-llama/meta-llama-3-8b-instruct --tasks multijail --output_path /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/multijail --device cuda:0 --batch_size auto --seed 42 --predict_only --wandb_args project=bachelorarbeit,name=multijail_unsteered --log_samples
+=== Running Steered Models ===
+=== Steering Configs ===
+
+Running: steered_layer12_strength0.33
+Command: lm_eval --model steered --model_args pretrained=meta-llama/meta-llama-3-8b-instruct,steer_path=multijailsteer_config_layer12_strength0.33.pt --tasks multijail --output_path /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/multijail --device cuda:0 --batch_size auto --seed 42 --predict_only --wandb_args project=bachelorarbeit,name=steered_layer12_strength0.33 --log_samples
+Running: steered_layer12_strength0.33Command: lm_eval --model steered --model_args pretrained=meta-llama/meta-llama-3-8b-instruct,steer_path=multijailsteer_config_layer12_strength0.33.pt --tasks multijail --output_path /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/multijail --device cuda:0 --batch_size auto --seed 42 --predict_only --wandb_args project=bachelorarbeit,name=steered_layer12_strength0.33 --log_samples=== Steering Configs ===
+
+Running: steered_layer12_strength0.66
+Command: lm_eval --model steered --model_args pretrained=meta-llama/meta-llama-3-8b-instruct,steer_path=multijailsteer_config_layer12_strength0.66.pt --tasks multijail --output_path /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/multijail --device cuda:0 --batch_size auto --seed 42 --predict_only --wandb_args project=bachelorarbeit,name=steered_layer12_strength0.66 --log_samples
+Running: steered_layer12_strength0.66Command: lm_eval --model steered --model_args pretrained=meta-llama/meta-llama-3-8b-instruct,steer_path=multijailsteer_config_layer12_strength0.66.pt --tasks multijail --output_path /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/multijail --device cuda:0 --batch_size auto --seed 42 --predict_only --wandb_args project=bachelorarbeit,name=steered_layer12_strength0.66 --log_samples=== Steering Configs ===
+
+Running: steered_layer12_strength1.0
+Command: lm_eval --model steered --model_args pretrained=meta-llama/meta-llama-3-8b-instruct,steer_path=multijailsteer_config_layer12_strength1.0.pt --tasks multijail --output_path /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/multijail --device cuda:0 --batch_size auto --seed 42 --predict_only --wandb_args project=bachelorarbeit,name=steered_layer12_strength1.0 --log_samples
+Running: steered_layer12_strength1.0Command: lm_eval --model steered --model_args pretrained=meta-llama/meta-llama-3-8b-instruct,steer_path=multijailsteer_config_layer12_strength1.0.pt --tasks multijail --output_path /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/multijail --device cuda:0 --batch_size auto --seed 42 --predict_only --wandb_args project=bachelorarbeit,name=steered_layer12_strength1.0 --log_samples
+=== Results Summary ===
+Baseline: Success
+Steered models:
+  Strength 0.33: Success
+  Strength 0.66: Success
+  Strength 1.0: Success
+============ Job Information ===================================================
+Submitted: 2025-07-09T18:53:15
+Started: 2025-07-09T18:53:17
+Ended: 2025-07-09T19:41:57
+Elapsed: 49 min, Limit: 240 min, Difference: 191 min
+CPUs: 8, Nodes: 1
+Estimated Consumption: 122.50 core-hours
+================================================================================

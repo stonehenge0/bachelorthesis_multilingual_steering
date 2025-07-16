@@ -1,4 +1,5 @@
 #! /bin/bash
+#SBATCH --job-name=true_multijail
 #SBATCH -c 8
 #SBATCH --mem 45G
 #SBATCH -p scc-gpu
@@ -6,6 +7,6 @@
 #SBATCH -G A100:1
 
 source /mnt/vast-standard/home/stein65/u14374/miniforge3/etc/profile.d/conda.sh
-conda activate modified_lm_eval_env # importantly this is the second env mit the modified lm_eval script in it!
+conda activate /mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env
 
 python multijail.py
