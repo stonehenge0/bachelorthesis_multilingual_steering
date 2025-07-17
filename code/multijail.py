@@ -1,5 +1,7 @@
 """Evaluate normal and steered models on global mmlu using llm eval harness."""
 
+### give longer max new token generated, sometimes hard to find what exactly the model would have answered.
+
 # Setup
 import os
 import sys
