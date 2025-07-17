@@ -7,7 +7,7 @@ import sentencepiece
 _model_cache = {}
 
 OR_BENCH_PATH = "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/data/sampled_or_bench_200_prompts.csv"
-TARGET_LANGUAGES = ["zh", "ja", "ar"]  ##  "ko"
+TARGET_LANGUAGES = ["zh", "ja", "ko"]  ##  more langs. For two lang groups CUDA will go OOM.
 
 # Language grouping as required by the model
 GROUP2LANG = {
@@ -177,7 +177,7 @@ if __name__ == "__main__":
 
     # read in dataframe of sampled OR-bench.
     df = pd.read_csv(OR_BENCH_PATH)
-    df = df[:4]  ## DEBUG!
+    
     print(f"Loaded df: {df.info}")
 
     result_df = translate_dataframe_optimized(df, "prompt", TARGET_LANGUAGES)
