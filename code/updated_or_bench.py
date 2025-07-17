@@ -177,7 +177,7 @@ if __name__ == "__main__":
 
     # read in dataframe of sampled OR-bench.
     df = pd.read_csv(OR_BENCH_PATH)
-    
+
     print(f"Loaded df: {df.info}")
 
     result_df = translate_dataframe_optimized(df, "prompt", TARGET_LANGUAGES)
