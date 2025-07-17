@@ -7,7 +7,7 @@ import sentencepiece
 _model_cache = {}
 
 OR_BENCH_PATH = "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/data/sampled_or_bench_200_prompts.csv"
-TARGET_LANGUAGES = ["zh", "ja", "ko"]  ##  more langs. For two lang groups CUDA will go OOM.
+TARGET_LANGUAGES = ["ar"]  ##  more langs. For two lang groups CUDA will go OOM.
 
 # Language grouping as required by the model
 GROUP2LANG = {

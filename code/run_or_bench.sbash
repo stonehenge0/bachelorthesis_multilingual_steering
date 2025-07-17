@@ -1,5 +1,5 @@
 #! /bin/bash
-#SBATCH --job-name=or_test
+#SBATCH --job-name=ar_or_translations
 #SBATCH -c 8
 #SBATCH --mem 60G
 #SBATCH -p scc-gpu
