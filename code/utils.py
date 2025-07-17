@@ -8,6 +8,6 @@ def check(x, name_of_x=False):
     if hasattr(x, "shape"):
         print(f"shape: {x.shape}")
 
-    if hasattr(x, "length"):
-        print(f"Length: {x.length}")
+    if hasattr(x, "len"):
+        print(f"Length: {len(x)}")
     print("====END OF CHECK======")
