@@ -5,9 +5,9 @@ def check(x, name_of_x=False):
         print(f"name:{name_of_x}")
     print(f"type: {type(x)}")
 
-    if x.shape:
+    if hasattr(x, "shape"):
         print(f"shape: {x.shape}")
-    else:
-        print(f"Length: {len(x)}")
 
+    if hasattr(x, "length"):
+        print(f"Length: {x.length}")
     print("====END OF CHECK======")
