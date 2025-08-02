@@ -9,6 +9,7 @@ import datetime
 import subprocess
 import time
 import argparse
+import ast
 
 import wandb
 import torch
@@ -19,25 +20,54 @@ from huggingface_hub import login
 from utils import check, seed_everything, create_or_ensure_output_path
 
 # Argparser
-def get_args():
+def get_args() -> argparse.Namespace:
+    """Parse CLI arguments."""
+    
     parser = argparse.ArgumentParser()
 
-    #### If choice mmlu here, then the we need to join the specific mmlu tasks as specified in mmlu_eval.
     # Task and model
-    parser.add_argument("--run_name", required=True, default="unnamed_run", help="The run name. It is used for wandb and in naming all output files.")
-    parser.add_argument("--task", required=True, choices=["multijail","mmlu", "or_bench"], help="The task to evaluate on. Choices are: multijail, mmlu, or_bench.")
-    parser.add_argument("--model", required=True, default="meta-llama/meta-llama-3-8b-instruct", help="The model to evaluate.")
+    parser.add_argument("--run_name", required=True, default="unnamed_run", type=str, help="The run name. It is used for wandb and in naming all output files.")
+    parser.add_argument("--task", required=True, choices=["multijail","mmlu", "or_bench"], type=str, help="The task to evaluate on. Choices are: multijail, mmlu, or_bench.")
+    parser.add_argument("--model", required=True, default="meta-llama/meta-llama-3-8b-instruct", type=str, help="The model to evaluate.")
 
     # Output path and wandb
-    parser.add_argument("--output_path", default="/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results", help="The output path for results.")
-    parser.add_argument("--wandb_project", default="bachelorarbeit", help="The wandb project name.")
+    parser.add_argument("--output_path", default="/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results", type=str, help="The output path for results.")
+    parser.add_argument("--wandb_project", default="bachelorarbeit", type=str, help="The wandb project name.")
 
     # Steering arguments
-    parser.add_argument("--steering_direction_path", default="/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/code/direction_llama3_8b.pt", help="Path to the steering direction .pt file.")
-    parser.add_argument("--steering_strengths", type=list, help="List of steering strengths (floats).")
+    parser.add_argument("--steering_direction_path", default="/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/code/direction_llama3_8b.pt", type=str, help="Path to the steering direction .pt file.")
+    parser.add_argument(
+        "--steering_strengths",
+        nargs="*",
+        type=float,
+        default=None,
+        help="List of steering strengths (floats). Can be empty, one or more values."
+    )
     parser.add_argument("--steering_layer", type=int, help="Layer number to apply steering to.")
 
+    # Device and other parameters
+    parser.add_argument("--device", default="cuda:0", type=str, help="Device to run evaluation on (e.g., cuda:0, cpu).")
+    parser.add_argument("--limit", type=int, default=None, help="Limit the number of evaluation samples (default: None for full dataset).")
+
     return parser.parse_args()
+
+# Adding the args as variables here is somewhat of a personal preference, makes the script a bit more readable imo.
+args = get_args()
+run_name = args.run_name
+task = args.task
+model = args.model
+output_path = args.output_path
+wandb_project = args.wandb_project
+steering_direction_path = args.steering_direction_path
+steering_strengths = args.steering_strengths
+steering_layer = args.steering_layer
+device = args.device
+limit = args.limit
+
+# Map mmlu arg to lang specific mmlu tasks for lm_eval. Currently runs English, German, Chinese, and Bengali.
+if task == "mmlu":
+    task = ",".join(["global_mmlu_en", "global_mmlu_de","global_mmlu_zh", "global_mmlu_bn"])
+
 
 # Login to weights and biases, huggingface
 wandb.login()
@@ -82,7 +112,6 @@ def create_steering_config(layer_num, strength):
             "action": "add",
         }
     }
-
 
 def run_evaluation(model_type, model_args, run_name):
     """Run lm_eval with given parameters"""
