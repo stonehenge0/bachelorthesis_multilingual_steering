@@ -1,25 +1,9 @@
 import pandas as pd
-import argparse
 from utils import check
+import json
 
-parser = argparse.ArgumentParser(
-    description="Make a nice, cleaned up version of the multijail responses."
-)
 
-parser.add_argument(
-    ("--input_file", "-i"),
-    type=list,
-    required=False,
-    help="List of paths to input files containing multijail responses.",
-)
-parser.add_argument(
-    ("--output_file", "-o"),
-    type=str,
-    required=False,
-    help="Path to output file for cleaned multijail responses.",
-)
+PATHS_TO_MULTIJAIL_RESPONSES = ["C:\\Users\\emste\\Documents\\cloned_Gits\\model_steering_multilingual\\results\\multijail\\meta-llama__meta-llama-3-8b-instruct\\samples_multijail_2025-07-16T14-54-59.581312.jsonl"]
 
-args = parser.parse_args()
+json.load(PATHS_TO_MULTIJAIL_RESPONSES)
 
-print(args)
-print(check(args))
