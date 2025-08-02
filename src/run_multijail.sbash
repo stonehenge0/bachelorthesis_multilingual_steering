@@ -1,0 +1,33 @@
+#! /bin/bash
+#SBATCH --job-name=true_multijail # Job name.
+#SBATCH -c 8 # CPU cores
+#SBATCH --mem 50G # memory
+#SBATCH -p scc-gpu # Partition
+#SBATCH -t 04:00:00 # Time limit
+#SBATCH -G A100:1 # Which GPU to use
+#SBATCH --output=../slurm_files/slurm-%x-%j.out     # where to write output, %x gives job name, %j names job id
+#SBATCH --error=../slurm_files/slurm-%x-%j.err      # where to write slurm error.
+
+# Printing out some info on filepaths.
+echo "Submitting job with sbatch from directory: ${SLURM_SUBMIT_DIR}"
+echo "Home directory: ${HOME}"
+echo "Working directory: $PWD"
+echo "Current node: ${SLURM_NODELIST}"
+
+# Print out some python and torch info.
+python --version
+python -m torch.utils.collect_env 2> /dev/null
+
+# Print out some git info.
+module load git
+echo -e "\nCurrent Branch: $(git rev-parse --abbrev-ref HEAD)"
+echo "Latest Commit: $(git rev-parse --short HEAD)"
+echo -e "Uncommitted Changes: $(git status --porcelain | wc -l)\n"
+
+# Conda environment setup.
+source /mnt/vast-standard/home/stein65/u14374/miniforge3/etc/profile.d/conda.sh
+conda activate /mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env
+echo "Activated Conda environment: $CONDA_DEFAULT_ENV"
+
+# Run script.
+# python multijail.py

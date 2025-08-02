@@ -1,0 +1,109 @@
+================================================================================
+JobID = 10187710
+User = u14374, Account = ag_gipp
+Partition = scc-gpu, Nodelist = ggpu135
+================================================================================
+Submitting job with sbatch from directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/src
+Home directory: /user/stein65/u14374
+Working directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/src
+Current node: ggpu135
+Python 3.12.8
+Collecting environment information...
+PyTorch version: 2.7.1+cu126
+Is debug build: False
+CUDA used to build PyTorch: 12.6
+ROCM used to build PyTorch: N/A
+
+OS: Rocky Linux 8.10 (Green Obsidian) (x86_64)
+GCC version: (GCC) 8.5.0 20210514 (Red Hat 8.5.0-26)
+Clang version: Could not collect
+CMake version: version 3.26.5
+Libc version: glibc-2.28
+
+Python version: 3.12.8 | packaged by conda-forge | (main, Dec  5 2024, 14:24:40) [GCC 13.3.0] (64-bit runtime)
+Python platform: Linux-4.18.0-553.54.1.el8_10.x86_64-x86_64-with-glibc2.28
+Is CUDA available: True
+CUDA runtime version: Could not collect
+CUDA_MODULE_LOADING set to: LAZY
+GPU models and configuration: GPU 0: NVIDIA A100-SXM4-40GB
+Nvidia driver version: 550.163.01
+cuDNN version: Could not collect
+HIP runtime version: N/A
+MIOpen runtime version: N/A
+Is XNNPACK available: True
+
+CPU:
+Architecture:        x86_64
+CPU op-mode(s):      32-bit, 64-bit
+Byte Order:          Little Endian
+CPU(s):              128
+On-line CPU(s) list: 0-127
+Thread(s) per core:  2
+Core(s) per socket:  32
+Socket(s):           2
+NUMA node(s):        2
+Vendor ID:           AuthenticAMD
+CPU family:          25
+Model:               1
+Model name:          AMD EPYC 7513 32-Core Processor
+Stepping:            1
+CPU MHz:             2600.000
+CPU max MHz:         3681.6399
+CPU min MHz:         1500.0000
+BogoMIPS:            5199.75
+Virtualization:      AMD-V
+L1d cache:           32K
+L1i cache:           32K
+L2 cache:            512K
+L3 cache:            32768K
+NUMA node0 CPU(s):   0-31,64-95
+NUMA node1 CPU(s):   32-63,96-127
+Flags:               fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl nonstop_tsc cpuid extd_apicid aperfmperf pni pclmulqdq monitor ssse3 fma cx16 pcid sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpb cat_l3 cdp_l3 invpcid_single hw_pstate ssbd mba ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 erms invpcid cqm rdt_a rdseed adx smap clflushopt clwb sha_ni xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local clzero irperf xsaveerptr wbnoinvd amd_ppin brs arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold v_vmsave_vmload vgif v_spec_ctrl umip pku ospke vaes vpclmulqdq rdpid overflow_recov succor smca fsrm
+
+Versions of relevant libraries:
+[pip3] numpy==2.3.1
+[pip3] nvidia-cublas-cu12==12.6.4.1
+[pip3] nvidia-cuda-cupti-cu12==12.6.80
+[pip3] nvidia-cuda-nvrtc-cu12==12.6.77
+[pip3] nvidia-cuda-runtime-cu12==12.6.77
+[pip3] nvidia-cudnn-cu12==9.5.1.17
+[pip3] nvidia-cufft-cu12==11.3.0.4
+[pip3] nvidia-curand-cu12==10.3.7.77
+[pip3] nvidia-cusolver-cu12==11.7.1.2
+[pip3] nvidia-cusparse-cu12==12.5.4.2
+[pip3] nvidia-cusparselt-cu12==0.6.3
+[pip3] nvidia-nccl-cu12==2.26.2
+[pip3] nvidia-nvjitlink-cu12==12.6.85
+[pip3] nvidia-nvtx-cu12==12.6.77
+[pip3] torch==2.7.1
+[pip3] triton==3.3.1
+[conda] numpy                     2.3.1                    pypi_0    pypi
+[conda] nvidia-cublas-cu12        12.6.4.1                 pypi_0    pypi
+[conda] nvidia-cuda-cupti-cu12    12.6.80                  pypi_0    pypi
+[conda] nvidia-cuda-nvrtc-cu12    12.6.77                  pypi_0    pypi
+[conda] nvidia-cuda-runtime-cu12  12.6.77                  pypi_0    pypi
+[conda] nvidia-cudnn-cu12         9.5.1.17                 pypi_0    pypi
+[conda] nvidia-cufft-cu12         11.3.0.4                 pypi_0    pypi
+[conda] nvidia-curand-cu12        10.3.7.77                pypi_0    pypi
+[conda] nvidia-cusolver-cu12      11.7.1.2                 pypi_0    pypi
+[conda] nvidia-cusparse-cu12      12.5.4.2                 pypi_0    pypi
+[conda] nvidia-cusparselt-cu12    0.6.3                    pypi_0    pypi
+[conda] nvidia-nccl-cu12          2.26.2                   pypi_0    pypi
+[conda] nvidia-nvjitlink-cu12     12.6.85                  pypi_0    pypi
+[conda] nvidia-nvtx-cu12          12.6.77                  pypi_0    pypi
+[conda] torch                     2.7.1                    pypi_0    pypi
+[conda] triton                    3.3.1                    pypi_0    pypi
+
+Current Branch: main
+Latest Commit: e539212
+Uncommitted Changes: 69
+
+Activated Conda environment: modified_lm_eval_env
+============ Job Information ===================================================
+Submitted: 2025-08-02T18:49:14
+Started: 2025-08-02T18:49:15
+Ended: 2025-08-02T18:49:54
+Elapsed: 1 min, Limit: 240 min, Difference: 239 min
+CPUs: 8, Nodes: 1
+Estimated Consumption: 2.50 core-hours
+================================================================================

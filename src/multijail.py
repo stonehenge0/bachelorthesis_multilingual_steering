@@ -5,22 +5,29 @@
 # Setup
 import os
 import sys
+import datetime
+import subprocess
+import time
+
 import wandb
 import torch
-import subprocess
 from lm_eval.loggers import WandbLogger
 from lm_eval.utils import sanitize_model_name
 from huggingface_hub import login
-import time
-import datetime
 
-time_start_script = time.time()
+from utils import check, seed_everything, create_or_ensure_output_path
 
-# Login wandb and hf
+# Login to weights and biases, huggingface
 wandb.login()
 with open(os.path.expanduser("~/.cache/huggingface/token"), "r") as f:
     hf_token = f.read().strip()
 login(token=hf_token)
+
+# Wandb logging
+wandb_user = wandb.api.default_entity
+print(f"=== Wandb Information ===")
+print(f"Logged in as: {wandb_user}")
+print(f"Project: {wandb_project}\n")
 
 # Model run parameters
 model = "meta-llama/meta-llama-3-8b-instruct"
@@ -40,19 +47,8 @@ steering_layer = 12
 direction = torch.load(steering_direction_path)
 zeros_bias = torch.zeros(direction.shape)
 
-# Failsafe in case output path does not exist
-if not os.path.exists(out_path):
-    print(f"WARNING: Output path does not exist: {out_path}")
-    os.makedirs(out_path, exist_ok=True)
-    print(f"Created output directory: {out_path}")
-    print(f"Your results will be saved to: {os.path.abspath(out_path)}")
-
-# Wandb logging
-wandb_user = wandb.api.default_entity
-print(f"=== Wandb Information ===")
-print(f"Logged in as: {wandb_user}")
-print(f"Project: {wandb_project}\n")
-
+# Failsafe: Ensure output path exists, create if missing.
+create_or_ensure_output_path(out_path)
 
 def create_steering_config(layer_num, strength):
     """Create steering config for given layer and strength"""
@@ -99,9 +95,6 @@ def run_evaluation(model_type, model_args, run_name):
 
     return result
 
-
-time_start_baseline = time.time()
-
 # Run baseline (unsteered) model.
 print("=== Running Baseline Model ===")
 baseline_success = run_evaluation(
@@ -110,21 +103,21 @@ baseline_success = run_evaluation(
     run_name=run_name_baseline + "_unsteered",
 )
 
-time_start_steered = time.time()
 # Run steered model for each steering strength.
 print("\n=== Running Steered Models ===")
 steered_results = {}
 
 for strength in steering_strengths:
 
-    # steer config for that specific steering strength
+    # steer config
     steer_config = create_steering_config(steering_layer, strength)
     print(f"=== Steering Configs ===")
     print()
 
     output_model_dir_name = sanitize_model_name(
         model
-    )  # Lm eval creates a new dir with the sanitized model name to put the outputs. We need to fetch the name to write our config to the right place.
+    ) 
+
 
     config_filename = (
         run_name_baseline + f"_steer_config_layer{steering_layer}_strength{strength}.pt"
@@ -143,33 +136,10 @@ for strength in steering_strengths:
 
     steered_results[strength] = steered_success
 
-time_script_finished = time.time()
-
 # Many many log prints and summary of the run.
 print("\n=== CompletedProcess Outputs ===")
 print(f"Baseline:\n\t{baseline_success}")
 print(f"\nSteered:\\n\t{steered_success}")
-
-
-print("\n=== Script timing summary ===")
-start_dt = datetime.datetime.fromtimestamp(time_start_script)
-end_dt = datetime.datetime.fromtimestamp(time_script_finished)
-print(f"Start time : {start_dt.strftime('%Y-%m-%d %H:%M:%S')}")
-print(f"End time   : {end_dt.strftime('%Y-%m-%d %H:%M:%S')}")
-total_minutes = (time_script_finished - time_start_script) / 60
-print(f"Total time : {total_minutes:.2f} minutes")
-
-print("\nTime breakdown:")
-print(
-    f"time_start_script ➜ time_start_baseline: {time_start_baseline - time_start_script:.2f} seconds"
-)
-print(
-    f"time_start_baseline ➜ time_start_steered: {time_start_steered - time_start_baseline:.2f} seconds"
-)
-print(
-    f"time_start_steered ➜ time_script_finished: {time_script_finished - time_start_steered:.2f} seconds"
-)
-
 
 print("\n=== Results Summary ===")
 baseline_no_error = True
