@@ -14,7 +14,7 @@ echo "Home directory: ${HOME}"
 echo "Working directory: $PWD"
 echo "Current node: ${SLURM_NODELIST}"
 
-# Print out some python and torch info.
+# Print out some python info.
 python --version
 python -m torch.utils.collect_env 2> /dev/null
 
@@ -31,3 +31,6 @@ echo "Activated Conda environment: $CONDA_DEFAULT_ENV"
 
 # Run script.
 # python multijail.py
+
+# Clean up hf Cache.
+hf cache delete ### This might need an extra install: pip install huggingface_hub["cli"]

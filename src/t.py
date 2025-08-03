@@ -1,9 +1,13 @@
-"""Run and evaluate baseline and steered models on different tasks using lm_eval."""
+# Test script for debugging lm eval runs.
+import ast
+import argparse
+from dataclasses import dataclass
+import os
+from typing import Dict, List, Optional, Callable
 
-#---------------------
-# Code logic:
-# Every combination of steered/unsteered model and task is run as a separate lm_eval run.
-# The run is based on the EvalConfig dataclass which is converted to command line arguments for lm_eval.
+
+from utils import check, seed_everything, create_or_ensure_output_path
+
 
 # Our base config undergoes three transformations: 
 # 1. create_config_globals() -> sets global parameters that are shared across all runs (seed, model, device, etc.)
@@ -11,30 +15,7 @@
 # 3. create_config_steered() -> sets steered model parameters (steering layer, steering strength, etc.)
 
 # In the end we will have n different configs that are each one lm_eval run with n = tasks * steering_strengths +1 (the +1 is for unsteered)
-# ---------------------
 
-### give longer max new token generated, sometimes hard to find what exactly the model would have answered.
-
-
-# Setup
-import os
-import sys
-import datetime
-import subprocess
-import time
-import argparse
-import ast
-from dataclasses import dataclass
-from typing import Dict, List, Optional, Callable
-
-
-import wandb
-import torch
-from lm_eval.loggers import WandbLogger
-from lm_eval.utils import sanitize_model_name
-from huggingface_hub import login
-
-from utils import check, seed_everything, create_or_ensure_output_path
 
 # Argparser
 def get_args() -> argparse.Namespace:
@@ -84,33 +65,13 @@ LIMIT = args.limit
 SEED = args.seed
 
 # Failsafe: Ensure output path exists, create if missing.
-create_or_ensure_output_path(OUT_PATH)
 
 # Map mmlu arg to lang specific mmlu tasks for lm_eval. Currently runs English, German, Chinese, and Bengali.
-if task == "mmlu":
-    task = ",".join(["global_mmlu_en", "global_mmlu_de","global_mmlu_zh", "global_mmlu_bn"])
+if TASK == "mmlu":
+    TASK = ",".join(["global_mmlu_en", "global_mmlu_de","global_mmlu_zh", "global_mmlu_bn"])
 
-# Login to weights and biases, huggingface
-wandb.login()
-with open(os.path.expanduser("~/.cache/huggingface/token"), "r") as f:
-    hf_token = f.read().strip()
-login(token=hf_token)
-
-# Wandb logging
-wandb_user = wandb.api.default_entity
-print(f"=== Wandb Information ===")
-print(f"Logged in as: {wandb_user}")
-print(f"Project: {WANDB_PROJECT}\n")
-
-# Load steering components
-STEER_DIRECTION = torch.load(STEERING_STEER_DIRECTION_PATH)
-zeros_bias = torch.zeros(STEER_DIRECTION.shape)
-
-# Failsafe: Ensure output path exists, create if missing.
-create_or_ensure_output_path(OUT_PATH)
 
 # Seeds for everything *in this script*. Lm eval gets the seed over its command line args.
-seed_everything(SEED)
 
 
 @dataclass
@@ -183,107 +144,5 @@ def create_base_config() -> EvalConfig:
     )    
     return config_globals
 
-def create_steering_config(layer_num, strength):
-    """Create steering config for given layer and strength"""
-    return {
-        f"layers.{layer_num}": {
-            "steering_vector": STEER_DIRECTION,
-            "bias": zeros_bias,
-            "steering_coefficient": strength,
-            "action": "add",
-        }
-    }
-
-def run_evaluation(model_type, model_args, run_name):
-    """Run lm_eval with given parameters"""
-
-    cmd = [
-        "lm_eval",
-        "--model",
-        model_type,
-        "--model_args",
-        model_args,
-        "--tasks",
-        task,
-        "--output_path",
-        f"{out_path}",
-        "--device",
-        device,
-        "--batch_size",
-        "auto",
-        "--apply_chat_template",
-        "--seed",
-        "1234,1234,1234",  # seeds for python's random, numpy and torch respectively
-        "--predict_only",  # Predict only, since we will evaluate with our own llm judge later.
-        "--wandb_args",
-        f"project={wandb_project},name={run_name}",
-        "--log_samples",
-    ]
-
-    print(f"Running: {run_name}")
-    print(f"Command: {' '.join(cmd)}")
-
-    result = subprocess.run(cmd, capture_output=True, text=True)
-
-    return result
-
-# Run baseline (unsteered) model.
-print("=== Running Baseline Model ===")
-baseline_success = run_evaluation(
-    model_type="hf",
-    model_args=f"pretrained={model}",
-    run_name=run_name_baseline + "_unsteered",
-)
-
-# Run steered model for each steering strength.
-print("\n=== Running Steered Models ===")
-steered_results = {}
-
-for strength in steering_strengths:
-
-    # steer config
-    steer_config = create_steering_config(steering_layer, strength)
-    print(f"=== Steering Configs ===")
-    print()
-
-    output_model_dir_name = sanitize_model_name(
-        model
-    ) 
-
-
-    config_filename = (
-        run_name_baseline + f"_steer_config_layer{steering_layer}_strength{strength}.pt"
-    )
-    config_filepath = os.path.join(out_path, output_model_dir_name, config_filename)
-
-    torch.save(steer_config, config_filepath)
-
-    # Run eval
-    run_name = f"steered_layer{steering_layer}_strength{strength}"
-    steered_success = run_evaluation(
-        model_type="steered",
-        model_args=f"pretrained={model},steer_path={config_filepath}",
-        run_name=run_name,
-    )
-
-    steered_results[strength] = steered_success
-
-# Many many log prints and summary of the run.
-print("\n=== CompletedProcess Outputs ===")
-print(f"Baseline:\n\t{baseline_success}")
-print(f"\nSteered:\\n\t{steered_success}")
-
-print("\n=== Results Summary ===")
-baseline_no_error = True
-steered_no_error = True
-
-if "Error" in str(baseline_success):
-    baseline_no_error = False
-
-if "Error" in str(steered_success):
-    steered_no_error = False
-
-print(f"Baseline: {'Success' if baseline_success else 'Failed'}")
-print("Steered models:")
-for strength, steered_success in steered_results.items():
-    print(f"  Strength {strength}: {'Success' if steered_success else 'Failed'}")
+print("=== Globals Config ===")
+print(create_base_config())
