@@ -55,7 +55,7 @@ def get_args() -> argparse.Namespace:
     parser.add_argument("--model", required=True, default="meta-llama/meta-llama-3-8b-instruct", type=str, help="The model to evaluate.")
 
     # Output path and wandb
-    parser.add_argument("--out_path", default="/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results", type=str, help="The output path for results.")
+    parser.add_argument("--out_path", default="/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/", type=str, help="The output path for results.")
     parser.add_argument("--wandb_project", default="bachelorarbeit", type=str, help="The wandb project name. bachelorarbeit project per default.")
 
     # Steering arguments
@@ -92,7 +92,6 @@ LIMIT = args.limit
 SEED = args.seed
 
 MMLU_SUBTASKS_LANGS = ",".join(["global_mmlu_en", "global_mmlu_de","global_mmlu_zh", "global_mmlu_bn"]) # Langs to run MMLU on.
-CONFIG_FILEPATH = f"/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/{datetime.datetime.now()}.pt"
 CONFIG_FILEPATH = f"/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/{datetime.datetime.now().strftime('%Y_%m_%d')}.pt"
 
 # Failsafe: Ensure output path exists, create if missing.
@@ -143,6 +142,8 @@ class EvalConfig:
     def to_cmd_args(self) -> List[str]:
         """Convert config to command line arguments for lm_eval."""
         # Required parameters
+
+        self.out_path = os.path.join(self.out_path, self.run_name + ".jsonl")  # Better file naming
         cmd = [
             "lm_eval",
             "--model", self.model_type,
@@ -263,7 +264,7 @@ def run_and_save(config: EvalConfig):
 
     # Save config to JSON in output path.
     try:
-        config.save_json(OUT_PATH / f"{config.run_name}.json")
+        config.save_json(f"{OUT_PATH}{config.run_name}.json")
     except:
         print(f"Warning: Could not save config for {config.run_name}")
 
@@ -280,10 +281,6 @@ def main():
         for strength in STEERING_STRENGTHS:
             steered_config = create_steering_config(task_config, strength)
             all_configs.append(steered_config)
-
-    print("=== All Configurations ===")
-    for item in all_configs:
-        print(item)
 
     for config in all_configs:
         run_and_save(config)

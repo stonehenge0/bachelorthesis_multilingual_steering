@@ -1,0 +1,9 @@
+usage: multijail_dev.py [-h] --run_name RUN_NAME --tasks
+                        {multijail,global_mmlu,or_bench}
+                        [{multijail,global_mmlu,or_bench} ...] --model MODEL
+                        [--out_path OUT_PATH] [--wandb_project WANDB_PROJECT]
+                        [--steering_direction_path STEERING_DIRECTION_PATH]
+                        [--steering_strengths [STEERING_STRENGTHS ...]]
+                        --steering_layer STEERING_LAYER [--device DEVICE]
+                        [--limit LIMIT] [--seed SEED]
+multijail_dev.py: error: argument --tasks: invalid choice: 'multijail,global_mmlu' (choose from 'multijail', 'global_mmlu', 'or_bench')

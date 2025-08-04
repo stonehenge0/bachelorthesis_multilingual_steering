@@ -1,23 +1,0 @@
-================================================================================
-JobID = 9517812
-User = u14374, Account = ag_gipp
-Partition = medium, Nodelist = amp008
-================================================================================
-/var/spool/slurmd/job9517812/slurm_script: line 12: nvitop: command not found
-/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/myenv/lib/python3.9/site-packages/pandas/core/computation/expressions.py:21: UserWarning: Pandas requires version '2.8.4' or newer of 'numexpr' (version '2.7.3' currently installed).
-  from pandas.core.computation.check import NUMEXPR_INSTALLED
-Downloading shards:   0%|          | 0/4 [00:00<?, ?it/s]{"timestamp":"2025-07-02T14:01:02.053524Z","level":"WARN","fields":{"message":"Reqwest(reqwest::Error { kind: Request, source: hyper_util::client::legacy::Error(SendRequest, hyper::Error(IncompleteMessage)) }). Retrying..."},"filename":"/home/conda/feedstock_root/build_artifacts/bld/rattler-build_hf-xet_1750541218/work/cas_client/src/http_client.rs","line_number":242}
-{"timestamp":"2025-07-02T14:01:02.066027Z","level":"WARN","fields":{"message":"Retry attempt #0. Sleeping 1.02873981s before the next attempt"},"filename":"/home/conda/feedstock_root/build_artifacts/bld/rattler-build_hf-xet_1750541218/build_env/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/reqwest-retry-0.7.0/src/middleware.rs","line_number":171}
-{"timestamp":"2025-07-02T14:01:02.066103Z","level":"WARN","fields":{"message":"Reqwest(reqwest::Error { kind: Request, source: hyper_util::client::legacy::Error(SendRequest, hyper::Error(IncompleteMessage)) }). Retrying..."},"filename":"/home/conda/feedstock_root/build_artifacts/bld/rattler-build_hf-xet_1750541218/work/cas_client/src/http_client.rs","line_number":242}
-{"timestamp":"2025-07-02T14:01:02.066110Z","level":"WARN","fields":{"message":"Retry attempt #0. Sleeping 441.205576ms before the next attempt"},"filename":"/home/conda/feedstock_root/build_artifacts/bld/rattler-build_hf-xet_1750541218/build_env/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/reqwest-retry-0.7.0/src/middleware.rs","line_number":171}
-Downloading shards:  25%|██▌       | 1/4 [01:55<05:45, 115.07s/it]/var/spool/slurmd/job9517812/slurm_script: line 16: 1755858 Killed                  python multijail_baseline.py
-/var/spool/slurmd/job9517812/slurm_script: line 19: kill: (1755857) - No such process
-============ Job Information ===================================================
-Submitted: 2025-07-02T15:59:26
-Started: 2025-07-02T15:59:30
-Ended: 2025-07-02T16:03:11
-Elapsed: 4 min, Limit: 5 min, Difference: 1 min
-CPUs: 1, Nodes: 1
-Estimated Consumption: 0.07 core-hours
-================================================================================
-slurmstepd: error: Detected 1 oom_kill event in StepId=9517812.batch. Some of the step tasks have been OOM Killed.
