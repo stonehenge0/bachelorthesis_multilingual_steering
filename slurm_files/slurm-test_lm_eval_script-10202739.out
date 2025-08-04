@@ -1,0 +1,39 @@
+================================================================================
+JobID = 10202739
+User = u14374, Account = ag_gipp
+Partition = scc-gpu, Nodelist = ggpu147
+================================================================================
+Submitting job with sbatch from directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/src
+Home directory: /user/stein65/u14374
+Working directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/src
+Current node: ggpu147
+Python 3.12.8
+
+Current Branch: main
+Latest Commit: f44d1d0
+Uncommitted Changes: 20
+
+Activated Conda environment: modified_lm_eval_env
+WARNING: Output path does not exist: /tmp/results/
+Created output directory: /tmp/results/
+Your results will be saved to: /tmp/results
+=== Wandb Information ===
+Logged in as: stonehenge0-university-of-goettingen
+Project: bachelorarbeit
+
+=== All Configurations ===
+EvalConfig(model_type='hf', model_args='pretrained=meta-llama/meta-llama-3-8b-instruct', tasks='global_mmlu_en,global_mmlu_de,global_mmlu_zh,global_mmlu_bn', device='cuda:0', batch_size='auto', out_path='/tmp/results/', seed='1234,1234,1234', run_name='test_run_meta-llama/meta-llama-3-8b-instruct_global_mmlu', apply_chat_template=False, predict_only=False, log_samples=True, wandb_args='project=bachelorarbeit', limit=2)
+EvalConfig(model_type='steered', model_args='pretrained=meta-llama/meta-llama-3-8b-instruct,steer_path=/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/2025-08-04 17:19:16.770720', tasks='global_mmlu_en,global_mmlu_de,global_mmlu_zh,global_mmlu_bn', device='cuda:0', batch_size='auto', out_path='/tmp/results/', seed='1234,1234,1234', run_name='test_run_meta-llama/meta-llama-3-8b-instruct_global_mmlu_L12_S0.1', apply_chat_template=False, predict_only=False, log_samples=True, wandb_args='project=bachelorarbeit', limit=2)
+Running command for test_run_meta-llama/meta-llama-3-8b-instruct_global_mmlu:
+ lm_eval --model hf --model_args pretrained=meta-llama/meta-llama-3-8b-instruct --tasks global_mmlu_en,global_mmlu_de,global_mmlu_zh,global_mmlu_bn --output_path /tmp/results/ --device cuda:0 --batch_size auto --seed 1234,1234,1234 --log_samples --limit 2 --wandb_args project=bachelorarbeit
+Warning: Could not save config for test_run_meta-llama/meta-llama-3-8b-instruct_global_mmlu
+Running command for test_run_meta-llama/meta-llama-3-8b-instruct_global_mmlu_L12_S0.1:
+ lm_eval --model steered --model_args pretrained=meta-llama/meta-llama-3-8b-instruct,steer_path=/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/2025-08-04 17:19:16.770720 --tasks global_mmlu_en,global_mmlu_de,global_mmlu_zh,global_mmlu_bn --output_path /tmp/results/ --device cuda:0 --batch_size auto --seed 1234,1234,1234 --log_samples --limit 2 --wandb_args project=bachelorarbeit
+============ Job Information ===================================================
+Submitted: 2025-08-04T17:18:20
+Started: 2025-08-04T17:18:29
+Ended: 2025-08-04T17:28:52
+Elapsed: 11 min, Limit: 30 min, Difference: 19 min
+CPUs: 8, Nodes: 1
+Estimated Consumption: 27.50 core-hours
+================================================================================

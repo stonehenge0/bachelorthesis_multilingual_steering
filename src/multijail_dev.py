@@ -44,7 +44,14 @@ def get_args() -> argparse.Namespace:
 
     # Task and model
     parser.add_argument("--run_name", required=True, default="unnamed_run", type=str, help="The run name. It is used for wandb and in naming all output files.")
-    parser.add_argument("--task", required=True, choices=["multijail","global_mmlu", "or_bench"], type=str, help="The task to evaluate on. Choices are: multijail, mmlu, or_bench.")
+    parser.add_argument(
+        "--tasks",
+        required=True,
+        nargs="+",
+        choices=["multijail", "global_mmlu", "or_bench"],
+        type=str,
+        help="One or more tasks to evaluate on. Choices are: multijail, global_mmlu, or_bench. Example: --task multijail global_mmlu"
+    )
     parser.add_argument("--model", required=True, default="meta-llama/meta-llama-3-8b-instruct", type=str, help="The model to evaluate.")
 
     # Output path and wandb
@@ -60,7 +67,7 @@ def get_args() -> argparse.Namespace:
         default=None,
         help="Any number of steering strength seperated by a space: --steering_strengths 0.1 0.5 1.0"
     )
-    parser.add_argument("--steering_layer", type=int, help="Layer number to apply steering to.")
+    parser.add_argument("--steering_layer", required=True, type=int, help="Layer to apply steering to.")
 
     # Device and other parameters
     parser.add_argument("--device", default="cuda:0", type=str, help="Device to run evaluation on (e.g., cuda:0, cpu).")
@@ -71,8 +78,9 @@ def get_args() -> argparse.Namespace:
 
 # Adding the args as variables here is somewhat of a personal preference, makes the script a bit more readable imo.
 args = get_args()
+
 RUN_NAME = args.run_name
-TASK = args.task
+TASKS = args.tasks
 MODEL = args.model
 OUT_PATH = args.out_path
 WANDB_PROJECT = args.wandb_project
@@ -84,7 +92,8 @@ LIMIT = args.limit
 SEED = args.seed
 
 MMLU_SUBTASKS_LANGS = ",".join(["global_mmlu_en", "global_mmlu_de","global_mmlu_zh", "global_mmlu_bn"]) # Langs to run MMLU on.
-CONFIG_FILEPATH = "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/"+ str(datetime.datetime.now())  #### check if the str is okay here
+CONFIG_FILEPATH = f"/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/{datetime.datetime.now()}.pt"
+CONFIG_FILEPATH = f"/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/{datetime.datetime.now().strftime('%Y_%m_%d')}.pt"
 
 # Failsafe: Ensure output path exists, create if missing.
 create_or_ensure_output_path(OUT_PATH)
@@ -125,7 +134,7 @@ class EvalConfig:
     
     # Optional fields (with defaults)
     run_name: str = ""
-    apply_chat_template: bool = False #### Should they be T/F or just go to None here? Same for others like limit flag etc. 
+    apply_chat_template: bool = False
     predict_only: bool = False
     log_samples: bool = True
     wandb_args: Optional[str] = None
@@ -162,6 +171,12 @@ class EvalConfig:
         
         return cmd
 
+    @staticmethod
+    def save_json(self, filepath: str):
+        """Save config to a JSON file."""
+        with open(filepath, "w") as f:
+            f.write(self.to_json())
+
 # 1. Base config with globals
 def create_base_config() -> EvalConfig:
     """Create base configuration with global settings."""
@@ -176,6 +191,7 @@ def create_base_config() -> EvalConfig:
         out_path=OUT_PATH,
         seed=f"{SEED},{SEED},{SEED}", # seeds for python's random, numpy and torch respectively",
         wandb_args=f"project={WANDB_PROJECT}",  # Base wandb config, run name will be added later
+        limit=LIMIT,
     )    
 
     return config_globals
@@ -233,96 +249,48 @@ def create_steering_config(task_specific_config,steer_strength):
 
     return config
 
-def run_evaluation(model_type, model_args, run_name):
-    """Run lm_eval with given parameters"""
+def run_and_save(config: EvalConfig):
+    """Run lm_eval with the given configuration and print the command."""
 
-    cmd = [
-        "lm_eval",
-        "--model",
-        model_type,
-        "--model_args",
-        model_args,
-        "--tasks",
-        task,
-        "--output_path",
-        f"{out_path}",
-        "--device",
-        device,
-        "--batch_size",
-        "auto",
-        "--apply_chat_template",
-        "--seed",
-        "1234,1234,1234",  # seeds for python's random, numpy and torch respectively
-        "--predict_only",  # Predict only, since we will evaluate with our own llm judge later.
-        "--wandb_args",
-        f"project={wandb_project},name={run_name}",
-        "--log_samples",
-    ]
+    # Run command
+    cmd = config.to_cmd_args()
+    print(f"Running command for {config.run_name}:\n {' '.join(cmd)}")
+    out = subprocess.run(cmd, capture_output=True, text=True)
 
-    print(f"Running: {run_name}")
-    print(f"Command: {' '.join(cmd)}")
+    # Check if Command ran successfully
+    if out.returncode != 0:
+        raise RuntimeError(f"Error running command for {config.run_name}:\n{out.stderr}\n Returncode:{out.returncode}")
 
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    # Save config to JSON in output path.
+    try:
+        config.save_json(OUT_PATH / f"{config.run_name}.json")
+    except:
+        print(f"Warning: Could not save config for {config.run_name}")
 
-    return result
+all_configs = []
 
-# Run baseline (unsteered) model.
-print("=== Running Baseline Model ===")
-baseline_success = run_evaluation(
-    model_type="hf",
-    model_args=f"pretrained={model}",
-    run_name=run_name_baseline + "_unsteered",
-)
+def main():
+    # baseline run and task config
+    for task in TASKS:
+        base_config = create_base_config()
+        task_config = create_task_config(base_config, task)
+        all_configs.append(task_config)
 
-# Run steered model for each steering strength.
-print("\n=== Running Steered Models ===")
-steered_results = {}
+        # Steer specific runs
+        for strength in STEERING_STRENGTHS:
+            steered_config = create_steering_config(task_config, strength)
+            all_configs.append(steered_config)
 
-for strength in steering_strengths:
+    print("=== All Configurations ===")
+    for item in all_configs:
+        print(item)
 
-    # steer config
-    steer_config = create_steering_config(steering_layer, strength)
-    print(f"=== Steering Configs ===")
-    print()
-
-    output_model_dir_name = sanitize_model_name(
-        model
-    ) 
+    for config in all_configs:
+        run_and_save(config)
 
 
-    config_filename = (
-        run_name_baseline + f"_steer_config_layer{steering_layer}_strength{strength}.pt"
-    )
-    config_filepath = os.path.join(out_path, output_model_dir_name, config_filename)
+if __name__ == "__main__":
+    main()
 
-    torch.save(steer_config, config_filepath)
 
-    # Run eval
-    run_name = f"steered_layer{steering_layer}_strength{strength}"
-    steered_success = run_evaluation(
-        model_type="steered",
-        model_args=f"pretrained={model},steer_path={config_filepath}",
-        run_name=run_name,
-    )
-
-    steered_results[strength] = steered_success
-
-# Many many log prints and summary of the run.
-print("\n=== CompletedProcess Outputs ===")
-print(f"Baseline:\n\t{baseline_success}")
-print(f"\nSteered:\\n\t{steered_success}")
-
-print("\n=== Results Summary ===")
-baseline_no_error = True
-steered_no_error = True
-
-if "Error" in str(baseline_success):
-    baseline_no_error = False
-
-if "Error" in str(steered_success):
-    steered_no_error = False
-
-print(f"Baseline: {'Success' if baseline_success else 'Failed'}")
-print("Steered models:")
-for strength, steered_success in steered_results.items():
-    print(f"  Strength {strength}: {'Success' if steered_success else 'Failed'}")
+    

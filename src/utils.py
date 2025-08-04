@@ -1,3 +1,8 @@
+import os
+import random
+import numpy as np
+import torch
+
 # Debugging tensors.
 def check(x, name_of_x=False):
     """Helper function for checking shapes and types during debugging."""
@@ -31,6 +36,7 @@ def create_or_ensure_output_path(path):
     """Create the output directory if it does not exist."""
     if not os.path.exists(path):
         print(f"WARNING: Output path does not exist: {path}")
+        
         os.makedirs(path, exist_ok=True)
         print(f"Created output directory: {path}")
         print(f"Your results will be saved to: {os.path.abspath(path)}")
