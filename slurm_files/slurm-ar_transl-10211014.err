@@ -1,0 +1,6 @@
+/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/src/translate_or_bench.py:80: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  # sample percentage of each category to fill the n_samples
+Traceback (most recent call last):
+  File "/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/src/translate_or_bench.py", line 226, in <module>
+    out_path_en_or_bench_sampled = f"{OUT_PATH}_en_sampled.csv"
+AttributeError: module 'pandas' has no attribute 'to_csv'

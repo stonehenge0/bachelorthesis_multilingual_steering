@@ -2,12 +2,43 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import pandas as pd
 import sentencepiece
+import argparse
+from datasets import load_dataset
+from utils import seed_everything
 
 # Global cache for loaded models
 _model_cache = {}
 
+
+def get_args() -> argparse.Namespace:
+    """Parse CLI arguments."""
+
+    parser = argparse.ArgumentParser()
+
+    # Task and model
+    parser.add_argument(
+        "--langs",
+        required=True,
+        type=str,
+        nargs="+",
+        help="ISO codes for the languages to translate to. For options see X-Alma docs.",
+    )
+    parser.add_argument(
+        "--samplesize",
+        type=int,
+        help="Number of samples the subset of OR Bench should have.",
+    )
+
+    return parser.parse_args()
+
+
+args = get_args()
+
+
 OR_BENCH_PATH = "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/data/sampled_or_bench_200_prompts.csv"
-TARGET_LANGUAGES = ["ar"]  ##  more langs. For two lang groups CUDA will go OOM.
+TARGET_LANGUAGES = args.langs
+OUT_PATH = f"/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/data/or_bench_translated{'_'.join(TARGET_LANGUAGES)}.csv"
+
 
 # Language grouping as required by the model
 GROUP2LANG = {
@@ -35,10 +66,21 @@ ISO_TO_NAME = {
     "es": "Spanish",
     "it": "Italian",
     "pt": "Portuguese",
+    "ar": "Arabic",
 }
 
-
 LANG2GROUP = {lang: str(group) for group, langs in GROUP2LANG.items() for lang in langs}
+
+
+def sample_or_bench(or_df,n_samples=200):
+    """Sample a subset of OR Bench for translation. Samples an equal percent from all subcategories."""
+
+    nrows = len(or_df)
+
+    # sample percentage of each category to fill the n_samples
+    sampled_df = or_df.groupby(or_df['category']).apply(
+        lambda x: x.sample(int((len(x) / nrows) * n_samples)))
+    return sampled_df
 
 
 def load_model_for_lang(lang_code):
@@ -106,7 +148,7 @@ def translate_batch(texts, source_lang, target_lang, model, tokenizer):
     return translations
 
 
-def translate_dataframe_optimized(sampled_df, prompt_column, target_langs):
+def translate_dataframe(sampled_df, prompt_column, target_langs):
     """
     Optimized translation that loads each model only once and processes all prompts
     for that language before moving to the next language.
@@ -166,20 +208,24 @@ def translate_dataframe_optimized(sampled_df, prompt_column, target_langs):
     return pd.DataFrame(translations)
 
 
-def clear_model_cache():
-    """Clear the model cache to free up memory."""
-    global _model_cache
-    _model_cache.clear()
-    print("Model cache cleared")
-
-
 if __name__ == "__main__":
 
-    # read in dataframe of sampled OR-bench.
-    df = pd.read_csv(OR_BENCH_PATH)
+    seed_everything(42)  # Set seed for reproducibility
 
-    print(f"Loaded df: {df.info}")
+    # Load (and sample if requested)
+    # Load full dataset
+    hf_dataset = load_dataset("bench-llm/or-bench", "or-bench-80k")
+    df = pd.DataFrame(hf_dataset["train"])  # 80k samples
 
-    result_df = translate_dataframe_optimized(df, "prompt", TARGET_LANGUAGES)
+    if args.samplesize:
+        SAMPLESIZE = args.samplesize
+        print(f"Sampling OR Bench to {SAMPLESIZE} samples.")
+        df = sample_or_bench(df,n_samples=SAMPLESIZE)
+        out_path_en_or_bench_sampled = f"{OUT_PATH}_en_sampled.csv"
+        df = sample_or_bench(df,n_samples=SAMPLESIZE)
+        df.to_csv(out_path_en_or_bench_sampled, index=False)
+
+    # translate
+    result_df = translate_dataframe(df, "prompt", TARGET_LANGUAGES)
     print(f"Translated df info: {result_df.info}")
-    result_df.to_csv("translated_or_bench_optimized.csv", index=False)
+    result_df.to_csv(OUT_PATH, index=False)

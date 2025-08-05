@@ -31,7 +31,7 @@ echo "Activated Conda environment: $CONDA_DEFAULT_ENV"
 
 # Run script.
 # currently runs one task and one steering strength.
-python multijail_dev.py   --run_name "multijail_and_global_mmlu"   --task "multijail" "global_mmlu"   --model "meta-llama/meta-llama-3-8b-instruct" --device "cuda:0"   --out_path "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/"   --wandb_project "bachelorarbeit"   --steering_direction_path "direction_llama3_8b.pt"   --steering_strengths 0.33 0.66 1.0 --steering_layer 12
+python lm_eval_steered_and_baseline_tasks.py   --run_name "multijail_and_global_mmlu"   --task "multijail" "global_mmlu"   --model "meta-llama/meta-llama-3-8b-instruct" --device "cuda:0"   --out_path "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/"   --wandb_project "bachelorarbeit"   --steering_direction_path "direction_llama3_8b.pt"   --steering_strengths 0.33 0.66 1.0 --steering_layer 12
 
 # Clean up hf Cache.
 # hf cache delete
