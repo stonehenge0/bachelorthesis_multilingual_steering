@@ -15,6 +15,8 @@
 
 ### give longer max new token generated, sometimes hard to find what exactly the model would have answered.
 ### Currently working on saving and retrieving the the steer config in temp, might work though.
+### Options for sampling
+### Naming of WandB runs not there yet. 
 
 # Setup
 import os
@@ -92,7 +94,7 @@ LIMIT = args.limit
 SEED = args.seed
 
 MMLU_SUBTASKS_LANGS = ",".join(["global_mmlu_en", "global_mmlu_de","global_mmlu_zh", "global_mmlu_bn"]) # Langs to run MMLU on.
-CONFIG_FILEPATH = f"/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/{datetime.datetime.now().strftime('%Y_%m_%d')}.pt"
+CONFIG_FILEPATH = f"/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_{RUN_NAME}.pt"
 
 # Failsafe: Ensure output path exists, create if missing.
 create_or_ensure_output_path(OUT_PATH)
