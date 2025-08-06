@@ -1,9 +1,9 @@
 #! /bin/bash
-#SBATCH --job-name=he_transl
+#SBATCH --job-name=TH
 #SBATCH -c 8
-#SBATCH --mem-per-gpu 40G
+#SBATCH --mem-per-gpu 60G
 #SBATCH -p scc-gpu
-#SBATCH -t 00:09:00
+#SBATCH -t 04:30:00
 #SBATCH -G A100:1
 #SBATCH --output=../slurm_files/slurm-%x-%j.out 
 #SBATCH --error=../slurm_files/slurm-%x-%j.err      
@@ -30,4 +30,4 @@ source /mnt/vast-standard/home/stein65/u14374/miniforge3/etc/profile.d/conda.sh
 conda activate /mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env
 echo "Activated Conda environment: $CONDA_DEFAULT_ENV"
 
-python translate_or_bench.py --langs he --samplesize 10
+python translate_or_bench.py --langs th --samplepercentage 0.002

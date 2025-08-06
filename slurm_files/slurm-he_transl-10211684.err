@@ -1,6 +1,0 @@
-Traceback (most recent call last):
-  File "/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/src/translate_or_bench.py", line 226, in <module>
-    df = sample_or_bench(df,n_samples=SAMPLESIZE)
-  File "/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/src/translate_or_bench.py", line 82, in sample_or_bench
-    your_function,
-NameError: name 'your_function' is not defined

@@ -24,9 +24,9 @@ def get_args() -> argparse.Namespace:
         help="ISO codes for the languages to translate to. For options see X-Alma docs.",
     )
     parser.add_argument(
-        "--samplesize",
-        type=int,
-        help="Number of samples the subset of OR Bench should have.",
+        "--samplepercentage",
+        type=float,
+        help="Percentage of samples the subset of OR Bench. OR Bench is 80k samples, so 0.0001 = 8 samples.",
     )
 
     return parser.parse_args()
@@ -37,8 +37,8 @@ args = get_args()
 
 OR_BENCH_PATH = "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/data/sampled_or_bench_200_prompts.csv"
 TARGET_LANGUAGES = args.langs
-OUT_PATH = f"/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/data/or_bench_translated{'_'.join(TARGET_LANGUAGES)}.csv"
-
+OUT_PATH = f"/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/data/or_bench_translated_{'_'.join(TARGET_LANGUAGES)}.csv"
+OUT_PATH_EN_SAMPLE = f"/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/data/or_bench_subsampled_en_{args.samplepercentage}.csv"
 
 # Language grouping as required by the model
 GROUP2LANG = {
@@ -72,14 +72,13 @@ ISO_TO_NAME = {
 LANG2GROUP = {lang: str(group) for group, langs in GROUP2LANG.items() for lang in langs}
 
 
-def sample_or_bench(or_df,n_samples=200):
-    """Sample a subset of OR Bench for translation. Samples an equal percent from all subcategories."""
+def sample_or_bench(or_df,fraction=0.0001): # 0.0001 = 8 samples. 
+    """Sample a subset of OR Bench for translation. Samples an equal percent from all subcategories.
+    fraction is the percentage of the dataset to subsample"""
 
-    nrows = len(or_df)
+    grouped_df = or_df.groupby("category")
+    sampled_df = grouped_df.sample(frac=fraction, random_state=42)
 
-    # sample percentage of each category to fill the n_samples
-    sampled_df = or_df.groupby(or_df['category']).apply(
-        lambda x: x.sample(int((len(x) / nrows) * n_samples)))
     return sampled_df
 
 
@@ -210,20 +209,20 @@ def translate_dataframe(sampled_df, prompt_column, target_langs):
 
 if __name__ == "__main__":
 
-    seed_everything(42)  # Set seed for reproducibility
+    # seed everything 
+    seed_everything(42) 
 
-    # Load (and sample if requested)
     # Load full dataset
     hf_dataset = load_dataset("bench-llm/or-bench", "or-bench-80k")
     df = pd.DataFrame(hf_dataset["train"])  # 80k samples
+    
+    # subsample
+    if args.samplepercentage:
+        SAMPLEPERCENTAGE = args.samplepercentage
+        print(f"Sampling OR Bench to {SAMPLEPERCENTAGE * 80000} samples.")
 
-    if args.samplesize:
-        SAMPLESIZE = args.samplesize
-        print(f"Sampling OR Bench to {SAMPLESIZE} samples.")
-        df = sample_or_bench(df,n_samples=SAMPLESIZE)
-        out_path_en_or_bench_sampled = f"{OUT_PATH}_en_sampled.csv"
-        df = sample_or_bench(df,n_samples=SAMPLESIZE)
-        df.to_csv(out_path_en_or_bench_sampled, index=False)
+        df = sample_or_bench(df,fraction=SAMPLEPERCENTAGE)
+        df.to_csv(OUT_PATH_EN_SAMPLE, index=False)
 
     # translate
     result_df = translate_dataframe(df, "prompt", TARGET_LANGUAGES)
