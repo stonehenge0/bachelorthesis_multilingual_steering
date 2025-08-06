@@ -1,5 +1,5 @@
 #! /bin/bash
-#SBATCH --job-name=TH
+#SBATCH --job-name=VI
 #SBATCH -c 8
 #SBATCH --mem-per-gpu 60G
 #SBATCH -p scc-gpu
@@ -30,4 +30,4 @@ source /mnt/vast-standard/home/stein65/u14374/miniforge3/etc/profile.d/conda.sh
 conda activate /mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env
 echo "Activated Conda environment: $CONDA_DEFAULT_ENV"
 
-python translate_or_bench.py --langs th --samplepercentage 0.002
+python translate_or_bench.py --langs vi --samplepercentage 0.002

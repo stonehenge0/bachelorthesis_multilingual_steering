@@ -67,12 +67,14 @@ ISO_TO_NAME = {
     "it": "Italian",
     "pt": "Portuguese",
     "ar": "Arabic",
+    "th": "Thai",
+    "vi": "Vietnamese",
 }
 
 LANG2GROUP = {lang: str(group) for group, langs in GROUP2LANG.items() for lang in langs}
 
 
-def sample_or_bench(or_df,fraction=0.0001): # 0.0001 = 8 samples. 
+def sample_or_bench(or_df, fraction=0.0001):  # 0.0001 = 8 samples.
     """Sample a subset of OR Bench for translation. Samples an equal percent from all subcategories.
     fraction is the percentage of the dataset to subsample"""
 
@@ -209,19 +211,19 @@ def translate_dataframe(sampled_df, prompt_column, target_langs):
 
 if __name__ == "__main__":
 
-    # seed everything 
-    seed_everything(42) 
+    # seed everything
+    seed_everything(42)
 
     # Load full dataset
     hf_dataset = load_dataset("bench-llm/or-bench", "or-bench-80k")
     df = pd.DataFrame(hf_dataset["train"])  # 80k samples
-    
+
     # subsample
     if args.samplepercentage:
         SAMPLEPERCENTAGE = args.samplepercentage
         print(f"Sampling OR Bench to {SAMPLEPERCENTAGE * 80000} samples.")
 
-        df = sample_or_bench(df,fraction=SAMPLEPERCENTAGE)
+        df = sample_or_bench(df, fraction=SAMPLEPERCENTAGE)
         df.to_csv(OUT_PATH_EN_SAMPLE, index=False)
 
     # translate
