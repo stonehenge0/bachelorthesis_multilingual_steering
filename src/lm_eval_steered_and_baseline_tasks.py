@@ -1,11 +1,11 @@
 """Run and evaluate baseline and steered models on different tasks using lm_eval."""
 
-#---------------------
+# ---------------------
 # Code logic:
 # Every combination of steered/unsteered model and task is run as a separate lm_eval run. This is necessary because of the combinations of flags.
 # The run is based on the EvalConfig dataclass which is converted to command line arguments for lm_eval.
 
-# Our base config undergoes three transformations: 
+# Our base config undergoes three transformations:
 # 1. create_config_globals() -> sets global parameters that are shared across all runs (seed, model, device, etc.)
 # 2. create_task_config() -> sets task-specific parameters (tasks, apply_chat_template, etc.)
 # 3. create_steering_config() -> sets steered model parameters (steering layer, steering strength, etc.)
@@ -13,10 +13,8 @@
 # In the end we will have n different configs that are each one lm_eval run with n = tasks * steering_strengths +1 (the +1 is for unsteered)
 # ---------------------
 
-### give longer max new token generated, sometimes hard to find what exactly the model would have answered.
-### Currently working on saving and retrieving the the steer config in temp, might work though.
 ### Options for sampling
-### Naming of WandB runs not there yet. 
+### Naming of WandB runs not there yet.
 
 # Setup
 import os
@@ -38,45 +36,88 @@ from huggingface_hub import login
 
 from utils import check, seed_everything, create_or_ensure_output_path
 
+
 # Argparser
 def get_args() -> argparse.Namespace:
     """Parse CLI arguments."""
-    
+
     parser = argparse.ArgumentParser()
 
     # Task and model
-    parser.add_argument("--run_name", required=True, default="unnamed_run", type=str, help="The run name. It is used for wandb and in naming all output files.")
+    parser.add_argument(
+        "--run_name",
+        required=True,
+        default="unnamed_run",
+        type=str,
+        help="The run name. It is used for wandb and in naming all output files.",
+    )
     parser.add_argument(
         "--tasks",
         required=True,
         nargs="+",
         choices=["multijail", "global_mmlu", "or_bench"],
         type=str,
-        help="One or more tasks to evaluate on. Choices are: multijail, global_mmlu, or_bench. Example: --task multijail global_mmlu"
+        help="One or more tasks to evaluate on. Choices are: multijail, global_mmlu, or_bench. Example: --task multijail global_mmlu",
     )
-    parser.add_argument("--model", required=True, default="meta-llama/meta-llama-3-8b-instruct", type=str, help="The model to evaluate.")
+    parser.add_argument(
+        "--model",
+        required=True,
+        default="meta-llama/meta-llama-3-8b-instruct",
+        type=str,
+        help="The model to evaluate.",
+    )
 
     # Output path and wandb
-    parser.add_argument("--out_path", default="/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/", type=str, help="The output path for results.")
-    parser.add_argument("--wandb_project", default="bachelorarbeit", type=str, help="The wandb project name. bachelorarbeit project per default.")
+    parser.add_argument(
+        "--out_path",
+        default="/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/",
+        type=str,
+        help="The output path for results.",
+    )
+    parser.add_argument(
+        "--wandb_project",
+        default="bachelorarbeit",
+        type=str,
+        help="The wandb project name. bachelorarbeit project per default.",
+    )
 
     # Steering arguments
-    parser.add_argument("--steering_direction_path", default="/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/code/direction_llama3_8b.pt", type=str, help="Path to the steering direction .pt file.")
+    parser.add_argument(
+        "--steering_direction_path",
+        default="/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/code/direction_llama3_8b.pt",
+        type=str,
+        help="Path to the steering direction .pt file.",
+    )
     parser.add_argument(
         "--steering_strengths",
         nargs="*",
         type=float,
         default=None,
-        help="Any number of steering strength seperated by a space: --steering_strengths 0.1 0.5 1.0"
+        help="Any number of steering strength seperated by a space: --steering_strengths 0.1 0.5 1.0",
     )
-    parser.add_argument("--steering_layer", required=True, type=int, help="Layer to apply steering to.")
+    parser.add_argument(
+        "--steering_layer", required=True, type=int, help="Layer to apply steering to."
+    )
 
     # Device and other parameters
-    parser.add_argument("--device", default="cuda:0", type=str, help="Device to run evaluation on (e.g., cuda:0, cpu).")
-    parser.add_argument("--limit", type=int, default=None, help="Limit the number of evaluation samples (default: None for full dataset).")
-    parser.add_argument("--seed", type=int, default=1234, help="Random seed for reproducibility.")
+    parser.add_argument(
+        "--device",
+        default="cuda:0",
+        type=str,
+        help="Device to run evaluation on (e.g., cuda:0, cpu).",
+    )
+    parser.add_argument(
+        "--limit",
+        type=int,
+        default=None,
+        help="Limit the number of evaluation samples (default: None for full dataset).",
+    )
+    parser.add_argument(
+        "--seed", type=int, default=1234, help="Random seed for reproducibility."
+    )
 
     return parser.parse_args()
+
 
 # Adding the args as variables here is somewhat of a personal preference, makes the script a bit more readable imo.
 args = get_args()
@@ -93,7 +134,9 @@ DEVICE = args.device
 LIMIT = args.limit
 SEED = args.seed
 
-MMLU_SUBTASKS_LANGS = ",".join(["global_mmlu_en", "global_mmlu_de","global_mmlu_zh", "global_mmlu_bn"]) # Langs to run MMLU on.
+MMLU_SUBTASKS_LANGS = ",".join(
+    ["global_mmlu_en", "global_mmlu_de", "global_mmlu_zh", "global_mmlu_bn"]
+)  # Langs to run MMLU on.
 CONFIG_FILEPATH = f"/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_{RUN_NAME}.pt"
 
 # Failsafe: Ensure output path exists, create if missing.
@@ -121,9 +164,11 @@ ZEROS_BIAS = torch.zeros(STEER_DIRECTION.shape)
 # Failsafe: Ensure output path exists, create if missing.
 create_or_ensure_output_path(OUT_PATH)
 
+
 @dataclass
 class EvalConfig:
     """Configuration for a single evaluation run."""
+
     # Required fields (no defaults)
     model_type: str
     model_args: str
@@ -132,7 +177,7 @@ class EvalConfig:
     batch_size: str
     out_path: str
     seed: str
-    
+
     # Optional fields (with defaults)
     run_name: str = ""
     apply_chat_template: bool = False
@@ -140,38 +185,47 @@ class EvalConfig:
     log_samples: bool = True
     wandb_args: Optional[str] = None
     limit: Optional[int] = None
-    
+
     def to_cmd_args(self) -> List[str]:
         """Convert config to command line arguments for lm_eval."""
         # Required parameters
 
-        self.out_path = os.path.join(self.out_path, self.run_name + ".jsonl")  # Better file naming
+        self.out_path = os.path.join(
+            self.out_path, self.run_name + ".jsonl"
+        )  # Better file naming
         cmd = [
             "lm_eval",
-            "--model", self.model_type,
-            "--model_args", self.model_args,
-            "--tasks", self.tasks,
-            "--output_path", self.out_path,
-            "--device", self.device,
-            "--batch_size", self.batch_size,
-            "--seed", self.seed,
+            "--model",
+            self.model_type,
+            "--model_args",
+            self.model_args,
+            "--tasks",
+            self.tasks,
+            "--output_path",
+            self.out_path,
+            "--device",
+            self.device,
+            "--batch_size",
+            self.batch_size,
+            "--seed",
+            self.seed,
             "--log_samples",
         ]
-        
+
         # Optional flag parameters (no values needed)
         if self.apply_chat_template:
             cmd.append("--apply_chat_template")
-        
+
         if self.predict_only:
             cmd.append("--predict_only")
-        
+
         # Optional parameters with values
         if self.limit:
             cmd.extend(["--limit", str(self.limit)])
-        
+
         if self.wandb_args:
             cmd.extend(["--wandb_args", self.wandb_args])
-        
+
         return cmd
 
     @staticmethod
@@ -179,6 +233,7 @@ class EvalConfig:
         """Save config to a JSON file."""
         with open(filepath, "w") as f:
             f.write(self.to_json())
+
 
 # 1. Base config with globals
 def create_base_config() -> EvalConfig:
@@ -188,16 +243,17 @@ def create_base_config() -> EvalConfig:
         run_name="_".join([RUN_NAME, MODEL]),
         model_type="hf",  # Default, will be overridden for steered
         model_args=f"pretrained={MODEL}",
-        tasks="",     
+        tasks="",
         device=DEVICE,
         batch_size="auto",
         out_path=OUT_PATH,
-        seed=f"{SEED},{SEED},{SEED}", # seeds for python's random, numpy and torch respectively",
+        seed=f"{SEED},{SEED},{SEED}",  # seeds for python's random, numpy and torch respectively",
         wandb_args=f"project={WANDB_PROJECT}",  # Base wandb config, run name will be added later
         limit=LIMIT,
-    )    
+    )
 
     return config_globals
+
 
 # 2. Task-specific configurations
 def create_task_config(base_config_with_globals, task) -> EvalConfig:
@@ -211,24 +267,27 @@ def create_task_config(base_config_with_globals, task) -> EvalConfig:
         config.tasks = "multijail"
         config.apply_chat_template = True
         config.predict_only = True
-    
+
     elif task == "global_mmlu":
         config.tasks = "global_mmlu_en,global_mmlu_de,global_mmlu_zh,global_mmlu_bn"
         config.apply_chat_template = False
         config.predict_only = False
-    
+
     elif task == "or_bench":
         config.tasks = "or_bench"
         config.apply_chat_template = True
         config.predict_only = True
-    
+
     else:
-        raise ValueError(f"Unknown task: {task}. Supported tasks are: multijail, global_mmlu, or_bench.")
-    
+        raise ValueError(
+            f"Unknown task: {task}. Supported tasks are: multijail, global_mmlu, or_bench."
+        )
+
     return config
 
+
 # 3. Steer specific configurations
-def create_steering_config(task_specific_config,steer_strength):
+def create_steering_config(task_specific_config, steer_strength):
     """Create steering config for given layer and strength"""
 
     config = deepcopy(task_specific_config)
@@ -252,6 +311,7 @@ def create_steering_config(task_specific_config,steer_strength):
 
     return config
 
+
 def run_and_save(config: EvalConfig):
     """Run lm_eval with the given configuration and print the command."""
 
@@ -262,7 +322,9 @@ def run_and_save(config: EvalConfig):
 
     # Check if Command ran successfully
     if out.returncode != 0:
-        raise RuntimeError(f"Error running command for {config.run_name}:\n{out.stderr}\n Returncode:{out.returncode}")
+        raise RuntimeError(
+            f"Error running command for {config.run_name}:\n{out.stderr}\n Returncode:{out.returncode}"
+        )
 
     # Save config to JSON in output path.
     try:
@@ -270,7 +332,9 @@ def run_and_save(config: EvalConfig):
     except:
         print(f"Warning: Could not save config for {config.run_name}")
 
+
 all_configs = []
+
 
 def main():
     # baseline run and task config
@@ -290,6 +354,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-    
