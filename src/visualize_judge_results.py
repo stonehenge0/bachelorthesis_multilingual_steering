@@ -1,4 +1,6 @@
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Task identifier and corresponding file paths
 df_filepaths = {
@@ -36,6 +38,40 @@ def count_safe_unsafe_invalid_str_contains(df):
     return safe, unsafe, invalid
 
 
+def create_task_barplots(results_df):
+    """Create separate bar plots for multijail and or_bench tasks showing safe/unsafe/invalid counts."""
+
+    # Separate columns by task
+    multijail_cols = [col for col in results_df.columns if col.startswith("multijail")]
+    or_bench_cols = [col for col in results_df.columns if col.startswith("or_bench")]
+
+    # Create figure with 2 subplots
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
+
+    # Plot 1: MultiJail
+    multijail_data = results_df[multijail_cols]
+    multijail_data.plot(kind="bar", ax=ax1, width=0.8)
+    ax1.set_title("MultiJail Task: Safety Judgments by Steering Level", fontsize=14)
+    ax1.set_xlabel("Safety Category", fontsize=12)
+    ax1.set_ylabel("Count", fontsize=12)
+    ax1.legend(title="Steering Level", bbox_to_anchor=(1.05, 1), loc="upper left")
+    ax1.tick_params(axis="x", rotation=0)
+
+    # Plot 2: OR-Bench
+    or_bench_data = results_df[or_bench_cols]
+    or_bench_data.plot(kind="bar", ax=ax2, width=0.8)
+    ax2.set_title("OR-Bench Task: Safety Judgments by Steering Level", fontsize=14)
+    ax2.set_xlabel("Safety Category", fontsize=12)
+    ax2.set_ylabel("Count", fontsize=12)
+    ax2.legend(title="Steering Level", bbox_to_anchor=(1.05, 1), loc="upper left")
+    ax2.tick_params(axis="x", rotation=0)
+
+    # Adjust layout to prevent overlapping
+    plt.tight_layout()
+
+    return fig
+
+
 results = {}
 
 for task, path in df_filepaths.items():
@@ -55,6 +91,13 @@ for task, path in df_filepaths.items():
 
 # cols: tasks and steer levels, rows: safe, unsafe, invalid countss
 results_df = pd.DataFrame.from_dict(results, orient="index").T
+
+# Create the plots
+fig = create_task_barplots(results_df)
+plt.show()
+
+# Optional: Save the figure
+fig.savefig("safety_judgments_by_task.png", dpi=300, bbox_inches="tight")
 
 print("\nResults DataFrame:")
 print(results_df)

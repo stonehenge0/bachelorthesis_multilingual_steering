@@ -1,25 +1,17 @@
 ================================================================================
-JobID = 10250549
+JobID = 10250657
 User = u14374, Account = ag_gipp
-Partition = scc-gpu, Nodelist = ggpu194
+Partition = scc-gpu, Nodelist = ggpu211
 ================================================================================
 Submitting job with sbatch from directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/src
 Home directory: /user/stein65/u14374
 Working directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/src
-Current node: ggpu194
+Current node: ggpu211
 Python 3.12.8
 
 Current Branch: main
-Latest Commit: a52d906
-Uncommitted Changes: 18
+Latest Commit: 6f5a07c
+Uncommitted Changes: 11
 
 Activated Conda environment: modified_lm_eval_env
 Loading model Qwen/Qwen2.5-7B-Instruct and tokenizer...
-============ Job Information ===================================================
-Submitted: 2025-08-08T01:16:57
-Started: 2025-08-08T01:17:02
-Ended: 2025-08-08T01:41:30
-Elapsed: 25 min, Limit: 60 min, Difference: 35 min
-CPUs: 8, Nodes: 1
-Estimated Consumption: 62.50 core-hours
-================================================================================
