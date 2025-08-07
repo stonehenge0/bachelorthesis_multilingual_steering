@@ -1,0 +1,2 @@
+wandb: Currently logged in as: stonehenge0 (stonehenge0-university-of-goettingen) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+Note: Environment variable`HF_TOKEN` is set and is the current active token independently from the token you've just configured.

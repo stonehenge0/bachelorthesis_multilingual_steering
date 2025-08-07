@@ -190,9 +190,7 @@ class EvalConfig:
         """Convert config to command line arguments for lm_eval."""
         # Required parameters
 
-        self.out_path = os.path.join(
-            self.out_path, self.run_name + ".jsonl"
-        )  # Better file naming
+        self.out_path = os.path.join(self.out_path, self.run_name)  # Better file naming
         cmd = [
             "lm_eval",
             "--model",
@@ -240,7 +238,7 @@ def create_base_config() -> EvalConfig:
     """Create base configuration with global settings."""
 
     config_globals = EvalConfig(
-        run_name="_".join([RUN_NAME, MODEL]),
+        run_name=f"{MODEL}",
         model_type="hf",  # Default, will be overridden for steered
         model_args=f"pretrained={MODEL}",
         tasks="",
@@ -261,7 +259,7 @@ def create_task_config(base_config_with_globals, task) -> EvalConfig:
     Create task-specific configuration by extending the base config.
     """
     config = deepcopy(base_config_with_globals)
-    config.run_name = f"{config.run_name}_{task}"
+    config.run_name = f"{task}"  # f"{config.run_name}_{task}"
 
     if task == "multijail":
         config.tasks = "multijail"
