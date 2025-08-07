@@ -14,3 +14,51 @@ Latest Commit: 5208b9d
 Uncommitted Changes: 134
 
 Activated Conda environment: modified_lm_eval_env
+=== Wandb Information ===
+Logged in as: stonehenge0-university-of-goettingen
+Project: bachelorarbeit
+
+Running command for multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_multijail:
+ lm_eval --model hf --model_args pretrained=meta-llama/meta-llama-3-8b-instruct --tasks multijail --output_path /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_multijail.jsonl --device cuda:0 --batch_size auto --seed 1234,1234,1234 --log_samples --apply_chat_template --predict_only --wandb_args project=bachelorarbeit
+Warning: Could not save config for multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_multijail
+Running command for multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_multijail_L12_S0.33:
+ lm_eval --model steered --model_args pretrained=meta-llama/meta-llama-3-8b-instruct,steer_path=/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt --tasks multijail --output_path /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_multijail_L12_S0.33.jsonl --device cuda:0 --batch_size auto --seed 1234,1234,1234 --log_samples --apply_chat_template --predict_only --wandb_args project=bachelorarbeit
+Warning: Could not save config for multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_multijail_L12_S0.33
+Running command for multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_multijail_L12_S0.66:
+ lm_eval --model steered --model_args pretrained=meta-llama/meta-llama-3-8b-instruct,steer_path=/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt --tasks multijail --output_path /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_multijail_L12_S0.66.jsonl --device cuda:0 --batch_size auto --seed 1234,1234,1234 --log_samples --apply_chat_template --predict_only --wandb_args project=bachelorarbeit
+Warning: Could not save config for multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_multijail_L12_S0.66
+Running command for multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_multijail_L12_S1.0:
+ lm_eval --model steered --model_args pretrained=meta-llama/meta-llama-3-8b-instruct,steer_path=/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt --tasks multijail --output_path /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_multijail_L12_S1.0.jsonl --device cuda:0 --batch_size auto --seed 1234,1234,1234 --log_samples --apply_chat_template --predict_only --wandb_args project=bachelorarbeit
+Warning: Could not save config for multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_multijail_L12_S1.0
+Running command for multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_global_mmlu:
+ lm_eval --model hf --model_args pretrained=meta-llama/meta-llama-3-8b-instruct --tasks global_mmlu_en,global_mmlu_de,global_mmlu_zh,global_mmlu_bn --output_path /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_global_mmlu.jsonl --device cuda:0 --batch_size auto --seed 1234,1234,1234 --log_samples --wandb_args project=bachelorarbeit
+Warning: Could not save config for multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_global_mmlu
+Running command for multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_global_mmlu_L12_S0.33:
+ lm_eval --model steered --model_args pretrained=meta-llama/meta-llama-3-8b-instruct,steer_path=/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt --tasks global_mmlu_en,global_mmlu_de,global_mmlu_zh,global_mmlu_bn --output_path /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_global_mmlu_L12_S0.33.jsonl --device cuda:0 --batch_size auto --seed 1234,1234,1234 --log_samples --wandb_args project=bachelorarbeit
+Warning: Could not save config for multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_global_mmlu_L12_S0.33
+Running command for multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_global_mmlu_L12_S0.66:
+ lm_eval --model steered --model_args pretrained=meta-llama/meta-llama-3-8b-instruct,steer_path=/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt --tasks global_mmlu_en,global_mmlu_de,global_mmlu_zh,global_mmlu_bn --output_path /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_global_mmlu_L12_S0.66.jsonl --device cuda:0 --batch_size auto --seed 1234,1234,1234 --log_samples --wandb_args project=bachelorarbeit
+Warning: Could not save config for multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_global_mmlu_L12_S0.66
+Running command for multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_global_mmlu_L12_S1.0:
+ lm_eval --model steered --model_args pretrained=meta-llama/meta-llama-3-8b-instruct,steer_path=/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt --tasks global_mmlu_en,global_mmlu_de,global_mmlu_zh,global_mmlu_bn --output_path /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_global_mmlu_L12_S1.0.jsonl --device cuda:0 --batch_size auto --seed 1234,1234,1234 --log_samples --wandb_args project=bachelorarbeit
+Warning: Could not save config for multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_global_mmlu_L12_S1.0
+Running command for multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_or_bench:
+ lm_eval --model hf --model_args pretrained=meta-llama/meta-llama-3-8b-instruct --tasks or_bench --output_path /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_or_bench.jsonl --device cuda:0 --batch_size auto --seed 1234,1234,1234 --log_samples --apply_chat_template --predict_only --wandb_args project=bachelorarbeit
+Warning: Could not save config for multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_or_bench
+Running command for multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_or_bench_L12_S0.33:
+ lm_eval --model steered --model_args pretrained=meta-llama/meta-llama-3-8b-instruct,steer_path=/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt --tasks or_bench --output_path /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_or_bench_L12_S0.33.jsonl --device cuda:0 --batch_size auto --seed 1234,1234,1234 --log_samples --apply_chat_template --predict_only --wandb_args project=bachelorarbeit
+Warning: Could not save config for multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_or_bench_L12_S0.33
+Running command for multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_or_bench_L12_S0.66:
+ lm_eval --model steered --model_args pretrained=meta-llama/meta-llama-3-8b-instruct,steer_path=/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt --tasks or_bench --output_path /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_or_bench_L12_S0.66.jsonl --device cuda:0 --batch_size auto --seed 1234,1234,1234 --log_samples --apply_chat_template --predict_only --wandb_args project=bachelorarbeit
+Warning: Could not save config for multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_or_bench_L12_S0.66
+Running command for multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_or_bench_L12_S1.0:
+ lm_eval --model steered --model_args pretrained=meta-llama/meta-llama-3-8b-instruct,steer_path=/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt --tasks or_bench --output_path /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_or_bench_L12_S1.0.jsonl --device cuda:0 --batch_size auto --seed 1234,1234,1234 --log_samples --apply_chat_template --predict_only --wandb_args project=bachelorarbeit
+Warning: Could not save config for multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_or_bench_L12_S1.0
+============ Job Information ===================================================
+Submitted: 2025-08-06T18:33:16
+Started: 2025-08-06T18:33:49
+Ended: 2025-08-06T20:28:27
+Elapsed: 115 min, Limit: 300 min, Difference: 185 min
+CPUs: 8, Nodes: 1
+Estimated Consumption: 287.50 core-hours
+================================================================================
