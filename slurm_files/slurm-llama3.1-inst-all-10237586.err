@@ -1,3 +1,0 @@
-wandb: Currently logged in as: stonehenge0 (stonehenge0-university-of-goettingen) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
-Note: Environment variable`HF_TOKEN` is set and is the current active token independently from the token you've just configured.
-[2025-08-07T18:43:25.022] error: *** JOB 10237586 ON ggpu151 CANCELLED AT 2025-08-07T18:43:25 DUE TO TIME LIMIT ***

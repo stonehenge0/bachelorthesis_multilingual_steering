@@ -1,0 +1,34 @@
+#! /bin/bash
+#SBATCH --job-name=visualize
+#SBATCH -c 8
+#SBATCH --mem-per-gpu 40G
+#SBATCH -p scc-gpu
+#SBATCH -t 00:20:00
+#SBATCH -G A100:1
+#SBATCH --output=../slurm_files/slurm-%x-%j.out 
+#SBATCH --error=../slurm_files/slurm-%x-%j.err      
+
+
+# Printing out some info on filepaths.
+echo "Submitting job with sbatch from directory: ${SLURM_SUBMIT_DIR}"
+echo "Home directory: ${HOME}"
+echo "Working directory: $PWD"
+echo "Current node: ${SLURM_NODELIST}"
+
+# Python and torch info. Uncomment for debugging
+python --version
+# python -m torch.utils.collect_env 2> /dev/null
+
+# Print out some git info.
+module load git
+echo -e "\nCurrent Branch: $(git rev-parse --abbrev-ref HEAD)"
+echo "Latest Commit: $(git rev-parse --short HEAD)"
+echo -e "Uncommitted Changes: $(git status --porcelain | wc -l)\n"
+
+# Conda environment setup.
+source /mnt/vast-standard/home/stein65/u14374/miniforge3/etc/profile.d/conda.sh
+conda activate /mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env
+echo "Activated Conda environment: $CONDA_DEFAULT_ENV"
+
+# script
+python visualize_judge_results.py

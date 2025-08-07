@@ -1,0 +1,56 @@
+================================================================================
+JobID = 10250529
+User = u14374, Account = ag_gipp
+Partition = scc-gpu, Nodelist = ggpu194
+================================================================================
+Submitting job with sbatch from directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/src
+Home directory: /user/stein65/u14374
+Working directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/src
+Current node: ggpu194
+Python 3.12.8
+
+Current Branch: main
+Latest Commit: a52d906
+Uncommitted Changes: 13
+
+Activated Conda environment: modified_lm_eval_env
+Loading model Qwen/Qwen2.5-7B-Instruct and tokenizer...
+Dict for model files to process:
+{'multijail_baseline': '../results/multijail/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-08-07T15-05-24.018004.jsonl', 'multijail_L11_S0.33': '../results/multijail_L11_S0.33/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-08-07T16-21-51.487431.jsonl', 'multijail_L11_S0.66': '../results/multijail_L11_S0.66/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-08-07T17-12-12.014675.jsonl', 'multijail_L11_S1.0': '../results/multijail_L11_S1.0/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-08-07T18-05-27.598702.jsonl', 'or_bench_baseline': '../results/or_bench/meta-llama__Llama-3.1-8B-Instruct/samples_or_bench_2025-08-07T22-18-53.594768.jsonl', 'or_bench_L11_S0.33': '../results/or_bench_L11_S0.33/meta-llama__Llama-3.1-8B-Instruct/samples_or_bench_2025-08-07T22-36-20.237882.jsonl', 'or_bench_L11_S0.66': '../results/or_bench_L11_S0.66/meta-llama__Llama-3.1-8B-Instruct/samples_or_bench_2025-08-07T22-51-43.968415.jsonl', 'or_bench_L11_S1.0': '../results/or_bench_L11_S1.0/meta-llama__Llama-3.1-8B-Instruct/samples_or_bench_2025-08-07T23-07-12.032751.jsonl'}
+<class 'dict'>
+
+============Starting processing============
+Task:multijail_baseline
+File: ../results/multijail/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-08-07T15-05-24.018004.jsonl
+
+Information on the Dataframe being processed:
+Columns: Index(['doc_id', 'doc', 'target', 'arguments', 'resps', 'filtered_resps',
+       'filter', 'metrics', 'doc_hash', 'prompt_hash', 'target_hash', 'bypass',
+       'prompt', 'prompt_and_answer'],
+      dtype='object')
+Number of samples: 10
+NAs values:
+ doc_id                0
+doc                   0
+target                0
+arguments             0
+resps                 0
+filtered_resps        0
+filter                0
+metrics               0
+doc_hash              0
+prompt_hash           0
+target_hash           0
+bypass               10
+prompt                0
+prompt_and_answer     0
+dtype: int64
+
+============ Job Information ===================================================
+Submitted: 2025-08-08T01:03:27
+Started: 2025-08-08T01:03:28
+Ended: 2025-08-08T01:06:20
+Elapsed: 3 min, Limit: 60 min, Difference: 57 min
+CPUs: 8, Nodes: 1
+Estimated Consumption: 7.50 core-hours
+================================================================================

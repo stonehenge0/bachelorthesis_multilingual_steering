@@ -1,0 +1,10 @@
+Note: Environment variable`HF_TOKEN` is set and is the current active token independently from the token you've just configured.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:03<00:11,  3.93s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:10<00:11,  5.73s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:16<00:05,  5.62s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:20<00:00,  5.13s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:20<00:00,  5.20s/it]
+Traceback (most recent call last):
+  File "/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/src/llm_judge.py", line 192, in <module>
+    df = read_in_jsonl_to_df(filepath)
+  File "/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/src/llm_judge.py", line 71, in read_in_jsonl_to_df
+    with jsonlines.open(filepath) as reader:
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/jsonlines/jsonlines.py", line 643, in open
+    fp = builtins.open(file, mode=mode + "t", encoding=encoding)
+FileNotFoundError: [Errno 2] No such file or directory: 'results/multijail/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-08-07T15-05-24.018004.jsonl'

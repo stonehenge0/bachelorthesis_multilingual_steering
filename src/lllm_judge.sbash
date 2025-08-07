@@ -1,0 +1,33 @@
+#! /bin/bash
+#SBATCH --job-name=Qwen_judge
+#SBATCH -c 8 #
+#SBATCH --mem 80G  
+#SBATCH -p scc-gpu 
+#SBATCH -t 01:00:00 
+#SBATCH -G A100:1 
+#SBATCH --output=../slurm_files/slurm-%x-%j.out     
+#SBATCH --error=../slurm_files/slurm-%x-%j.err      
+
+# Printing out some info on filepaths.
+echo "Submitting job with sbatch from directory: ${SLURM_SUBMIT_DIR}"
+echo "Home directory: ${HOME}"
+echo "Working directory: $PWD"
+echo "Current node: ${SLURM_NODELIST}"
+
+# Python and torch info. Uncomment for debugging
+python --version
+# python -m torch.utils.collect_env 2> /dev/null
+
+# Print out some git info.
+module load git
+echo -e "\nCurrent Branch: $(git rev-parse --abbrev-ref HEAD)"
+echo "Latest Commit: $(git rev-parse --short HEAD)"
+echo -e "Uncommitted Changes: $(git status --porcelain | wc -l)\n"
+
+# Conda environment setup.
+source /mnt/vast-standard/home/stein65/u14374/miniforge3/etc/profile.d/conda.sh
+conda activate /mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env
+echo "Activated Conda environment: $CONDA_DEFAULT_ENV"
+
+# Run script.
+python llm_judge.py --model "Qwen/Qwen2.5-7B-Instruct" --out_path "../results/judged_responses/" --files_to_process_dict '{"multijail_baseline": "../results/multijail/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-08-07T15-05-24.018004.jsonl", "multijail_L11_S0.33": "../results/multijail_L11_S0.33/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-08-07T16-21-51.487431.jsonl", "multijail_L11_S0.66": "../results/multijail_L11_S0.66/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-08-07T17-12-12.014675.jsonl", "multijail_L11_S1.0": "../results/multijail_L11_S1.0/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-08-07T18-05-27.598702.jsonl", "or_bench_baseline": "../results/or_bench/meta-llama__Llama-3.1-8B-Instruct/samples_or_bench_2025-08-07T22-18-53.594768.jsonl", "or_bench_L11_S0.33": "../results/or_bench_L11_S0.33/meta-llama__Llama-3.1-8B-Instruct/samples_or_bench_2025-08-07T22-36-20.237882.jsonl", "or_bench_L11_S0.66": "../results/or_bench_L11_S0.66/meta-llama__Llama-3.1-8B-Instruct/samples_or_bench_2025-08-07T22-51-43.968415.jsonl", "or_bench_L11_S1.0": "../results/or_bench_L11_S1.0/meta-llama__Llama-3.1-8B-Instruct/samples_or_bench_2025-08-07T23-07-12.032751.jsonl"}'

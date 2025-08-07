@@ -1,0 +1,2 @@
+Note: Environment variable`HF_TOKEN` is set and is the current active token independently from the token you've just configured.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:04<00:12,  4.06s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:35<00:40, 20.34s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:41<00:13, 13.62s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:45<00:00, 10.04s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:45<00:00, 11.49s/it]

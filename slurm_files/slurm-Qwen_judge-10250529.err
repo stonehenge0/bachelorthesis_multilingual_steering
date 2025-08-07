@@ -1,0 +1,20 @@
+Note: Environment variable`HF_TOKEN` is set and is the current active token independently from the token you've just configured.
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:03<00:11,  3.98s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:28<00:32, 16.02s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:34<00:11, 11.29s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:38<00:00,  8.59s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:38<00:00,  9.63s/it]
+Traceback (most recent call last):
+  File "/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/src/llm_judge.py", line 209, in <module>
+    save_output_df(df, task_name=task, out_path=args.out_path)
+  File "/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/src/llm_judge.py", line 141, in save_output_df
+    full_df.to_csv(full_out_path)
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/pandas/util/_decorators.py", line 333, in wrapper
+    return func(*args, **kwargs)
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/pandas/core/generic.py", line 3986, in to_csv
+    return DataFrameRenderer(formatter).to_csv(
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/pandas/io/formats/format.py", line 1014, in to_csv
+    csv_formatter.save()
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/pandas/io/formats/csvs.py", line 251, in save
+    with get_handle(
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/pandas/io/common.py", line 749, in get_handle
+    check_parent_directory(str(handle))
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/pandas/io/common.py", line 616, in check_parent_directory
+    raise OSError(rf"Cannot save file into a non-existent directory: '{parent}'")
+OSError: Cannot save file into a non-existent directory: 'results/judged_responses'
