@@ -30,8 +30,6 @@ from copy import deepcopy
 
 import wandb
 import torch
-from lm_eval.loggers import WandbLogger
-from lm_eval.utils import sanitize_model_name
 from huggingface_hub import login
 
 from utils import check, seed_everything, create_or_ensure_output_path
@@ -43,14 +41,14 @@ def get_args() -> argparse.Namespace:
 
     parser = argparse.ArgumentParser()
 
-    # Task and model
-    parser.add_argument(
-        "--run_name",
-        required=True,
-        default="unnamed_run",
-        type=str,
-        help="The run name. It is used for wandb and in naming all output files.",
-    )
+    # Task and model ###
+    # parser.add_argument(
+    #     "--run_name",
+    #     required=True,
+    #     default="unnamed_run",
+    #     type=str,
+    #     help="The run name. It is used for wandb and in naming all output files.",
+    # )
     parser.add_argument(
         "--tasks",
         required=True,
@@ -122,7 +120,7 @@ def get_args() -> argparse.Namespace:
 # Adding the args as variables here is somewhat of a personal preference, makes the script a bit more readable imo.
 args = get_args()
 
-RUN_NAME = args.run_name
+# RUN_NAME = args.run_name
 TASKS = args.tasks
 MODEL = args.model
 OUT_PATH = args.out_path
@@ -134,9 +132,14 @@ DEVICE = args.device
 LIMIT = args.limit
 SEED = args.seed
 
+MODEL_NAME = MODEL.split("/")[-1]
+RUN_NAME = MODEL_NAME  ### If this works, replace the rest, but for debugging this is a good test I think.
+
 MMLU_SUBTASKS_LANGS = ",".join(
     ["global_mmlu_en", "global_mmlu_de", "global_mmlu_zh", "global_mmlu_bn"]
-)  # Langs to run MMLU on.
+)
+
+# Langs to run MMLU on.
 CONFIG_FILEPATH = f"/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_{RUN_NAME}.pt"
 
 # Failsafe: Ensure output path exists, create if missing.
@@ -160,9 +163,6 @@ print(f"Project: {WANDB_PROJECT}\n")
 # Load steering components
 STEER_DIRECTION = torch.load(STEERING_DIRECTION_PATH)
 ZEROS_BIAS = torch.zeros(STEER_DIRECTION.shape)
-
-# Failsafe: Ensure output path exists, create if missing.
-create_or_ensure_output_path(OUT_PATH)
 
 
 @dataclass
@@ -190,7 +190,7 @@ class EvalConfig:
         """Convert config to command line arguments for lm_eval."""
         # Required parameters
 
-        self.out_path = os.path.join(self.out_path, self.run_name)  # Better file naming
+        self.out_path = os.path.join(self.out_path)  ### removed self.run_name
         cmd = [
             "lm_eval",
             "--model",
@@ -238,7 +238,7 @@ def create_base_config() -> EvalConfig:
     """Create base configuration with global settings."""
 
     config_globals = EvalConfig(
-        run_name=f"{MODEL}",
+        run_name=f"{MODEL_NAME}",
         model_type="hf",  # Default, will be overridden for steered
         model_args=f"pretrained={MODEL}",
         tasks="",

@@ -1,17 +1,16 @@
 ================================================================================
-JobID = 10250657
+JobID = 10338280
 User = u14374, Account = ag_gipp
-Partition = scc-gpu, Nodelist = ggpu211
+Partition = scc-gpu, Nodelist = ggpu194
 ================================================================================
 Submitting job with sbatch from directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/src
 Home directory: /user/stein65/u14374
 Working directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/src
-Current node: ggpu211
+Current node: ggpu194
 Python 3.12.8
 
 Current Branch: main
-Latest Commit: 6f5a07c
-Uncommitted Changes: 11
+Latest Commit: 3fb1c32
+Uncommitted Changes: 26
 
 Activated Conda environment: modified_lm_eval_env
-Loading model Qwen/Qwen2.5-7B-Instruct and tokenizer...
