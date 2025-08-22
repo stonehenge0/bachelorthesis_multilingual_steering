@@ -1,0 +1,16 @@
+Hello future Emma, welcome back from Summercamp!
+
+You have a pipeline that runs, good job! What you are currently working on is visualizations and 
+analysing the output properly. 
+
+Last changes: 
+- backtranslate aya script. It translates the answers from multijail and or_bench to english using Aya. 
+For or bench so we can eval with string match of refusals (look at the source code from or paper) and
+for multijail we do this just for readability. 
+-> This hasn't been debugged, so that is one thing to do. 
+
+- Also: In the backtranslate script we account for the fact right now that the steer info is in the name
+of the parent parent dir of the jsonl files and not the parent dir. That can be fixed in the lm eval file, 
+just don't forget to change this in the aya script :) 
+
+Good Luck, work well <3
