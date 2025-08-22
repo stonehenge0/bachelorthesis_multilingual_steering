@@ -1,0 +1,2 @@
+Note: Environment variable`HF_TOKEN` is set and is the current active token independently from the token you've just configured.
+Fetching 11 files:   0%|          | 0/11 [00:00<?, ?it/s]Fetching 11 files:   9%|▉         | 1/11 [07:44<1:17:28, 464.86s/it]Fetching 11 files:  18%|█▊        | 2/11 [08:00<30:08, 200.90s/it]  

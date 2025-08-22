@@ -209,13 +209,13 @@ def get_args():
 
     parser.add_argument(
         "--folderpath",
-        type=str,  # Keep as string, parse later
+        type=str,
         required=True,
-        help="Path to the folder containing multijail and or_bench samples. Parent dir of multijail/or_bench is expected to indicate the task and steer level in its name.",
+        help="Path to the folder containing multijail and or_bench samples. Parent dir of multijail/or_bench is expected to indicate task and steer level in its name.",
     )
 
     args = parser.parse_args()
-    args.folderpath = json.loads(args.folderpath)
+    # args.folderpath = json.loads(args.folderpath)
 
     return args
 

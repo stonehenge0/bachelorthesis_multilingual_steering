@@ -30,5 +30,7 @@ source /mnt/vast-standard/home/stein65/u14374/miniforge3/etc/profile.d/conda.sh
 conda activate /mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env
 echo "Activated Conda environment: $CONDA_DEFAULT_ENV"
 
-# 
-python translate_or_bench.py --langs vi --samplepercentage 0.002
+# ar
+# it
+# ko, th, vi, zh
+python translate_or_bench.py --langs vi --samplepercentage 0.004
