@@ -136,7 +136,7 @@ MODEL_NAME = MODEL.split("/")[-1]
 RUN_NAME = MODEL_NAME  ### If this works, replace the rest, but for debugging this is a good test I think.
 
 MMLU_SUBTASKS_LANGS = ",".join(
-    ["global_mmlu_en", "global_mmlu_de", "global_mmlu_zh", "global_mmlu_bn"]
+    ["global_mmlu_en", "global_mmlu_ar", "global_mmlu_zh", "global_mmlu_it", "global_mmlu_ko"]
 )
 
 # Langs to run MMLU on.

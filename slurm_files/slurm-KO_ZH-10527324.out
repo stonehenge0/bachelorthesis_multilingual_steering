@@ -1,0 +1,38 @@
+================================================================================
+JobID = 10527324
+User = u14374, Account = ag_gipp
+Partition = scc-gpu, Nodelist = ggpu136
+================================================================================
+Submitting job with sbatch from directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/src
+Home directory: /user/stein65/u14374
+Working directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/src
+Current node: ggpu136
+Python 3.12.8
+
+Current Branch: main
+Latest Commit: 46b36be
+Uncommitted Changes: 10
+
+Activated Conda environment: modified_lm_eval_env
+Sampling OR Bench to 320.0 samples.
+=== Starting optimized translate_dataframe ===
+
+--- Processing language: ko,zh ---
+=== Starting Load model ===
+lang_code for model load: ko,zh
+Error processing language ko,zh: Language 'ko,zh' not supported.
+
+Total translations collected: 0
+First couple translations: []
+=== Finished optimized translate_dataframe ===
+Translated df info: <bound method DataFrame.info of Empty DataFrame
+Columns: []
+Index: []>
+============ Job Information ===================================================
+Submitted: 2025-08-23T07:45:45
+Started: 2025-08-23T07:45:49
+Ended: 2025-08-23T07:46:46
+Elapsed: 1 min, Limit: 270 min, Difference: 269 min
+CPUs: 8, Nodes: 1
+Estimated Consumption: 2.50 core-hours
+================================================================================

@@ -1,5 +1,5 @@
 ================================================================================
-JobID = 10515859
+JobID = 10527371
 User = u14374, Account = ag_gipp
 Partition = scc-gpu, Nodelist = ggpu135
 ================================================================================
@@ -10,16 +10,13 @@ Current node: ggpu135
 Python 3.12.8
 
 Current Branch: main
-Latest Commit: 34e832d
-Uncommitted Changes: 20
+Latest Commit: 46b36be
+Uncommitted Changes: 18
 
 Activated Conda environment: modified_lm_eval_env
-Loading model CohereLabs/aya-101 and tokenizer...
-============ Job Information ===================================================
-Submitted: 2025-08-22T16:42:02
-Started: 2025-08-22T16:42:27
-Ended: 2025-08-22T16:52:59
-Elapsed: 11 min, Limit: 600 min, Difference: 589 min
-CPUs: 8, Nodes: 1
-Estimated Consumption: 27.50 core-hours
-================================================================================
+Sampling OR Bench to 320.0 samples.
+=== Starting optimized translate_dataframe ===
+
+--- Processing language: ko ---
+=== Starting Load model ===
+lang_code for model load: ko

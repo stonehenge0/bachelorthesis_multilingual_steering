@@ -1,5 +1,5 @@
 #! /bin/bash
-#SBATCH --job-name=VI
+#SBATCH --job-name=KO_ZH
 #SBATCH -c 8
 #SBATCH --mem-per-gpu 60G
 #SBATCH -p scc-gpu
@@ -32,5 +32,6 @@ echo "Activated Conda environment: $CONDA_DEFAULT_ENV"
 
 # ar
 # it
-# ko, th, vi, zh
-python translate_or_bench.py --langs vi --samplepercentage 0.004
+# ko, zh
+# th, vi
+python translate_or_bench.py --langs ko zh --samplepercentage 0.004
