@@ -1,0 +1,268 @@
+"""Run and evaluate baseline and steered models on different tasks using lm_eval."""
+
+# ---------------------
+# Code logic:
+# Every combination of steered/unsteered model and task is run as a separate lm_eval run. This is necessary because of the combinations of flags.
+# The run is based on the EvalConfig dataclass which is converted to command line arguments for lm_eval.
+
+# Our base config undergoes three transformations:
+# 1. create_config_globals() -> sets global parameters that are shared across all runs (seed, model, device, etc.)
+# 2. create_task_config() -> sets task-specific parameters (tasks, apply_chat_template, etc.)
+# 3. create_steering_config() -> sets steered model parameters (steering layer, steering strength, etc.)
+
+# In the end we will have n different configs that are each one lm_eval run with n = tasks * steering_strengths +1 (the +1 is for unsteered)
+# ---------------------
+
+### Options for sampling
+### Naming of WandB runs not there yet.
+
+# Setup
+import os
+import sys
+import datetime
+import subprocess
+import time
+import argparse
+import ast
+from dataclasses import dataclass
+from typing import Dict, List, Optional, Callable
+from copy import deepcopy
+
+import wandb
+import torch
+from huggingface_hub import login
+
+from utils import check, seed_everything, create_or_ensure_output_path
+
+
+@dataclass
+class EvalConfig:
+    """Configuration for a single evaluation run."""
+
+    # Required fields (no defaults)
+    model_type: str
+    model_args: str
+    tasks: str
+    device: str
+    batch_size: str
+    out_path: str
+    seed: str
+
+    # Optional fields (with defaults)
+    run_name: str = ""
+    apply_chat_template: bool = False
+    predict_only: bool = False
+    log_samples: bool = True
+    wandb_args: Optional[str] = None
+    limit: Optional[int] = None
+
+    def to_cmd_args(self) -> List[str]:
+        """Convert config to command line arguments for lm_eval."""
+        # Required parameters
+
+        self.out_path = os.path.join(self.out_path)  ### removed self.run_name
+        cmd = [
+            "lm_eval",
+            "--model",
+            self.model_type,
+            "--model_args",
+            self.model_args,
+            "--tasks",
+            self.tasks,
+            "--output_path",
+            self.out_path,
+            "--device",
+            self.device,
+            "--batch_size",
+            self.batch_size,
+            "--seed",
+            self.seed,
+            "--log_samples",
+        ]
+
+        # Optional flag parameters (no values needed)
+        if self.apply_chat_template:
+            cmd.append("--apply_chat_template")
+
+        if self.predict_only:
+            cmd.append("--predict_only")
+
+        # Optional parameters with values
+        if self.limit:
+            cmd.extend(["--limit", str(self.limit)])
+
+        if self.wandb_args:
+            cmd.extend(["--wandb_args", self.wandb_args])
+
+        return cmd
+
+    @staticmethod
+    def save_json(self, filepath: str):
+        """Save config to a JSON file."""
+        with open(filepath, "w") as f:
+            f.write(self.to_json())
+
+
+# 1. Base config with globals
+def create_base_config() -> EvalConfig:
+    """Create base configuration with global settings."""
+
+    config_globals = EvalConfig(
+        run_name=f"{MODEL_NAME}",
+        model_type="hf",  # Default, will be overridden for steered
+        model_args=f"pretrained={MODEL_PATH}",
+        tasks="",
+        device=DEVICE,
+        batch_size="auto",
+        out_path=OUT_PATH,
+        seed=f"{SEED},{SEED},{SEED}",  # seeds for python's random, numpy and torch respectively",
+        wandb_args=f"project={WANDB_PROJECT}",  # Base wandb config, run name will be added later
+        limit=LIMIT,
+    )
+
+    return config_globals
+
+
+# 2. Task-specific configurations
+def create_task_config(base_config_with_globals, task) -> EvalConfig:
+    """
+    Create task-specific configuration by extending the base config.
+    """
+    config = deepcopy(base_config_with_globals)
+    config.run_name = f"{task}"  # f"{config.run_name}_{task}"
+
+    if task == "multijail":
+        config.tasks = "multijail"
+        config.apply_chat_template = True
+        config.predict_only = True
+
+    elif task == "global_mmlu":
+        config.tasks = "global_mmlu_en,global_mmlu_de,global_mmlu_zh,global_mmlu_bn"
+        config.apply_chat_template = False
+        config.predict_only = False
+
+    elif task == "or_bench":
+        config.tasks = "or_bench"
+        config.apply_chat_template = True
+        config.predict_only = True
+
+    else:
+        raise ValueError(
+            f"Unknown task: {task}. Supported tasks are: multijail, global_mmlu, or_bench."
+        )
+
+    return config
+
+
+# 3. Steer specific configurations
+def create_steering_config(task_specific_config, steer_strength):
+    """Create steering config for given layer and strength"""
+
+    config = deepcopy(task_specific_config)
+    config.run_name = f"{config.run_name}_L{STEER_LAYER}_S{steer_strength}"
+
+    # steering config as input to lm_eval
+    steer_config_parameter = {
+        f"layers.{STEER_LAYER}": {
+            "steering_vector": STEER_DIRECTION,
+            "bias": ZEROS_BIAS,
+            "steering_coefficient": steer_strength,
+            "action": "add",
+        }
+    }
+
+    # it's a bit annoying that lm_eval expects the steering config as a filepath, but we have to save it to a file and then read it back.
+    torch.save(steer_config_parameter, CONFIG_FILEPATH)
+
+    config.model_type = "steered"
+    config.model_args = f"pretrained={MODEL_PATH},steer_path={CONFIG_FILEPATH}"
+
+    return config
+
+
+def run_and_save(config: EvalConfig):
+    """Run lm_eval with the given configuration and print the command."""
+
+    # Run command
+    cmd = config.to_cmd_args()
+    print(f"Running command for {config.run_name}:\n {' '.join(cmd)}")
+    out = subprocess.run(cmd, capture_output=True, text=True)
+
+    # Check if Command ran successfully
+    if out.returncode != 0:
+        raise RuntimeError(
+            f"Error running command for {config.run_name}:\n{out.stderr}\n Returncode:{out.returncode}"
+        )
+
+    # Save config to JSON in output path.
+    try:
+        config.save_json(f"{OUT_PATH}{config.run_name}.json")
+    except:
+        print(f"Warning: Could not save config for {config.run_name}")
+
+
+all_configs = []
+
+
+def lm_eval_steered_and_baseline_tasks(
+    STEERING_STRENGTHS,
+    MODEL_ALIAS,
+    MODEL_PATH,
+    STEER_TYPE,
+    STEER_VECTOR_PATH,
+    STEER_LAYER,
+    TOKEN_POS,
+    DEVICE,
+    DEBUG,
+    ARTIFACT_PATH,
+):
+
+    # GLOBALS
+    TASKS = ["multijail", "global_mmlu", "or_bench"]
+    WANDB_PROJECT = "bachelorarbeit"
+    LIMIT = 3  # if debug = True only run a subset {LIMIT} samples
+    SEED = 1234
+    OUT_PATH = ARTIFACT_PATH  ### This we might want to change down the line.
+    MMLU_SUBTASKS_LANGS = ",".join(
+        [
+            "global_mmlu_en",
+            "global_mmlu_ar",
+            "global_mmlu_zh",
+            "global_mmlu_it",
+            "global_mmlu_ko",
+        ]
+    )
+    CONFIG_FILEPATH = os.path.join(
+        ARTIFACT_PATH, f"steer_config_{MODEL_ALIAS}.pt"
+    )  ### This too is weird still rn.
+
+    seed_everything(SEED)
+
+    # Login wandb and huggingface
+    wandb.login()
+    with open(os.path.expanduser("~/.cache/huggingface/token"), "r") as f:
+        hf_token = f.read().strip()
+    login(token=hf_token)
+
+    wandb_user = wandb.api.default_entity
+    print(f"=== Wandb Information ===")
+    print(f"Logged in as: {wandb_user}")
+    print(f"Project: {WANDB_PROJECT}\n")
+
+    # Load steering components
+    STEER_DIRECTION = torch.load(STEER_VECTOR_PATH)
+    ZEROS_BIAS = torch.zeros(STEER_DIRECTION.shape)
+
+    # baseline run and task config
+    for task in TASKS:
+        base_config = create_base_config()
+        task_config = create_task_config(base_config, task)
+        all_configs.append(task_config)
+
+        # Steer specific runs
+        for strength in STEERING_STRENGTHS:
+            steered_config = create_steering_config(task_config, strength)
+            all_configs.append(steered_config)
+
+    for config in all_configs:
+        run_and_save(config)
