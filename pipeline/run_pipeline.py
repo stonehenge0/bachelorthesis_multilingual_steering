@@ -2,10 +2,10 @@ import argparse
 import os
 
 from config import Config
-from submodules.lm_eval_steered_and_baseline_tasks import (
+from subfns.lm_eval_steered_and_baseline_tasks import (
     lm_eval_steered_and_baseline_tasks,
 )
-
+from subfns.utils import create_or_ensure_output_path
 
 def parse_arguments():
     """Parse model path argument from command line."""
@@ -63,7 +63,6 @@ def parse_arguments():
     parser.add_argument(
         "--debug",
         required=False,
-        type=bool,
         action="store_true",
         help="Run on a subsample of dataset and tasks.",
     )
@@ -90,6 +89,7 @@ def run_pipeline(model_path):
     )
 
     artifact_path = Config.artifact_path(cfg)
+    create_or_ensure_output_path(artifact_path)
 
     results = lm_eval_steered_and_baseline_tasks(
         STEERING_STRENGTHS=cfg.steering_strengths,

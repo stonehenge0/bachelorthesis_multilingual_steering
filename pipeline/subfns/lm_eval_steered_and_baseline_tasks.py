@@ -33,8 +33,7 @@ import wandb
 import torch
 from huggingface_hub import login
 
-from ..pipeline.utils import check, seed_everything, create_or_ensure_output_path
-
+from .utils import check, seed_everything, create_or_ensure_output_path
 
 @dataclass
 class EvalConfig:
@@ -183,7 +182,8 @@ def create_steering_config(
             "action": "add",
         }
     }
-    torch.save(steer_config_parameter, CONFIG_FILEPATH)
+    torch.save(steer_config_parameter, f"{CONFIG_FILEPATH}_S{steer_strength}_L{STEER_LAYER}.pt")
+    
     config.model_type = "steered"
     config.model_args = f"pretrained={MODEL_PATH},steer_path={CONFIG_FILEPATH}"
     return config
@@ -191,6 +191,7 @@ def create_steering_config(
 
 def run_and_save(config: EvalConfig, out_path: str):
     """Run lm_eval with the given configuration and print the command."""
+
     cmd = config.to_cmd_args()
     print(f"Running command for {config.run_name}:\n {' '.join(cmd)}")
     out = subprocess.run(cmd, capture_output=True, text=True)
@@ -199,7 +200,8 @@ def run_and_save(config: EvalConfig, out_path: str):
             f"Error running command for {config.run_name}:\n{out.stderr}\n Returncode:{out.returncode}"
         )
     # Ensure output path ends with separator
-    out_path = os.path.join(out_path, "")
+    out_path = os.path.join(f"{out_path}_{config.tasks}", "") ### Hier nochmal again, naming, but sure
+
     try:
         config.save_json(f"{out_path}{config.run_name}.json")
     except Exception as e:
@@ -249,11 +251,8 @@ def lm_eval_steered_and_baseline_tasks(
 
     seed_everything(SEED)
 
-    # Login wandb and huggingface
+    # Login wandb and huggingface. Took hf login out and hope still works ###
     wandb.login()
-    with open(os.path.expanduser("~/.cache/huggingface/token"), "r") as f:
-        hf_token = f.read().strip()
-    login(token=hf_token)
 
     wandb_user = wandb.api.default_entity
     print(f"=== Wandb Information ===")
@@ -275,7 +274,9 @@ def lm_eval_steered_and_baseline_tasks(
             )
         else:
             task_config = create_task_config(base_config, task)
+
         all_configs.append(task_config)
+
         for strength in STEERING_STRENGTHS:
             steered_config = create_steering_config(
                 task_config,
