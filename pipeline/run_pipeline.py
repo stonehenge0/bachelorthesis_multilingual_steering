@@ -1,7 +1,7 @@
 import argparse
 import os
 
-from pipeline.config import Config
+from config import Config
 from submodules.lm_eval_steered_and_baseline_tasks import (
     lm_eval_steered_and_baseline_tasks,
 )

@@ -33,7 +33,7 @@ import wandb
 import torch
 from huggingface_hub import login
 
-from utils import check, seed_everything, create_or_ensure_output_path
+from ..pipeline.utils import check, seed_everything, create_or_ensure_output_path
 
 
 @dataclass
