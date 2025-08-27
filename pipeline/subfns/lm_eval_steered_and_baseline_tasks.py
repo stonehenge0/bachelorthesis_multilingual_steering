@@ -35,6 +35,7 @@ from huggingface_hub import login
 
 from .utils import check, seed_everything, create_or_ensure_output_path
 
+
 @dataclass
 class EvalConfig:
     """Configuration for a single evaluation run."""
@@ -120,6 +121,7 @@ def create_base_config(
         wandb_args=f"project={WANDB_PROJECT}",  # Base wandb config, run name will be added later
         limit=LIMIT,
     )
+
     return config_globals
 
 
@@ -132,6 +134,8 @@ def create_task_config(
     """
     config = deepcopy(base_config_with_globals)
     config.run_name = f"{task}"
+    config.out_path = f"{config.out_path}_{task}"
+    print(f"Out path after task config: {config.out_path}")
 
     if task == "multijail":
         config.tasks = "multijail"
@@ -173,6 +177,8 @@ def create_steering_config(
     """Create steering config for given layer and strength"""
     config = deepcopy(task_specific_config)
     config.run_name = f"{config.run_name}_L{STEER_LAYER}_S{steer_strength}"
+    config.out_path = f"{config.out_path}_L{STEER_LAYER}_S{steer_strength}"
+    print(f"Out path after steer config: {config.out_path}")
 
     steer_config_parameter = {
         f"layers.{STEER_LAYER}": {
@@ -182,28 +188,38 @@ def create_steering_config(
             "action": "add",
         }
     }
-    torch.save(steer_config_parameter, f"{CONFIG_FILEPATH}_S{steer_strength}_L{STEER_LAYER}.pt")
-    
+    torch.save(steer_config_parameter, CONFIG_FILEPATH)
+
     config.model_type = "steered"
     config.model_args = f"pretrained={MODEL_PATH},steer_path={CONFIG_FILEPATH}"
     return config
 
 
 def run_and_save(config: EvalConfig, out_path: str):
-    """Run lm_eval with the given configuration and print the command."""
+    """Run lm_eval with the given configuration and save outputs."""
 
+    create_or_ensure_output_path(config.out_path)
     cmd = config.to_cmd_args()
     print(f"Running command for {config.run_name}:\n {' '.join(cmd)}")
+
     out = subprocess.run(cmd, capture_output=True, text=True)
+
     if out.returncode != 0:
         raise RuntimeError(
             f"Error running command for {config.run_name}:\n{out.stderr}\n Returncode:{out.returncode}"
         )
+
     # Ensure output path ends with separator
-    out_path = os.path.join(f"{out_path}_{config.tasks}", "") ### Hier nochmal again, naming, but sure
+    out_path = os.path.join(
+        f"{out_path}_{config.tasks}", ""
+    )  ### Hier nochmal again, naming, but sure
+
+    ### Explicit saving test here.
 
     try:
-        config.save_json(f"{out_path}{config.run_name}.json")
+        config.save_json(
+            filepath=f"{out_path}{config.run_name}.json"
+        )  ### added the "filepath="" here...
     except Exception as e:
         print(f"Warning: Could not save config for {config.run_name}: {e}")
 
@@ -247,7 +263,6 @@ def lm_eval_steered_and_baseline_tasks(
                 "global_mmlu_ar",
             ]
         )
-    CONFIG_FILEPATH = os.path.join(ARTIFACT_PATH, f"steer_config_{MODEL_ALIAS}.pt")
 
     seed_everything(SEED)
 
@@ -278,6 +293,11 @@ def lm_eval_steered_and_baseline_tasks(
         all_configs.append(task_config)
 
         for strength in STEERING_STRENGTHS:
+
+            CONFIG_FILEPATH = os.path.join(
+                ARTIFACT_PATH,
+                f"steer_config_{MODEL_ALIAS}_S{strength}_L{STEER_LAYER}.pt",  ### This is the crucial part rn
+            )
             steered_config = create_steering_config(
                 task_config,
                 strength,

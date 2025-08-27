@@ -1,5 +1,5 @@
-# Translate the LLM answers on Or-bench back to English for
-# evaluation using Aya101.
+# Translate the LLM answers on Or-bench and multijail back to English for
+# evaluation and analysis using Aya101
 
 import os
 import argparse
@@ -12,7 +12,7 @@ import torch
 from huggingface_hub import login
 import jsonlines
 
-from utils import seed_everything, create_or_ensure_output_path
+from .utils import seed_everything, create_or_ensure_output_path
 
 # seeds
 seed_everything(42)
