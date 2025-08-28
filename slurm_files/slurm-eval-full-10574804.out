@@ -1,0 +1,128 @@
+================================================================================
+JobID = 10574804
+User = u14374, Account = ag_gipp
+Partition = scc-gpu, Nodelist = ggpu136
+================================================================================
+Submitting job with sbatch from directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering
+Home directory: /user/stein65/u14374
+Working directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering
+Current node: ggpu136
+Python 3.12.8
+
+Current Branch: main
+Latest Commit: 76f8427
+Uncommitted Changes: 2
+
+Activated Conda environment: modified_lm_eval_env
+WARNING: Output path does not exist: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct
+Created output directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct
+Your results will be saved to: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct
+=== Wandb Information ===
+Logged in as: stonehenge0-university-of-goettingen
+Project: bachelorarbeit
+
+Out path after task config: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail
+Out path after steer config: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail_L11_S0.33
+Out path after steer config: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail_L11_S0.66
+Out path after steer config: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail_L11_S1.0
+Out path after task config: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_global_mmlu
+Out path after steer config: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_global_mmlu_L11_S0.33
+Out path after steer config: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_global_mmlu_L11_S0.66
+Out path after steer config: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_global_mmlu_L11_S1.0
+Out path after task config: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_or_bench
+Out path after steer config: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_or_bench_L11_S0.33
+Out path after steer config: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_or_bench_L11_S0.66
+Out path after steer config: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_or_bench_L11_S1.0
+WARNING: Output path does not exist: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail
+Created output directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail
+Your results will be saved to: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail
+Running command for multijail:
+ lm_eval --model hf --model_args pretrained=meta-llama/Llama-3.1-8B-Instruct --tasks multijail --output_path /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail --device cuda:0 --batch_size auto --seed 1234,1234,1234 --log_samples --apply_chat_template --predict_only --wandb_args project=bachelorarbeit
+Warning: Could not save config for multijail: save_json() missing 1 required positional argument: 'self'
+WARNING: Output path does not exist: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail_L11_S0.33
+Created output directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail_L11_S0.33
+Your results will be saved to: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail_L11_S0.33
+Running command for multijail_L11_S0.33:
+ lm_eval --model steered --model_args pretrained=meta-llama/Llama-3.1-8B-Instruct,steer_path=/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct/steer_config_Llama-3.1-8B-Instruct_S0.33_L11.pt --tasks multijail --output_path /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail_L11_S0.33 --device cuda:0 --batch_size auto --seed 1234,1234,1234 --log_samples --apply_chat_template --predict_only --wandb_args project=bachelorarbeit
+Warning: Could not save config for multijail_L11_S0.33: save_json() missing 1 required positional argument: 'self'
+WARNING: Output path does not exist: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail_L11_S0.66
+Created output directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail_L11_S0.66
+Your results will be saved to: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail_L11_S0.66
+Running command for multijail_L11_S0.66:
+ lm_eval --model steered --model_args pretrained=meta-llama/Llama-3.1-8B-Instruct,steer_path=/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct/steer_config_Llama-3.1-8B-Instruct_S0.66_L11.pt --tasks multijail --output_path /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail_L11_S0.66 --device cuda:0 --batch_size auto --seed 1234,1234,1234 --log_samples --apply_chat_template --predict_only --wandb_args project=bachelorarbeit
+Warning: Could not save config for multijail_L11_S0.66: save_json() missing 1 required positional argument: 'self'
+WARNING: Output path does not exist: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail_L11_S1.0
+Created output directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail_L11_S1.0
+Your results will be saved to: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail_L11_S1.0
+Running command for multijail_L11_S1.0:
+ lm_eval --model steered --model_args pretrained=meta-llama/Llama-3.1-8B-Instruct,steer_path=/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct/steer_config_Llama-3.1-8B-Instruct_S1.0_L11.pt --tasks multijail --output_path /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail_L11_S1.0 --device cuda:0 --batch_size auto --seed 1234,1234,1234 --log_samples --apply_chat_template --predict_only --wandb_args project=bachelorarbeit
+Warning: Could not save config for multijail_L11_S1.0: save_json() missing 1 required positional argument: 'self'
+WARNING: Output path does not exist: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_global_mmlu
+Created output directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_global_mmlu
+Your results will be saved to: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_global_mmlu
+Running command for global_mmlu:
+ lm_eval --model hf --model_args pretrained=meta-llama/Llama-3.1-8B-Instruct --tasks global_mmlu_en,global_mmlu_ar,global_mmlu_zh,global_mmlu_it,global_mmlu_ko --output_path /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_global_mmlu --device cuda:0 --batch_size auto --seed 1234,1234,1234 --log_samples --wandb_args project=bachelorarbeit
+Warning: Could not save config for global_mmlu: save_json() missing 1 required positional argument: 'self'
+WARNING: Output path does not exist: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_global_mmlu_L11_S0.33
+Created output directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_global_mmlu_L11_S0.33
+Your results will be saved to: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_global_mmlu_L11_S0.33
+Running command for global_mmlu_L11_S0.33:
+ lm_eval --model steered --model_args pretrained=meta-llama/Llama-3.1-8B-Instruct,steer_path=/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct/steer_config_Llama-3.1-8B-Instruct_S0.33_L11.pt --tasks global_mmlu_en,global_mmlu_ar,global_mmlu_zh,global_mmlu_it,global_mmlu_ko --output_path /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_global_mmlu_L11_S0.33 --device cuda:0 --batch_size auto --seed 1234,1234,1234 --log_samples --wandb_args project=bachelorarbeit
+Warning: Could not save config for global_mmlu_L11_S0.33: save_json() missing 1 required positional argument: 'self'
+WARNING: Output path does not exist: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_global_mmlu_L11_S0.66
+Created output directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_global_mmlu_L11_S0.66
+Your results will be saved to: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_global_mmlu_L11_S0.66
+Running command for global_mmlu_L11_S0.66:
+ lm_eval --model steered --model_args pretrained=meta-llama/Llama-3.1-8B-Instruct,steer_path=/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct/steer_config_Llama-3.1-8B-Instruct_S0.66_L11.pt --tasks global_mmlu_en,global_mmlu_ar,global_mmlu_zh,global_mmlu_it,global_mmlu_ko --output_path /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_global_mmlu_L11_S0.66 --device cuda:0 --batch_size auto --seed 1234,1234,1234 --log_samples --wandb_args project=bachelorarbeit
+Warning: Could not save config for global_mmlu_L11_S0.66: save_json() missing 1 required positional argument: 'self'
+WARNING: Output path does not exist: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_global_mmlu_L11_S1.0
+Created output directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_global_mmlu_L11_S1.0
+Your results will be saved to: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_global_mmlu_L11_S1.0
+Running command for global_mmlu_L11_S1.0:
+ lm_eval --model steered --model_args pretrained=meta-llama/Llama-3.1-8B-Instruct,steer_path=/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct/steer_config_Llama-3.1-8B-Instruct_S1.0_L11.pt --tasks global_mmlu_en,global_mmlu_ar,global_mmlu_zh,global_mmlu_it,global_mmlu_ko --output_path /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_global_mmlu_L11_S1.0 --device cuda:0 --batch_size auto --seed 1234,1234,1234 --log_samples --wandb_args project=bachelorarbeit
+Warning: Could not save config for global_mmlu_L11_S1.0: save_json() missing 1 required positional argument: 'self'
+WARNING: Output path does not exist: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_or_bench
+Created output directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_or_bench
+Your results will be saved to: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_or_bench
+Running command for or_bench:
+ lm_eval --model hf --model_args pretrained=meta-llama/Llama-3.1-8B-Instruct --tasks or_bench --output_path /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_or_bench --device cuda:0 --batch_size auto --seed 1234,1234,1234 --log_samples --apply_chat_template --predict_only --wandb_args project=bachelorarbeit
+Warning: Could not save config for or_bench: save_json() missing 1 required positional argument: 'self'
+WARNING: Output path does not exist: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_or_bench_L11_S0.33
+Created output directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_or_bench_L11_S0.33
+Your results will be saved to: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_or_bench_L11_S0.33
+Running command for or_bench_L11_S0.33:
+ lm_eval --model steered --model_args pretrained=meta-llama/Llama-3.1-8B-Instruct,steer_path=/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct/steer_config_Llama-3.1-8B-Instruct_S0.33_L11.pt --tasks or_bench --output_path /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_or_bench_L11_S0.33 --device cuda:0 --batch_size auto --seed 1234,1234,1234 --log_samples --apply_chat_template --predict_only --wandb_args project=bachelorarbeit
+Warning: Could not save config for or_bench_L11_S0.33: save_json() missing 1 required positional argument: 'self'
+WARNING: Output path does not exist: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_or_bench_L11_S0.66
+Created output directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_or_bench_L11_S0.66
+Your results will be saved to: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_or_bench_L11_S0.66
+Running command for or_bench_L11_S0.66:
+ lm_eval --model steered --model_args pretrained=meta-llama/Llama-3.1-8B-Instruct,steer_path=/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct/steer_config_Llama-3.1-8B-Instruct_S0.66_L11.pt --tasks or_bench --output_path /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_or_bench_L11_S0.66 --device cuda:0 --batch_size auto --seed 1234,1234,1234 --log_samples --apply_chat_template --predict_only --wandb_args project=bachelorarbeit
+Warning: Could not save config for or_bench_L11_S0.66: save_json() missing 1 required positional argument: 'self'
+WARNING: Output path does not exist: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_or_bench_L11_S1.0
+Created output directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_or_bench_L11_S1.0
+Your results will be saved to: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_or_bench_L11_S1.0
+Running command for or_bench_L11_S1.0:
+ lm_eval --model steered --model_args pretrained=meta-llama/Llama-3.1-8B-Instruct,steer_path=/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct/steer_config_Llama-3.1-8B-Instruct_S1.0_L11.pt --tasks or_bench --output_path /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_or_bench_L11_S1.0 --device cuda:0 --batch_size auto --seed 1234,1234,1234 --log_samples --apply_chat_template --predict_only --wandb_args project=bachelorarbeit
+Warning: Could not save config for or_bench_L11_S1.0: save_json() missing 1 required positional argument: 'self'
+Configuration: Config(model_path='meta-llama/Llama-3.1-8B-Instruct', model_alias='Llama-3.1-8B-Instruct', steer_type='layer_wise', steering_folder='', steering_vector_path='/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/data/Llama-3.1-8B-Instruct-direction.pt', steering_layer=11, steering_token_position=-2, steering_strengths=[0.33, 0.66, 1.0], debug=False, device='cuda:0')
+Artifact path: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct
+Results: None
+HF cache:
+REPO ID                                      REPO TYPE REVISION                                 SIZE ON DISK NB FILES LAST_MODIFIED REFS LOCAL PATH                                                                                                                                                  
+-------------------------------------------- --------- ---------------------------------------- ------------ -------- ------------- ---- ----------------------------------------------------------------------------------------------------------------------------------------------------------- 
+CohereForAI/Global-MMLU-Lite                 dataset   5b416f1ea1e38941cc7787fdcb04df65c09ba489         1.1M       11 1 hour ago    main /mnt/ceph-hdd/projects/ag_gipp/emma/hf_cache/hub/datasets--CohereForAI--Global-MMLU-Lite/snapshots/5b416f1ea1e38941cc7787fdcb04df65c09ba489                 
+DAMO-NLP-SG/MultiJail                        dataset   93d65c778925d55973b9ff30c7bccc8545494eb6       346.5K        2 1 day ago     main /mnt/ceph-hdd/projects/ag_gipp/emma/hf_cache/hub/datasets--DAMO-NLP-SG--MultiJail/snapshots/93d65c778925d55973b9ff30c7bccc8545494eb6                        
+stonehenge0/translated_or_bench_1099_samples dataset   61889c89d5564c1f0442eaed1b0f2287eea8e173       530.5K        2 1 day ago     main /mnt/ceph-hdd/projects/ag_gipp/emma/hf_cache/hub/datasets--stonehenge0--translated_or_bench_1099_samples/snapshots/61889c89d5564c1f0442eaed1b0f2287eea8e173 
+CohereLabs/aya-101                           model     231cff3a9729ccdaee18839b32aaabac5278a21c        51.7G       16 3 days ago    main /mnt/ceph-hdd/projects/ag_gipp/emma/hf_cache/hub/models--CohereLabs--aya-101/snapshots/231cff3a9729ccdaee18839b32aaabac5278a21c                             
+meta-llama/Llama-3.1-8B-Instruct             model     0e9e39f249a16976918f6564b8830bc894c89659        16.1G       10 1 day ago     main /mnt/ceph-hdd/projects/ag_gipp/emma/hf_cache/hub/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659               
+
+Done in 0.9s. Scanned 5 repo(s) for a total of [1m[31m67.8G[0m.
+============ Job Information ===================================================
+Submitted: 2025-08-27T15:35:45
+Started: 2025-08-27T17:14:04
+Ended: 2025-08-27T23:00:44
+Elapsed: 347 min, Limit: 1500 min, Difference: 1153 min
+CPUs: 8, Nodes: 1
+Estimated Consumption: 867.50 core-hours
+================================================================================

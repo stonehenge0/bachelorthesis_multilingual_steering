@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/subfns/translate_to_english.py", line 220, in <module>
+    tokenizer, model = load_model(args.model)
+  File "/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/subfns/translate_to_english.py", line 29, in load_model
+    model = AutoModelForSeq2SeqLM.from_pretrained(hf_path).to(DEVICE)
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/transformers/models/auto/auto_factory.py", line 603, in from_pretrained
+    raise ValueError(
+ValueError: Unrecognized configuration class <class 'transformers.models.cohere.configuration_cohere.CohereConfig'> for this kind of AutoModel: AutoModelForSeq2SeqLM.
+Model type should be one of BartConfig, BigBirdPegasusConfig, BlenderbotConfig, BlenderbotSmallConfig, EncoderDecoderConfig, FSMTConfig, GPTSanJapaneseConfig, GraniteSpeechConfig, LEDConfig, LongT5Config, M2M100Config, MarianConfig, MBartConfig, MT5Config, MvpConfig, NllbMoeConfig, PegasusConfig, PegasusXConfig, PLBartConfig, ProphetNetConfig, Qwen2AudioConfig, SeamlessM4TConfig, SeamlessM4Tv2Config, SwitchTransformersConfig, T5Config, T5GemmaConfig, UMT5Config, XLMProphetNetConfig.

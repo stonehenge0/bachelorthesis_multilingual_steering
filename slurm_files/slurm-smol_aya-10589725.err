@@ -1,0 +1,2 @@
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:10<00:32, 10.71s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:20<00:20, 10.21s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:34<00:12, 12.11s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:41<00:00, 10.02s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:41<00:00, 10.44s/it]
+Asking to truncate to max_length but no maximum length is provided and the model has no predefined maximum length. Default to no truncation.

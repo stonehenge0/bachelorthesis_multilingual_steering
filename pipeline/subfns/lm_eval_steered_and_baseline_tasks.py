@@ -13,11 +13,10 @@
 # In the end we will have n different configs that are each one lm_eval run with n = tasks * steering_strengths +1 (the +1 is for unsteered)
 # ---------------------
 
-### Options for sampling
+### ToDos:
 ### Naming of WandB runs not there yet.
 ### Steer type arguments not used yet, to be implemented.
 
-# Setup
 import os
 import sys
 import datetime
@@ -31,9 +30,8 @@ from copy import deepcopy
 
 import wandb
 import torch
-from huggingface_hub import login
 
-from .utils import check, seed_everything, create_or_ensure_output_path
+from .utils import seed_everything, create_or_ensure_output_path
 
 
 @dataclass
@@ -59,9 +57,9 @@ class EvalConfig:
 
     def to_cmd_args(self) -> List[str]:
         """Convert config to command line arguments for lm_eval."""
-        # Required parameters
 
-        self.out_path = os.path.join(self.out_path)  ### removed self.run_name
+        # Required parameters
+        self.out_path = os.path.join(self.out_path)
         cmd = [
             "lm_eval",
             "--model",
@@ -81,7 +79,7 @@ class EvalConfig:
             "--log_samples",
         ]
 
-        # Optional flag parameters (no values needed)
+        # Optional flags without values
         if self.apply_chat_template:
             cmd.append("--apply_chat_template")
 
@@ -104,7 +102,6 @@ class EvalConfig:
             f.write(self.to_json())
 
 
-# 1. Base config with globals
 def create_base_config(
     MODEL_NAME, MODEL_PATH, DEVICE, OUT_PATH, SEED, WANDB_PROJECT, LIMIT
 ) -> EvalConfig:
@@ -117,7 +114,7 @@ def create_base_config(
         device=DEVICE,
         batch_size="auto",
         out_path=OUT_PATH,
-        seed=f"{SEED},{SEED},{SEED}",  # seeds for python's random, numpy and torch respectively",
+        seed=f"{SEED},{SEED},{SEED}",  # Three seeds for python's random, numpy and torch respectively",
         wandb_args=f"project={WANDB_PROJECT}",  # Base wandb config, run name will be added later
         limit=LIMIT,
     )
@@ -125,7 +122,6 @@ def create_base_config(
     return config_globals
 
 
-# 2. Task-specific configurations
 def create_task_config(
     base_config_with_globals, task, mmlu_subtasks_langs=None
 ) -> EvalConfig:
@@ -164,7 +160,6 @@ def create_task_config(
     return config
 
 
-# 3. Steer specific configurations
 def create_steering_config(
     task_specific_config,
     steer_strength,
@@ -209,17 +204,15 @@ def run_and_save(config: EvalConfig, out_path: str):
             f"Error running command for {config.run_name}:\n{out.stderr}\n Returncode:{out.returncode}"
         )
 
-    # Ensure output path ends with separator
     out_path = os.path.join(
         f"{out_path}_{config.tasks}", ""
-    )  ### Hier nochmal again, naming, but sure
+    )
 
-    ### Explicit saving test here.
 
     try:
         config.save_json(
             filepath=f"{out_path}{config.run_name}.json"
-        )  ### added the "filepath="" here...
+        ) 
     except Exception as e:
         print(f"Warning: Could not save config for {config.run_name}: {e}")
 
@@ -244,7 +237,8 @@ def lm_eval_steered_and_baseline_tasks(
     WANDB_PROJECT = "bachelorarbeit"
     SEED = 1234
     OUT_PATH = ARTIFACT_PATH
-    # Default MMLU subtasks
+
+    # Default MMLU subtasks. These are all langs from MMLU that overlap with Or_bench
     MMLU_SUBTASKS_LANGS = ",".join(
         [
             "global_mmlu_en",
@@ -254,8 +248,9 @@ def lm_eval_steered_and_baseline_tasks(
             "global_mmlu_ko",
         ]
     )
-    # Debug small samples
-    LIMIT = 3 if DEBUG else None
+
+    # Debug with small samples
+    LIMIT = 2 if DEBUG else None
     if DEBUG:
         MMLU_SUBTASKS_LANGS = ",".join(
             [
@@ -266,7 +261,7 @@ def lm_eval_steered_and_baseline_tasks(
 
     seed_everything(SEED)
 
-    # Login wandb and huggingface. Took hf login out and hope still works ###
+    # Login to wandb
     wandb.login()
 
     wandb_user = wandb.api.default_entity
@@ -279,10 +274,14 @@ def lm_eval_steered_and_baseline_tasks(
     ZEROS_BIAS = torch.zeros(STEER_DIRECTION.shape)
 
     all_configs = []
+
     for task in TASKS:
+        # 1. Base config with globals
         base_config = create_base_config(
             MODEL_ALIAS, MODEL_PATH, DEVICE, OUT_PATH, SEED, WANDB_PROJECT, LIMIT
         )
+
+        # 2. task specific task config
         if task == "global_mmlu":
             task_config = create_task_config(
                 base_config, task, mmlu_subtasks_langs=MMLU_SUBTASKS_LANGS
@@ -292,11 +291,12 @@ def lm_eval_steered_and_baseline_tasks(
 
         all_configs.append(task_config)
 
+        # 3. for steered runs: Steer config and override default arguments (model type form hf to steered)
         for strength in STEERING_STRENGTHS:
 
             CONFIG_FILEPATH = os.path.join(
                 ARTIFACT_PATH,
-                f"steer_config_{MODEL_ALIAS}_S{strength}_L{STEER_LAYER}.pt",  ### This is the crucial part rn
+                f"steer_config_{MODEL_ALIAS}_S{strength}_L{STEER_LAYER}.pt",
             )
             steered_config = create_steering_config(
                 task_config,

@@ -7,12 +7,12 @@ import json
 from pathlib import Path
 
 import pandas as pd
-from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+from transformers import AutoTokenizer, AutoModelForCausalLM
 import torch
 from huggingface_hub import login
 import jsonlines
 
-from .utils import seed_everything, create_or_ensure_output_path
+from utils import check, seed_everything, create_or_ensure_output_path
 
 # seeds
 seed_everything(42)
@@ -26,7 +26,7 @@ TRANSLATION_INSTRUCTION = """Translate to English: """
 def load_model(hf_path):
     """Load model and tokenizer from huggingface."""
     tokenizer = AutoTokenizer.from_pretrained(hf_path, padding_side="left")
-    model = AutoModelForSeq2SeqLM.from_pretrained(hf_path).to(DEVICE)
+    model = AutoModelForCausalLM.from_pretrained(hf_path).to(DEVICE)
     return tokenizer, model
 
 
@@ -134,7 +134,7 @@ def generate_batched_answers(batch, model, tokenizer):
 
     # predict
     with torch.no_grad():
-        outputs = model.generate(**inputs, max_new_tokens=50, temperature=0.01)
+        outputs = model.generate(**inputs, do_sample=False, num_beams=4, early_stopping = True)
 
     # decode
     outputs = tokenizer.batch_decode(
@@ -146,6 +146,8 @@ def generate_batched_answers(batch, model, tokenizer):
 
 def save_pretty_output_df(full_df, task_name, out_path):
     """Save a df with answers to the specified path. It also makes the output df more readable for analysis"""
+
+    print(f"Info on the df being passed to save_output_df:\n {full_df.info()}")
 
     cols_to_drop = [
         "doc_id",
@@ -169,12 +171,14 @@ def save_pretty_output_df(full_df, task_name, out_path):
     full_df = pd.concat([full_df.drop("doc", axis=1), doc_df], axis=1)
 
     # drop uneccesary cols for readability.
+
     for col in cols_to_drop:
+        full_df.drop(col, inplace=True, axis=1, errors='ignore')
         if col in full_df.columns:
-            full_df.drop(col, inplace=True)
+            print(f"Dropped column: {col}")
         else:
             print(
-                f"Colum: {col} not in the dataframe and was not dropped. Df has the following columns: {full_df.columns}"
+                f"Column: {col} not in the dataframe and was not dropped. Df has the following columns: {full_df.columns}"
             )
 
     full_out_path = f"{out_path}{task_name}_translated.csv"

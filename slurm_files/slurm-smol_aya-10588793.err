@@ -1,0 +1,19 @@
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files:  25%|██▌       | 1/4 [01:49<05:29, 109.98s/it]Fetching 4 files:  75%|███████▌  | 3/4 [02:20<00:39, 39.67s/it] Fetching 4 files: 100%|██████████| 4/4 [02:20<00:00, 35.03s/it]
+Loading checkpoint shards:   0%|          | 0/4 [00:00<?, ?it/s]Loading checkpoint shards:  25%|██▌       | 1/4 [00:02<00:08,  2.85s/it]Loading checkpoint shards:  50%|█████     | 2/4 [00:05<00:05,  2.89s/it]Loading checkpoint shards:  75%|███████▌  | 3/4 [00:11<00:04,  4.15s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:15<00:00,  4.23s/it]Loading checkpoint shards: 100%|██████████| 4/4 [00:15<00:00,  3.94s/it]
+Asking to truncate to max_length but no maximum length is provided and the model has no predefined maximum length. Default to no truncation.
+The following generation flags are not valid and may be ignored: ['temperature']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+The following generation flags are not valid and may be ignored: ['temperature']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+Traceback (most recent call last):
+  File "/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/subfns/translate_to_english.py", line 262, in <module>
+    save_pretty_output_df(df, task_name=task, out_path=args.out_path)
+  File "/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/subfns/translate_to_english.py", line 174, in save_pretty_output_df
+    full_df.drop(col, inplace=True)
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/pandas/core/frame.py", line 5588, in drop
+    return super().drop(
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/pandas/core/generic.py", line 4807, in drop
+    obj = obj._drop_axis(labels, axis, level=level, errors=errors)
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/pandas/core/generic.py", line 4849, in _drop_axis
+    new_axis = axis.drop(labels, errors=errors)
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/pandas/core/indexes/base.py", line 7136, in drop
+    raise KeyError(f"{labels[mask].tolist()} not found in axis")
+KeyError: "['doc_id'] not found in axis"
