@@ -1,22 +1,0 @@
-Loading checkpoint shards:   0%|          | 0/11 [00:00<?, ?it/s]Loading checkpoint shards:   9%|▉         | 1/11 [00:00<00:03,  3.21it/s]Loading checkpoint shards:  18%|█▊        | 2/11 [00:01<00:08,  1.07it/s]Loading checkpoint shards:  27%|██▋       | 3/11 [00:03<00:09,  1.13s/it]Loading checkpoint shards:  36%|███▋      | 4/11 [00:04<00:09,  1.31s/it]Loading checkpoint shards:  45%|████▌     | 5/11 [00:06<00:08,  1.34s/it]Loading checkpoint shards:  55%|█████▍    | 6/11 [00:07<00:07,  1.49s/it]Loading checkpoint shards:  64%|██████▎   | 7/11 [00:09<00:06,  1.54s/it]Loading checkpoint shards:  73%|███████▎  | 8/11 [00:10<00:04,  1.47s/it]Loading checkpoint shards:  82%|████████▏ | 9/11 [00:12<00:02,  1.46s/it]Loading checkpoint shards:  91%|█████████ | 10/11 [00:13<00:01,  1.26s/it]Loading checkpoint shards: 100%|██████████| 11/11 [00:13<00:00,  1.19s/it]
-Traceback (most recent call last):
-  File "/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/subfns/translate_to_english.py", line 220, in <module>
-    tokenizer, model = load_model(args.model)
-  File "/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/subfns/translate_to_english.py", line 29, in load_model
-    model = AutoModelForSeq2SeqLM.from_pretrained(hf_path).to(DEVICE)
-  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/transformers/modeling_utils.py", line 4110, in to
-    return super().to(*args, **kwargs)
-  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1355, in to
-    return self._apply(convert)
-  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/torch/nn/modules/module.py", line 915, in _apply
-    module._apply(fn)
-  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/torch/nn/modules/module.py", line 915, in _apply
-    module._apply(fn)
-  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/torch/nn/modules/module.py", line 915, in _apply
-    module._apply(fn)
-  [Previous line repeated 4 more times]
-  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/torch/nn/modules/module.py", line 942, in _apply
-    param_applied = fn(param)
-  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/torch/nn/modules/module.py", line 1341, in convert
-    return t.to(
-torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 64.00 MiB. GPU 0 has a total capacity of 39.38 GiB of which 24.12 MiB is free. Including non-PyTorch memory, this process has 39.35 GiB memory in use. Of the allocated memory 38.94 GiB is allocated by PyTorch, and 368.00 KiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

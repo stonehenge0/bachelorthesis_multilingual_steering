@@ -1,5 +1,5 @@
 ================================================================================
-JobID = 10576554
+JobID = 10593658
 User = u14374, Account = ag_gipp
 Partition = scc-gpu, Nodelist = ggpu135
 ================================================================================
@@ -10,16 +10,16 @@ Current node: ggpu135
 Python 3.12.8
 
 Current Branch: main
-Latest Commit: 76f8427
-Uncommitted Changes: 6
+Latest Commit: f1ed929
+Uncommitted Changes: 45
 
 Activated Conda environment: modified_lm_eval_env
-Loading model CohereLabs/aya-101 and tokenizer...
+Loading model facebook/nllb-200-3.3B and tokenizer...
 ============ Job Information ===================================================
-Submitted: 2025-08-27T19:59:49
-Started: 2025-08-27T20:00:36
-Ended: 2025-08-27T20:03:25
-Elapsed: 3 min, Limit: 120 min, Difference: 117 min
+Submitted: 2025-08-28T14:16:11
+Started: 2025-08-28T14:16:48
+Ended: 2025-08-28T14:18:20
+Elapsed: 2 min, Limit: 180 min, Difference: 178 min
 CPUs: 8, Nodes: 1
-Estimated Consumption: 7.50 core-hours
+Estimated Consumption: 5.00 core-hours
 ================================================================================

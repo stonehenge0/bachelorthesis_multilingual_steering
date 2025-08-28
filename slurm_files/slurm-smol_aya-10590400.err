@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/subfns/translate_to_english.py", line 220, in <module>
+    args = get_args()
+  File "/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/subfns/translate_to_english.py", line 212, in get_args
+    args.folderpath = json.loads(args.folderpath) ### Not sure if this works, might have to take out again.
+UnboundLocalError: local variable 'args' referenced before assignment

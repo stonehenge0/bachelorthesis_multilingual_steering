@@ -1,5 +1,5 @@
 ================================================================================
-JobID = 10589372
+JobID = 10593681
 User = u14374, Account = ag_gipp
 Partition = scc-gpu, Nodelist = ggpu135
 ================================================================================
@@ -10,11 +10,11 @@ Current node: ggpu135
 Python 3.12.8
 
 Current Branch: main
-Latest Commit: 76f8427
-Uncommitted Changes: 186
+Latest Commit: f1ed929
+Uncommitted Changes: 48
 
 Activated Conda environment: modified_lm_eval_env
-Loading model CohereLabs/aya-expanse-8b and tokenizer...
+Loading model facebook/nllb-200-3.3B and tokenizer...
 Processing these files (should be multijail and or_bench):
 meta-llama__Llama-3.1-8B-Instruct: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/small_testrun/Llama-3.1-8B-Instruct_multijail_L11_S0.66/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-08-27T14-36-53.913678.jsonl
 
@@ -45,48 +45,11 @@ prompt               0
 prompt_and_answer    0
 dtype: int64
 
-<class 'pandas.core.frame.DataFrame'>
-RangeIndex: 3 entries, 0 to 2
-Data columns (total 16 columns):
- #   Column             Non-Null Count  Dtype 
----  ------             --------------  ----- 
- 0   doc_id             3 non-null      int64 
- 1   doc                3 non-null      object
- 2   target             3 non-null      object
- 3   arguments          3 non-null      object
- 4   resps              3 non-null      object
- 5   filtered_resps     3 non-null      object
- 6   filter             3 non-null      object
- 7   metrics            3 non-null      object
- 8   doc_hash           3 non-null      object
- 9   prompt_hash        3 non-null      object
- 10  target_hash        3 non-null      object
- 11  bypass             0 non-null      object
- 12  prompt             3 non-null      object
- 13  prompt_and_answer  3 non-null      object
- 14  prompt_translated  3 non-null      object
- 15  answer_translated  3 non-null      object
-dtypes: int64(1), object(15)
-memory usage: 512.0+ bytes
-Info on the df being passed to save_output_df:
- None
-Before unpacking json col, these are the columns:
- Index(['doc_id', 'doc', 'target', 'arguments', 'resps', 'filtered_resps',
-       'filter', 'metrics', 'doc_hash', 'prompt_hash', 'target_hash', 'bypass',
-       'prompt', 'prompt_and_answer', 'prompt_translated',
-       'answer_translated'],
-      dtype='object')
-After unpacking json col, these are the columns:
- Index(['doc_id', 'target', 'arguments', 'resps', 'filtered_resps', 'filter',
-       'metrics', 'doc_hash', 'prompt_hash', 'target_hash', 'bypass', 'prompt',
-       'prompt_and_answer', 'prompt_translated', 'answer_translated', 'prompt',
-       'id'],
-      dtype='object')
 ============ Job Information ===================================================
-Submitted: 2025-08-28T09:13:46
-Started: 2025-08-28T09:14:28
-Ended: 2025-08-28T09:16:05
-Elapsed: 2 min, Limit: 180 min, Difference: 178 min
+Submitted: 2025-08-28T14:25:27
+Started: 2025-08-28T14:26:24
+Ended: 2025-08-28T14:29:45
+Elapsed: 4 min, Limit: 180 min, Difference: 176 min
 CPUs: 8, Nodes: 1
-Estimated Consumption: 5.00 core-hours
+Estimated Consumption: 10.00 core-hours
 ================================================================================

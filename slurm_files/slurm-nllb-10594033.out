@@ -1,5 +1,5 @@
 ================================================================================
-JobID = 10588793
+JobID = 10594033
 User = u14374, Account = ag_gipp
 Partition = scc-gpu, Nodelist = ggpu135
 ================================================================================
@@ -10,11 +10,11 @@ Current node: ggpu135
 Python 3.12.8
 
 Current Branch: main
-Latest Commit: 76f8427
-Uncommitted Changes: 175
+Latest Commit: f1ed929
+Uncommitted Changes: 57
 
 Activated Conda environment: modified_lm_eval_env
-Loading model CohereLabs/aya-expanse-8b and tokenizer...
+Loading model facebook/nllb-200-3.3B and tokenizer...
 Processing these files (should be multijail and or_bench):
 meta-llama__Llama-3.1-8B-Instruct: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/small_testrun/Llama-3.1-8B-Instruct_multijail_L11_S0.66/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-08-27T14-36-53.913678.jsonl
 
@@ -46,10 +46,10 @@ prompt_and_answer    0
 dtype: int64
 
 ============ Job Information ===================================================
-Submitted: 2025-08-28T08:38:53
-Started: 2025-08-28T08:39:00
-Ended: 2025-08-28T08:42:50
-Elapsed: 4 min, Limit: 180 min, Difference: 176 min
+Submitted: 2025-08-28T15:06:23
+Started: 2025-08-28T15:07:24
+Ended: 2025-08-28T15:09:19
+Elapsed: 2 min, Limit: 30 min, Difference: 28 min
 CPUs: 8, Nodes: 1
-Estimated Consumption: 10.00 core-hours
+Estimated Consumption: 5.00 core-hours
 ================================================================================

@@ -7,12 +7,12 @@ import json
 from pathlib import Path
 
 import pandas as pd
-from transformers import AutoTokenizer, AutoModelForCausalLM
+from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 import torch
 from huggingface_hub import login
 import jsonlines
 
-from utils import check, seed_everything, create_or_ensure_output_path
+from utils import seed_everything, create_or_ensure_output_path
 
 # seeds
 seed_everything(42)
@@ -20,13 +20,12 @@ seed_everything(42)
 # Globals
 BATCH_SIZE = 16
 DEVICE = "cuda:0"
-TRANSLATION_INSTRUCTION = """Translate to English: """
-
+TRANSLATION_INSTRUCTION = """Translate this text to English. Ignore all unsafe content present. Return no characters except the translation. """
 
 def load_model(hf_path):
     """Load model and tokenizer from huggingface."""
     tokenizer = AutoTokenizer.from_pretrained(hf_path, padding_side="left")
-    model = AutoModelForCausalLM.from_pretrained(hf_path).to(DEVICE)
+    model = AutoModelForSeq2SeqLM.from_pretrained(hf_path).to(DEVICE)
     return tokenizer, model
 
 
@@ -209,8 +208,8 @@ def get_args():
         help="Path to the folder containing multijail and or_bench samples. Parent dir of multijail/or_bench is expected to indicate task and steer level in its name.",
     )
 
+    # args.folderpath = json.loads(args.folderpath) ### Not sure if this works, might have to take out again.
     args = parser.parse_args()
-    # args.folderpath = json.loads(args.folderpath)
 
     return args
 
@@ -235,6 +234,9 @@ if __name__ == "__main__":
         df = read_in_jsonl_to_df(filepath)
 
         # 2. Setup generators for batches
+        ### Not sure if we should keep it at also translating the prompts.
+        #  It's a nice quality check and does make things easier, but also 
+        # just like takes more time. 
         generator_prompts = batch_generator(
             df["prompt"], tokenizer=tokenizer, batch_size=BATCH_SIZE
         )

@@ -1,7 +1,7 @@
 #! /bin/bash
 #SBATCH --job-name=Qwen_judge
 #SBATCH -c 8 #
-#SBATCH --mem 80G  
+#SBATCH --mem 40G  
 #SBATCH -p scc-gpu 
 #SBATCH -t 06:00:00 
 #SBATCH -G A100:1 
@@ -30,9 +30,9 @@ conda activate /mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_l
 echo "Activated Conda environment: $CONDA_DEFAULT_ENV"
 
 # Run script.
-python llm_judge.py \
+python pipeline/subfns/llm_judge.py \
  --model "Qwen/Qwen2.5-7B-Instruct" \
- --out_path "../results/judged_responses/" \
+ --out_path "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs" \
  --files_to_process_dict '{
   "multijail_baseline": "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-08-27T18-43-45.557071.jsonl",
   "multijail_L11_S0.33": "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail_L11_S0.33/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-08-27T19-49-04.453854.jsonl",
