@@ -1,4 +1,5 @@
 # Translate samples to English for evaluation (Or-bench) and analysis (Multijail)
+import os
 
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -17,17 +18,14 @@ def get_args() -> argparse.Namespace:
 
     # Task and model
     parser.add_argument(
-        "--langs",
+        "--source_langs",
         required=True,
         type=str,
         nargs="+",
-        help="ISO codes for the languages to translate to. For options see X-Alma docs.",
+        help="ISO codes for the languages to translate from. For options see X-Alma docs.",
     )
-    parser.add_argument(
-        "--samplepercentage",
-        type=float,
-        help="Percentage of samples the subset of OR Bench. OR Bench is 80k samples, so 0.0001 = 8 samples.",
-    )
+
+    parser.add_argument("--or_bench_folder", type=str, help="Path to the folder with or bench results for all steering strengths.")
 
     return parser.parse_args()
 
@@ -35,10 +33,8 @@ def get_args() -> argparse.Namespace:
 args = get_args()
 
 
-OR_BENCH_PATH = "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/data/sampled_or_bench_200_prompts.csv"
-TARGET_LANGUAGES = args.langs
+TARGET_LANGUAGES = args.source_langs
 OUT_PATH = f"/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/data/or_bench_translated_{'_'.join(TARGET_LANGUAGES)}.csv"
-OUT_PATH_EN_SAMPLE = f"/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/data/or_bench_subsampled_en_{args.samplepercentage}.csv"
 
 # Language grouping as required by the model
 GROUP2LANG = {
@@ -71,18 +67,19 @@ ISO_TO_NAME = {
     "vi": "Vietnamese",
 }
 
-LANG2GROUP = {lang: str(group) for group, langs in GROUP2LANG.items() for lang in langs}
+LANG2GROUP = {lang: str(group) for group, source_langs in GROUP2LANG.items() for lang in source_langs} ### double check this w. the source_langs
 
+def folderpath_to_file_dicts(all_results_folderpath):
+    """Filter out or bench answer files."""
 
-def sample_or_bench(or_df, fraction=0.0001):  # 0.0001 = 8 samples.
-    """Sample a subset of OR Bench for translation. Samples an equal percent from all subcategories.
-    fraction is the percentage of the dataset to subsample"""
+    or_bench_dict = {}
 
-    grouped_df = or_df.groupby("category")
-    sampled_df = grouped_df.sample(frac=fraction, random_state=42)
+    for file in os.listdir(all_results_folderpath):
+        if "samples_or_bench" in file:
+            or_bench_dict[file] = os.path.join(all_results_folderpath,file)
 
-    return sampled_df
-
+    print(f"Files to process in or_bench_dict: {or_bench_dict}")
+    return or_bench_dict
 
 def load_model_for_lang(lang_code):
     """Load model and tokenizer based on language group with caching."""
@@ -149,15 +146,15 @@ def translate_batch(texts, source_lang, target_lang, model, tokenizer):
     return translations
 
 
-def translate_dataframe(sampled_df, prompt_column, target_langs):
+def translate_dataframe(df, prompt_column, source_langs):
     """
     Optimized translation that loads each model only once and processes all prompts
     for that language before moving to the next language.
 
     Args:
-        sampled_df (pd.DataFrame): Input DataFrame with prompts.
+        df (pd.DataFrame): Input DataFrame with prompts.
         prompt_column (str): Name of the column containing prompts.
-        target_langs (List[str]): List of ISO codes to translate into.
+        source_langs (List[str]): List of ISO codes to translate from.
 
     Returns:
         pd.DataFrame: DataFrame with translated samples, ids, and language codes.
@@ -166,11 +163,11 @@ def translate_dataframe(sampled_df, prompt_column, target_langs):
     translations = []
 
     # Extract all prompts and their indices
-    prompts = sampled_df[prompt_column].tolist()
-    indices = sampled_df.index.tolist()
+    prompts = df[prompt_column].tolist()
+    indices = df.index.tolist()
 
     # Process one language at a time
-    for lang in target_langs:
+    for lang in source_langs:
         print(f"\n--- Processing language: {lang} ---")
 
         try:
@@ -180,8 +177,8 @@ def translate_dataframe(sampled_df, prompt_column, target_langs):
             # Translate all prompts for this language
             translated_texts = translate_batch(
                 prompts,
-                source_lang="en",
-                target_lang=lang,
+                source_lang=lang,
+                target_lang="en",
                 model=model,
                 tokenizer=tokenizer,
             )
@@ -214,19 +211,15 @@ if __name__ == "__main__":
     # seed everything
     seed_everything(42)
 
-    # Load full dataset
-    hf_dataset = load_dataset("bench-llm/or-bench", "or-bench-80k")
-    df = pd.DataFrame(hf_dataset["train"])  # 80k samples
+    # 1. Load in all steering files: 
+    or_bench_files_dict = folderpath_to_file_dicts(args.or_bench_folder)
 
-    # subsample
-    if args.samplepercentage:
-        SAMPLEPERCENTAGE = args.samplepercentage
-        print(f"Sampling OR Bench to {SAMPLEPERCENTAGE * 80000} samples.")
+    # 2. Iterate over all files and translate.
+    for name, filepath in or_bench_files_dict.items():
 
-        df = sample_or_bench(df, fraction=SAMPLEPERCENTAGE)
-        df.to_csv(OUT_PATH_EN_SAMPLE, index=False)
+        df = pd.read_csv(filepath, lines=True) # Input is jsonl, not normal json
 
-    # translate
-    result_df = translate_dataframe(df, "prompt", TARGET_LANGUAGES)
-    print(f"Translated df info: {result_df.info}")
-    result_df.to_csv(OUT_PATH, index=False)
+        # 3. Translate
+        result_df = translate_dataframe(df, "filtered_resps", TARGET_LANGUAGES)
+        print(f"Translated df info: {result_df.info}")
+        result_df.to_csv(OUT_PATH, index=False)

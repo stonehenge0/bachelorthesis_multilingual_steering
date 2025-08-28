@@ -1,11 +1,0 @@
-Loading checkpoint shards:   0%|          | 0/3 [00:00<?, ?it/s]Loading checkpoint shards:  33%|███▎      | 1/3 [00:09<00:19,  9.63s/it]Loading checkpoint shards:  67%|██████▋   | 2/3 [00:24<00:12, 12.79s/it]Loading checkpoint shards: 100%|██████████| 3/3 [00:24<00:00,  8.24s/it]
-Traceback (most recent call last):
-  File "/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/subfns/translate_to_english.py", line 248, in <module>
-    for batch in generator_prompts:
-  File "/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/subfns/translate_to_english.py", line 113, in batch_generator
-    formated_texts = tokenizer.apply_chat_template(
-  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/transformers/tokenization_utils_base.py", line 1621, in apply_chat_template
-    chat_template = self.get_chat_template(chat_template, tools)
-  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/transformers/tokenization_utils_base.py", line 1743, in get_chat_template
-    raise ValueError(
-ValueError: Cannot use chat template functions because tokenizer.chat_template is not set and no template argument was passed! For information about writing templates and setting the tokenizer.chat_template attribute, please see the documentation at https://huggingface.co/docs/transformers/main/en/chat_templating
