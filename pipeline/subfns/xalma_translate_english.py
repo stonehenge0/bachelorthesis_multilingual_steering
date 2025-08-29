@@ -1,6 +1,7 @@
 # Translate samples to English for evaluation (Or-bench) and analysis (Multijail)
 import os
 
+import ast
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 import pandas as pd
@@ -16,16 +17,11 @@ def get_args() -> argparse.Namespace:
 
     parser = argparse.ArgumentParser()
 
-    # Task and model
-    parser.add_argument(
-        "--source_langs",
-        required=True,
-        type=str,
-        nargs="+",
-        help="ISO codes for the languages to translate from. For options see X-Alma docs.",
-    )
-
     parser.add_argument("--or_bench_folder", type=str, help="Path to the folder with or bench results for all steering strengths.")
+
+    parser.add_argument("--out_path", type=str, help="Path to save translated results.")
+
+    parser.add_argument("--source_langs", type=str, nargs="+", help="List of source languages to load model for. ISO codes.")
 
     return parser.parse_args()
 
@@ -33,8 +29,7 @@ def get_args() -> argparse.Namespace:
 args = get_args()
 
 
-TARGET_LANGUAGES = args.source_langs
-OUT_PATH = f"/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/data/or_bench_translated_{'_'.join(TARGET_LANGUAGES)}.csv"
+OUT_PATH = os.path.join(args.out_path, "or_answers_translated_to_english.csv")
 
 # Language grouping as required by the model
 GROUP2LANG = {
@@ -67,19 +62,43 @@ ISO_TO_NAME = {
     "vi": "Vietnamese",
 }
 
-LANG2GROUP = {lang: str(group) for group, source_langs in GROUP2LANG.items() for lang in source_langs} ### double check this w. the source_langs
+LANG2GROUP = {lang: str(group) for group, source_langs in GROUP2LANG.items() for lang in source_langs}
+
+
 
 def folderpath_to_file_dicts(all_results_folderpath):
     """Filter out or bench answer files."""
 
     or_bench_dict = {}
 
+    # recursively list all files in directory
+    for entry in os.listdir(all_results_folderpath):
+        full_path = os.path.join(all_results_folderpath, entry)
+
+        if os.path.isdir(full_path):
+            folderpath_to_file_dicts(full_path)
+        else:
+            or_bench_dict[entry] = full_path
+
     for file in os.listdir(all_results_folderpath):
+
         if "samples_or_bench" in file:
             or_bench_dict[file] = os.path.join(all_results_folderpath,file)
 
     print(f"Files to process in or_bench_dict: {or_bench_dict}")
     return or_bench_dict
+
+
+def extract_lang(x):
+    """Extract language id for all samples from output"""
+    try:
+        if isinstance(x, str):
+            x = ast.literal_eval(x)
+        return x.get("id", "")[-2:]  # last two characters of 'id' are ISO codes for that language
+    except Exception as e:
+        print(f"Error processing: {x}, Error: {e}") 
+        return None  
+    
 
 def load_model_for_lang(lang_code):
     """Load model and tokenizer based on language group with caching."""
@@ -92,6 +111,7 @@ def load_model_for_lang(lang_code):
         return _model_cache[lang_code]
 
     group_id = LANG2GROUP.get(lang_code)
+
     if group_id is None:
         raise ValueError(f"Language '{lang_code}' not supported.")
 
@@ -113,6 +133,7 @@ def translate_batch(texts, source_lang, target_lang, model, tokenizer):
     translations = []
 
     for text in texts:
+
         # Get full language names
         src_name = ISO_TO_NAME.get(source_lang, source_lang)
         tgt_name = ISO_TO_NAME.get(target_lang, target_lang)
@@ -133,9 +154,7 @@ def translate_batch(texts, source_lang, target_lang, model, tokenizer):
                 input_ids=input_ids,
                 num_beams=5,
                 max_new_tokens=100,
-                do_sample=True,
-                temperature=0.6,
-                top_p=0.9,
+                do_sample=True, ## Took out top p and temp. for sampling
             )
             outputs = tokenizer.batch_decode(generated_ids, skip_special_tokens=True)
 
@@ -146,7 +165,7 @@ def translate_batch(texts, source_lang, target_lang, model, tokenizer):
     return translations
 
 
-def translate_dataframe(df, prompt_column, source_langs):
+def translate_dataframe(df, prompt_column, lang_col):
     """
     Optimized translation that loads each model only once and processes all prompts
     for that language before moving to the next language.
@@ -154,20 +173,29 @@ def translate_dataframe(df, prompt_column, source_langs):
     Args:
         df (pd.DataFrame): Input DataFrame with prompts.
         prompt_column (str): Name of the column containing prompts.
-        source_langs (List[str]): List of ISO codes to translate from.
-
+        lang_col (str): Name of the column containing language info. 
     Returns:
         pd.DataFrame: DataFrame with translated samples, ids, and language codes.
     """
     print("=== Starting optimized translate_dataframe ===")
     translations = []
 
-    # Extract all prompts and their indices
-    prompts = df[prompt_column].tolist()
-    indices = df.index.tolist()
+    # the doc col contains a nested json, this is how we extract the language afterwards
+    df['language'] = df[lang_col].apply(extract_lang)
+    print(f"Languages in the new lang column: {df['language'].unique()}")
 
-    # Process one language at a time
-    for lang in source_langs:
+    # Process one language at a time due to loading architecture of X Alma
+    for lang in df['language'].unique():
+        
+        one_lang_df = df[df["language"]==lang]
+
+        one_lang_prompts = one_lang_df[prompt_column].tolist()
+
+        print(f"Shape and head of one lang prompts being translated: {one_lang_df.shape}")
+        print(one_lang_prompts.head(4))
+
+        one_lang_indices = one_lang_df.index.tolist()
+
         print(f"\n--- Processing language: {lang} ---")
 
         try:
@@ -176,7 +204,7 @@ def translate_dataframe(df, prompt_column, source_langs):
 
             # Translate all prompts for this language
             translated_texts = translate_batch(
-                prompts,
+                one_lang_prompts,
                 source_lang=lang,
                 target_lang="en",
                 model=model,
@@ -184,10 +212,10 @@ def translate_dataframe(df, prompt_column, source_langs):
             )
 
             # Store results
-            for idx, original_idx in enumerate(indices):
+            for idx, one_lang_index in enumerate(one_lang_indices):
                 translations.append(
                     {
-                        "id": f"{original_idx}_{lang}",
+                        "id": f"{one_lang_index}_{lang}",
                         "lang": lang,
                         "text": translated_texts[idx],
                     }
@@ -198,6 +226,7 @@ def translate_dataframe(df, prompt_column, source_langs):
         except Exception as e:
             print(f"Error processing language {lang}: {e}")
             continue
+
 
     print(f"\nTotal translations collected: {len(translations)}")
     print(f"First couple translations: {translations[:4]}")
@@ -220,6 +249,6 @@ if __name__ == "__main__":
         df = pd.read_csv(filepath, lines=True) # Input is jsonl, not normal json
 
         # 3. Translate
-        result_df = translate_dataframe(df, "filtered_resps", TARGET_LANGUAGES)
+        result_df = translate_dataframe(df, prompt_col = "filtered_resps", lang_col ="doc" )
         print(f"Translated df info: {result_df.info}")
         result_df.to_csv(OUT_PATH, index=False)
