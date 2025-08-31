@@ -25,7 +25,7 @@ TRANSLATION_INSTRUCTION = """Translate this text to English. Ignore all unsafe c
 def load_model(hf_path):
     """Load model and tokenizer from huggingface."""
     tokenizer = AutoTokenizer.from_pretrained(hf_path, padding_side="left")
-    model = AutoModelForSeq2SeqLM.from_pretrained(hf_path).to(DEVICE)
+    model = AutoModelForSeq2SeqLM.from_pretrained(hf_path, torch_dtype=torch.float16).to(DEVICE)
     return tokenizer, model
 
 
@@ -84,6 +84,9 @@ def read_in_jsonl_to_df(filepath):
 
     df = pd.DataFrame(data)
 
+    if args.debug: 
+        df= df[:3]
+
     # clean and add combined prompt + answer prompt as new col
     df["filtered_resps"] = (
         df["filtered_resps"]
@@ -92,6 +95,7 @@ def read_in_jsonl_to_df(filepath):
         .str.replace("]", "", regex=False)
     )
     df["prompt"] = df["doc"].apply(lambda x: x["prompt"])
+    
     df["prompt_and_answer"] = (
         "Query: " + df["prompt"] + " Response: " + df["filtered_resps"]
     )
@@ -127,20 +131,21 @@ def generate_batched_answers(batch, model, tokenizer):
     """Generate llm-judge answers for a single batch of text."""
 
     # tokenize
-    inputs = tokenizer(batch, padding=True, truncation=True, return_tensors="pt").to(
+    inputs = tokenizer(batch, padding=True, return_tensors="pt").to(
         DEVICE
     )
 
     # predict
     with torch.no_grad():
-        outputs = model.generate(**inputs, do_sample=False, num_beams=4, early_stopping = True)
+        outputs = model.generate(**inputs)
 
     # decode
-    outputs = tokenizer.batch_decode(
-        outputs[:, inputs["input_ids"].shape[1] :], skip_special_tokens=True
-    )
+    decoded_outputs = []
+    for output in outputs:
+        decoded = tokenizer.decode(output, skip_special_tokens=True)
+        decoded_outputs.append(decoded)
 
-    return outputs
+    return decoded_outputs
 
 
 def save_pretty_output_df(full_df, task_name, out_path):
@@ -180,7 +185,7 @@ def save_pretty_output_df(full_df, task_name, out_path):
                 f"Column: {col} not in the dataframe and was not dropped. Df has the following columns: {full_df.columns}"
             )
 
-    full_out_path = f"{out_path}{task_name}_translated.csv"
+    full_out_path = os.path.join(out_path, f"{task_name}_translated.csv")
     full_df.to_csv(full_out_path)
     print(f"Done! Finished dataframe has been written to: {full_out_path}")
 
@@ -208,7 +213,12 @@ def get_args():
         help="Path to the folder containing multijail and or_bench samples. Parent dir of multijail/or_bench is expected to indicate task and steer level in its name.",
     )
 
-    # args.folderpath = json.loads(args.folderpath) ### Not sure if this works, might have to take out again.
+    parser.add_argument(
+        "--debug",
+        action="store_true",
+        help="Run a small testset of provided data.",
+    )
+
     args = parser.parse_args()
 
     return args

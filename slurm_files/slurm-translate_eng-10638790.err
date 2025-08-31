@@ -1,0 +1,3 @@
+usage: translate_to_english.py [-h] --model MODEL [--out_path OUT_PATH]
+                               --folderpath FOLDERPATH [--debug]
+translate_to_english.py: error: the following arguments are required: --model

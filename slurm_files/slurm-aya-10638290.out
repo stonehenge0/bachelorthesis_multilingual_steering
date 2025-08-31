@@ -1,0 +1,57 @@
+================================================================================
+JobID = 10638290
+User = u14374, Account = ag_gipp
+Partition = scc-gpu, Nodelist = ggpu151
+================================================================================
+Submitting job with sbatch from directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering
+Home directory: /user/stein65/u14374
+Working directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering
+Current node: ggpu151
+Python 3.12.8
+
+Current Branch: main
+Latest Commit: 84690fd
+Uncommitted Changes: 9
+
+Activated Conda environment: modified_lm_eval_env
+Loading model CohereLabs/aya-101 and tokenizer...
+Processing these files (should be multijail and or_bench):
+meta-llama__Llama-3.1-8B-Instruct: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail_L11_S0.33/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-08-27T19-49-04.453854.jsonl
+Files to process: {'meta-llama__Llama-3.1-8B-Instruct': PosixPath('/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail_L11_S0.33/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-08-27T19-49-04.453854.jsonl')}
+
+
+============Starting processing============
+Task:meta-llama__Llama-3.1-8B-Instruct
+File: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail_L11_S0.33/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-08-27T19-49-04.453854.jsonl
+
+Information on the Dataframe being processed:
+Columns: Index(['doc_id', 'doc', 'target', 'arguments', 'resps', 'filtered_resps',
+       'filter', 'metrics', 'doc_hash', 'prompt_hash', 'target_hash', 'bypass',
+       'prompt', 'prompt_and_answer'],
+      dtype='object')
+Number of samples: 3150
+NAs values:
+ doc_id                  0
+doc                     0
+target                  0
+arguments               0
+resps                   0
+filtered_resps          0
+filter                  0
+metrics                 0
+doc_hash                0
+prompt_hash             0
+target_hash             0
+bypass               3150
+prompt                  0
+prompt_and_answer       0
+dtype: int64
+
+============ Job Information ===================================================
+Submitted: 2025-08-31T14:13:04
+Started: 2025-08-31T14:13:54
+Ended: 2025-08-31T14:16:46
+Elapsed: 3 min, Limit: 7 min, Difference: 4 min
+CPUs: 8, Nodes: 1
+Estimated Consumption: 7.50 core-hours
+================================================================================

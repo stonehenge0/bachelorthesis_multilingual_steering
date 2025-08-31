@@ -1,0 +1,24 @@
+================================================================================
+JobID = 10638790
+User = u14374, Account = ag_gipp
+Partition = scc-gpu, Nodelist = ggpu136
+================================================================================
+Submitting job with sbatch from directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering
+Home directory: /user/stein65/u14374
+Working directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering
+Current node: ggpu136
+Python 3.12.8
+
+Current Branch: main
+Latest Commit: 84690fd
+Uncommitted Changes: 20
+
+Activated Conda environment: modified_lm_eval_env
+============ Job Information ===================================================
+Submitted: 2025-08-31T16:08:51
+Started: 2025-08-31T16:08:59
+Ended: 2025-08-31T16:09:59
+Elapsed: 1 min, Limit: 15 min, Difference: 14 min
+CPUs: 8, Nodes: 1
+Estimated Consumption: 2.50 core-hours
+================================================================================

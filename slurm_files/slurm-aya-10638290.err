@@ -1,0 +1,15 @@
+Loading checkpoint shards:   0%|          | 0/11 [00:00<?, ?it/s]Loading checkpoint shards:   9%|▉         | 1/11 [00:00<00:03,  2.83it/s]Loading checkpoint shards:  18%|█▊        | 2/11 [00:01<00:09,  1.01s/it]Loading checkpoint shards:  27%|██▋       | 3/11 [00:03<00:10,  1.36s/it]Loading checkpoint shards:  36%|███▋      | 4/11 [00:05<00:10,  1.53s/it]Loading checkpoint shards:  45%|████▌     | 5/11 [00:07<00:09,  1.59s/it]Loading checkpoint shards:  55%|█████▍    | 6/11 [00:09<00:08,  1.71s/it]Loading checkpoint shards:  64%|██████▎   | 7/11 [00:10<00:07,  1.75s/it]Loading checkpoint shards:  73%|███████▎  | 8/11 [00:12<00:05,  1.72s/it]Loading checkpoint shards:  82%|████████▏ | 9/11 [00:14<00:03,  1.81s/it]Loading checkpoint shards:  91%|█████████ | 10/11 [00:15<00:01,  1.65s/it]Loading checkpoint shards: 100%|██████████| 11/11 [00:15<00:00,  1.44s/it]
+Traceback (most recent call last):
+  File "/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/subfns/translate_to_english.py", line 243, in <module>
+    aya_translations = generate_batched_answers(
+  File "/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/subfns/translate_to_english.py", line 126, in generate_batched_answers
+    inputs = tokenizer.encode(batch, return_tensors="pt", padding=True).to(DEVICE)
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/transformers/tokenization_utils_base.py", line 2649, in encode
+    encoded_inputs = self.encode_plus(
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/transformers/tokenization_utils_base.py", line 3040, in encode_plus
+    return self._encode_plus(
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/transformers/tokenization_utils_fast.py", line 627, in _encode_plus
+    batched_output = self._batch_encode_plus(
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/transformers/tokenization_utils_fast.py", line 553, in _batch_encode_plus
+    encodings = self._tokenizer.encode_batch(
+TypeError: TextEncodeInput must be Union[TextInputSequence, Tuple[InputSequence, InputSequence]]
