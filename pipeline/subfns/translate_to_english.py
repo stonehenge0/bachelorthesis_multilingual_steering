@@ -22,10 +22,13 @@ BATCH_SIZE = 16
 DEVICE = "cuda:0"
 TRANSLATION_INSTRUCTION = """Translate to English: """
 
+
 def load_model(hf_path):
     """Load model and tokenizer from huggingface."""
     tokenizer = AutoTokenizer.from_pretrained(hf_path, padding_side="left")
-    model = AutoModelForSeq2SeqLM.from_pretrained(hf_path, torch_dtype=torch.float16).to(DEVICE)
+    model = AutoModelForSeq2SeqLM.from_pretrained(
+        hf_path, torch_dtype=torch.float16
+    ).to(DEVICE)
     return tokenizer, model
 
 
@@ -87,9 +90,6 @@ def read_in_jsonl_to_df(filepath):
 
     df = pd.DataFrame(data)
 
-    if args.debug: 
-        df= df[:3]
-
     # clean and add combined prompt + answer prompt as new col
     df["filtered_resps"] = (
         df["filtered_resps"]
@@ -131,9 +131,7 @@ def generate_batched_answers(batch, model, tokenizer):
     """Generate llm-judge answers for a single batch of text."""
 
     # tokenize
-    inputs = tokenizer(batch, padding=True, return_tensors="pt").to(
-        DEVICE
-    )
+    inputs = tokenizer(batch, padding=True, return_tensors="pt").to(DEVICE)
 
     # predict
     with torch.no_grad():
@@ -176,7 +174,7 @@ def save_pretty_output_df(full_df, task_name, out_path):
 
     # drop uneccesary cols for readability.
     for col in cols_to_drop:
-        full_df.drop(col, inplace=True, axis=1, errors='ignore')
+        full_df.drop(col, inplace=True, axis=1, errors="ignore")
 
     full_out_path = os.path.join(out_path, f"{task_name}_translated.csv")
     full_df.to_csv(full_out_path)
@@ -238,8 +236,8 @@ if __name__ == "__main__":
 
         # 2. Setup generators for batches
         ### Not sure if we should keep it at also translating the prompts.
-        #  It's a nice quality check and does make things easier, but also 
-        # just like takes more time. 
+        #  It's a nice quality check and does make things easier, but also
+        # just like takes more time.
         generator_prompts = batch_generator(
             df["prompt"], tokenizer=tokenizer, batch_size=BATCH_SIZE
         )

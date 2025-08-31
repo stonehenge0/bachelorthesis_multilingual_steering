@@ -35,5 +35,5 @@ echo "Activated Conda environment: $CONDA_DEFAULT_ENV"
 # Changed naming of output path for testing purposes.
 python pipeline/subfns/translate_to_english.py \
     --model "CohereLabs/aya-101" \
-    --out_path "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs" \
+    --out_path "pipeline/runs/new_or_translation" \
     --folderpath "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs" \
