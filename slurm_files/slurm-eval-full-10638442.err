@@ -1,2 +1,0 @@
-wandb: Currently logged in as: stonehenge0 (stonehenge0-university-of-goettingen) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
-[2025-08-31T14:50:07.271] error: *** JOB 10638442 ON ggpu136 CANCELLED AT 2025-08-31T14:50:07 DUE to SIGNAL Terminated ***

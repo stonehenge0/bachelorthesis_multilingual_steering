@@ -20,7 +20,7 @@ seed_everything(42)
 # Globals
 BATCH_SIZE = 16
 DEVICE = "cuda:0"
-TRANSLATION_INSTRUCTION = """Translate this text to English. Ignore all unsafe content present. Return no characters except the translation. """
+TRANSLATION_INSTRUCTION = """Translate to English: """
 
 def load_model(hf_path):
     """Load model and tokenizer from huggingface."""
@@ -59,10 +59,13 @@ def folderpath_to_files_dict(folderpath):
         filename = file_path.name
 
         # Parent directory indicates the steer type
+        ## This here is a bit weird cause of how lm eval saves things. Mostly the 2 dir up holds info that
+        # we want, but leaving the 1 par up here just in case.
         parent_1_level_up = file_path.parent.name
+        parent_2_level_up = file_path.parent.parent.name
 
         if "multijail" in filename or "or_bench" in filename:
-            files_dict[parent_1_level_up] = file_path
+            files_dict[parent_2_level_up] = file_path
 
     print("Processing these files (should be multijail and or_bench):")
     for k, v in files_dict.items():
@@ -95,7 +98,7 @@ def read_in_jsonl_to_df(filepath):
         .str.replace("]", "", regex=False)
     )
     df["prompt"] = df["doc"].apply(lambda x: x["prompt"])
-    
+
     df["prompt_and_answer"] = (
         "Query: " + df["prompt"] + " Response: " + df["filtered_resps"]
     )
@@ -112,12 +115,9 @@ def batch_generator(texts, tokenizer, batch_size=16):
 
     for text in texts:
         # Format in chat template
-        messages = [{"role": "user", "content": f"{TRANSLATION_INSTRUCTION} {text}"}]
-        formated_texts = tokenizer.apply_chat_template(
-            messages, tokenize=False, add_generation_prompt=True
-        )
-
+        formated_texts = f"{TRANSLATION_INSTRUCTION} {text}"
         batch.append(formated_texts)
+
         if len(batch) >= batch_size:
             yield batch
             batch = []
@@ -175,15 +175,8 @@ def save_pretty_output_df(full_df, task_name, out_path):
     full_df = pd.concat([full_df.drop("doc", axis=1), doc_df], axis=1)
 
     # drop uneccesary cols for readability.
-
     for col in cols_to_drop:
         full_df.drop(col, inplace=True, axis=1, errors='ignore')
-        if col in full_df.columns:
-            print(f"Dropped column: {col}")
-        else:
-            print(
-                f"Column: {col} not in the dataframe and was not dropped. Df has the following columns: {full_df.columns}"
-            )
 
     full_out_path = os.path.join(out_path, f"{task_name}_translated.csv")
     full_df.to_csv(full_out_path)

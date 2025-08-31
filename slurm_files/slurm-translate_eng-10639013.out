@@ -1,0 +1,129 @@
+================================================================================
+JobID = 10639013
+User = u14374, Account = ag_gipp
+Partition = scc-gpu, Nodelist = ggpu136
+================================================================================
+Submitting job with sbatch from directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering
+Home directory: /user/stein65/u14374
+Working directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering
+Current node: ggpu136
+Python 3.12.8
+
+Current Branch: main
+Latest Commit: 2066371
+Uncommitted Changes: 29
+
+Activated Conda environment: modified_lm_eval_env
+Loading model CohereLabs/aya-101 and tokenizer...
+Processing these files (should be multijail and or_bench):
+meta-llama__Llama-3.1-8B-Instruct: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail_L11_S0.33/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-08-27T19-49-04.453854.jsonl
+
+============Starting processing============
+Task:meta-llama__Llama-3.1-8B-Instruct
+File: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail_L11_S0.33/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-08-27T19-49-04.453854.jsonl
+
+Information on the Dataframe being processed:
+Columns: Index(['doc_id', 'doc', 'target', 'arguments', 'resps', 'filtered_resps',
+       'filter', 'metrics', 'doc_hash', 'prompt_hash', 'target_hash', 'bypass',
+       'prompt', 'prompt_and_answer'],
+      dtype='object')
+Number of samples: 3
+NAs values:
+ doc_id               0
+doc                  0
+target               0
+arguments            0
+resps                0
+filtered_resps       0
+filter               0
+metrics              0
+doc_hash             0
+prompt_hash          0
+target_hash          0
+bypass               3
+prompt               0
+prompt_and_answer    0
+dtype: int64
+
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 3 entries, 0 to 2
+Data columns (total 16 columns):
+ #   Column             Non-Null Count  Dtype 
+---  ------             --------------  ----- 
+ 0   doc_id             3 non-null      int64 
+ 1   doc                3 non-null      object
+ 2   target             3 non-null      object
+ 3   arguments          3 non-null      object
+ 4   resps              3 non-null      object
+ 5   filtered_resps     3 non-null      object
+ 6   filter             3 non-null      object
+ 7   metrics            3 non-null      object
+ 8   doc_hash           3 non-null      object
+ 9   prompt_hash        3 non-null      object
+ 10  target_hash        3 non-null      object
+ 11  bypass             0 non-null      object
+ 12  prompt             3 non-null      object
+ 13  prompt_and_answer  3 non-null      object
+ 14  prompt_translated  3 non-null      object
+ 15  answer_translated  3 non-null      object
+dtypes: int64(1), object(15)
+memory usage: 512.0+ bytes
+Info on the df being passed to save_output_df:
+ None
+Column: doc_id not in the dataframe and was not dropped. Df has the following columns: Index(['target', 'arguments', 'resps', 'filtered_resps', 'filter', 'metrics',
+       'doc_hash', 'prompt_hash', 'target_hash', 'bypass', 'prompt',
+       'prompt_and_answer', 'prompt_translated', 'answer_translated', 'prompt',
+       'id'],
+      dtype='object')
+Column: target not in the dataframe and was not dropped. Df has the following columns: Index(['arguments', 'resps', 'filtered_resps', 'filter', 'metrics', 'doc_hash',
+       'prompt_hash', 'target_hash', 'bypass', 'prompt', 'prompt_and_answer',
+       'prompt_translated', 'answer_translated', 'prompt', 'id'],
+      dtype='object')
+Column: arguments not in the dataframe and was not dropped. Df has the following columns: Index(['resps', 'filtered_resps', 'filter', 'metrics', 'doc_hash',
+       'prompt_hash', 'target_hash', 'bypass', 'prompt', 'prompt_and_answer',
+       'prompt_translated', 'answer_translated', 'prompt', 'id'],
+      dtype='object')
+Column: resps not in the dataframe and was not dropped. Df has the following columns: Index(['filtered_resps', 'filter', 'metrics', 'doc_hash', 'prompt_hash',
+       'target_hash', 'bypass', 'prompt', 'prompt_and_answer',
+       'prompt_translated', 'answer_translated', 'prompt', 'id'],
+      dtype='object')
+Column: filter not in the dataframe and was not dropped. Df has the following columns: Index(['filtered_resps', 'metrics', 'doc_hash', 'prompt_hash', 'target_hash',
+       'bypass', 'prompt', 'prompt_and_answer', 'prompt_translated',
+       'answer_translated', 'prompt', 'id'],
+      dtype='object')
+Column: metrics not in the dataframe and was not dropped. Df has the following columns: Index(['filtered_resps', 'doc_hash', 'prompt_hash', 'target_hash', 'bypass',
+       'prompt', 'prompt_and_answer', 'prompt_translated', 'answer_translated',
+       'prompt', 'id'],
+      dtype='object')
+Column: doc_hash not in the dataframe and was not dropped. Df has the following columns: Index(['filtered_resps', 'prompt_hash', 'target_hash', 'bypass', 'prompt',
+       'prompt_and_answer', 'prompt_translated', 'answer_translated', 'prompt',
+       'id'],
+      dtype='object')
+Column: prompt_hash not in the dataframe and was not dropped. Df has the following columns: Index(['filtered_resps', 'target_hash', 'bypass', 'prompt',
+       'prompt_and_answer', 'prompt_translated', 'answer_translated', 'prompt',
+       'id'],
+      dtype='object')
+Column: target_hash not in the dataframe and was not dropped. Df has the following columns: Index(['filtered_resps', 'bypass', 'prompt', 'prompt_and_answer',
+       'prompt_translated', 'answer_translated', 'prompt', 'id'],
+      dtype='object')
+Column: bypass not in the dataframe and was not dropped. Df has the following columns: Index(['filtered_resps', 'prompt', 'prompt_and_answer', 'prompt_translated',
+       'answer_translated', 'prompt', 'id'],
+      dtype='object')
+Column: text not in the dataframe and was not dropped. Df has the following columns: Index(['filtered_resps', 'prompt', 'prompt_and_answer', 'prompt_translated',
+       'answer_translated', 'prompt', 'id'],
+      dtype='object')
+Column: prompt not in the dataframe and was not dropped. Df has the following columns: Index(['filtered_resps', 'prompt_and_answer', 'prompt_translated',
+       'answer_translated', 'id'],
+      dtype='object')
+Column: category not in the dataframe and was not dropped. Df has the following columns: Index(['filtered_resps', 'prompt_and_answer', 'prompt_translated',
+       'answer_translated', 'id'],
+      dtype='object')
+Done! Finished dataframe has been written to: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/meta-llama__Llama-3.1-8B-Instruct_translated.csv
+============ Job Information ===================================================
+Submitted: 2025-08-31T17:03:44
+Started: 2025-08-31T17:04:04
+Ended: 2025-08-31T17:06:47
+Elapsed: 3 min, Limit: 15 min, Difference: 12 min
+CPUs: 8, Nodes: 1
+Estimated Consumption: 7.50 core-hours
+================================================================================

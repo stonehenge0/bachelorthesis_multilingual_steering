@@ -1,0 +1,11 @@
+Loading checkpoint shards:   0%|          | 0/11 [00:00<?, ?it/s]Loading checkpoint shards:   9%|▉         | 1/11 [00:10<01:48, 10.85s/it]Loading checkpoint shards:  18%|█▊        | 2/11 [00:21<01:34, 10.54s/it]Loading checkpoint shards:  27%|██▋       | 3/11 [00:30<01:21, 10.15s/it]Loading checkpoint shards:  36%|███▋      | 4/11 [00:40<01:10, 10.01s/it]Loading checkpoint shards:  45%|████▌     | 5/11 [00:50<00:59,  9.92s/it]Loading checkpoint shards:  55%|█████▍    | 6/11 [01:00<00:50, 10.08s/it]Loading checkpoint shards:  64%|██████▎   | 7/11 [01:13<00:43, 10.89s/it]Loading checkpoint shards:  73%|███████▎  | 8/11 [01:24<00:33, 11.07s/it]Loading checkpoint shards:  82%|████████▏ | 9/11 [01:36<00:22, 11.20s/it]Loading checkpoint shards:  91%|█████████ | 10/11 [01:43<00:09,  9.82s/it]Loading checkpoint shards: 100%|██████████| 11/11 [01:54<00:00, 10.22s/it]Loading checkpoint shards: 100%|██████████| 11/11 [01:54<00:00, 10.38s/it]
+Traceback (most recent call last):
+  File "/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/subfns/translate_to_english.py", line 260, in <module>
+    for batch in generator_prompts:
+  File "/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/subfns/translate_to_english.py", line 116, in batch_generator
+    formated_texts = tokenizer.apply_chat_template(
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/transformers/tokenization_utils_base.py", line 1621, in apply_chat_template
+    chat_template = self.get_chat_template(chat_template, tools)
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/transformers/tokenization_utils_base.py", line 1743, in get_chat_template
+    raise ValueError(
+ValueError: Cannot use chat template functions because tokenizer.chat_template is not set and no template argument was passed! For information about writing templates and setting the tokenizer.chat_template attribute, please see the documentation at https://huggingface.co/docs/transformers/main/en/chat_templating

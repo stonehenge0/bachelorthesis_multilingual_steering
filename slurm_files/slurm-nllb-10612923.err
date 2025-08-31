@@ -1,4 +1,0 @@
-Traceback (most recent call last):
-  File "/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/subfns/xalma_translate_english.py", line 32, in <module>
-    OUT_PATH = f"/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/data/or_bench_translated_{'_'.join(TARGET_LANGUAGES)}.csv"
-NameError: name 'TARGET_LANGUAGES' is not defined
