@@ -1,5 +1,5 @@
 #! /bin/bash
-#SBATCH --job-name=Qwen_judge
+#SBATCH --job-name=aya_judge
 #SBATCH -c 8 #
 #SBATCH --mem 40G  
 #SBATCH -p scc-gpu 
@@ -31,7 +31,7 @@ echo "Activated Conda environment: $CONDA_DEFAULT_ENV"
 
 # Run script.
 python pipeline/subfns/llm_judge.py \
- --model "Qwen/Qwen2.5-7B-Instruct" \
+ --model "CohereLabs/aya-101" \
  --out_path "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs" \
  --files_to_process_dict '{
   "multijail_baseline": "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-08-27T18-43-45.557071.jsonl",
