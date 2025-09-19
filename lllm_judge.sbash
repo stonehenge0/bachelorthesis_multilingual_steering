@@ -3,10 +3,10 @@
 #SBATCH -c 8 #
 #SBATCH --mem 40G  
 #SBATCH -p scc-gpu 
-#SBATCH -t 06:00:00 
+#SBATCH -t 04:00:00 
 #SBATCH -G A100:1 
-#SBATCH --output=../slurm_files/slurm-%x-%j.out     
-#SBATCH --error=../slurm_files/slurm-%x-%j.err      
+#SBATCH --output=./slurm_files/slurm-%x-%j.out     
+#SBATCH --error=./slurm_files/slurm-%x-%j.err      
 
 # Printing out some info on filepaths.
 echo "Submitting job with sbatch from directory: ${SLURM_SUBMIT_DIR}"
@@ -30,6 +30,10 @@ conda activate /mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_l
 echo "Activated Conda environment: $CONDA_DEFAULT_ENV"
 
 # Run script.
+
+# qwen: /mnt/ceph-hdd/projects/ag_gipp/emma/hf_cache/hub/models--Qwen--Qwen3-14B/snapshots/40c069824f4251a91eefaf281ebe4c544efd3e18
+# aya101: /mnt/ceph-hdd/projects/ag_gipp/emma/hf_cache/hub/models--CohereLabs--aya-101/snapshots/231cff3a9729ccdaee18839b32aaabac5278a21c
+
 python pipeline/subfns/llm_judge.py \
  --model "CohereLabs/aya-101" \
  --out_path "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/aya_judged_multijail" \

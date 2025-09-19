@@ -1,9 +1,9 @@
 #! /bin/bash
 #SBATCH --job-name=70b-llama
-#SBATCH -c 8 #
+#SBATCH -c 8 
 #SBATCH -p scc-gpu 
 #SBATCH -t 07:00:00 
-#SBATCH --G=H100:1
+#SBATCH -G H100
 #SBATCH --output=./slurm_files/slurm-%x-%j.out     
 #SBATCH --error=./slurm_files/slurm-%x-%j.err  
 

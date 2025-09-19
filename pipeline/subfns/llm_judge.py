@@ -4,10 +4,11 @@ import argparse
 import json
 
 import pandas as pd
-from transformers import AutoTokenizer, AutoModelForCausalLM
+from transformers import AutoTokenizer, AutoModelForCausalLM, AutoModelForSeq2SeqLM
 import torch
 from huggingface_hub import login
 import jsonlines
+import torch
 
 from utils import seed_everything
 
@@ -30,7 +31,16 @@ Also do not return any "assistant" tag. """
 def load_model(hf_path):
     """Load model and tokenizer from huggingface."""
     tokenizer = AutoTokenizer.from_pretrained(hf_path, padding_side="left")
-    model = AutoModelForCausalLM.from_pretrained(hf_path).to(DEVICE)
+
+    if "aya" in hf_path.lower():
+        model = AutoModelForSeq2SeqLM.from_pretrained(
+            hf_path, local_files_only=True, dtype=torch.float16
+        ).to(DEVICE)
+    else:
+        model = AutoModelForCausalLM.from_pretrained(
+            hf_path, local_files_only=True, dtype=torch.float16
+        ).to(DEVICE)
+
     return tokenizer, model
 
 
