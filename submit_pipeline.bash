@@ -1,9 +1,10 @@
 #! /bin/bash
-#SBATCH --job-name=70b-llama
+#SBATCH --job-name=greedy_llama
 #SBATCH -c 8 
 #SBATCH -p scc-gpu 
 #SBATCH -t 07:00:00 
-#SBATCH -G H100
+#SBATCH -G A100
+#SBATCH --constraint=inet
 #SBATCH --output=./slurm_files/slurm-%x-%j.out     
 #SBATCH --error=./slurm_files/slurm-%x-%j.err  
 
@@ -34,12 +35,12 @@ export PYTHONPATH=/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multiling
 
 # Run script
 python pipeline/run_pipeline.py\
-  --model_path "meta-llama/Llama-3.1-70B-Instruct" \
+  --model_path "meta-llama/Llama-3.1-8B-Instruct" \
   --steer_type "layer_wise" \
   --steering_folder "" \
-  --steering_vector_path "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/data/steer_data_Llama-3.1-70B-Instruct/direction.pt" \
-  --steering_layer 35 \
-  --steering_token_position -5 \
+  --steering_vector_path "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/data/steer_data_Llama-3.1-8B/Llama-3.1-8B-Instruct-direction.pt" \
+  --steering_layer 11 \
+  --steering_token_position -2 \
   --steering_strengths 0.33 0.66 1.0 \
   --device "cuda:0" \
 

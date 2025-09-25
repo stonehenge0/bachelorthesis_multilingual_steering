@@ -14,7 +14,6 @@
 # ---------------------
 
 ### ToDos:
-### Naming of WandB runs not there yet.
 ### Steer type arguments not used yet, to be implemented.
 
 import os
@@ -28,7 +27,6 @@ from dataclasses import dataclass
 from typing import Dict, List, Optional, Callable
 from copy import deepcopy
 
-import wandb
 import torch
 
 from .utils import seed_everything, create_or_ensure_output_path
@@ -52,8 +50,10 @@ class EvalConfig:
     apply_chat_template: bool = False
     predict_only: bool = False
     log_samples: bool = True
-    wandb_args: Optional[str] = None
     limit: Optional[int] = None
+    gen_kwargs: str = (
+        None  # With None you get -> uses t=0.7, max_new_tokens=150, do_sample= True
+    )
 
     def to_cmd_args(self) -> List[str]:
         """Convert config to command line arguments for lm_eval."""
@@ -90,8 +90,8 @@ class EvalConfig:
         if self.limit:
             cmd.extend(["--limit", str(self.limit)])
 
-        if self.wandb_args:
-            cmd.extend(["--wandb_args", self.wandb_args])
+        if self.gen_kwargs:
+            cmd.extend(["--gen_kwargs", self.gen_kwargs])
 
         return cmd
 
@@ -103,7 +103,7 @@ class EvalConfig:
 
 
 def create_base_config(
-    MODEL_NAME, MODEL_PATH, DEVICE, OUT_PATH, SEED, WANDB_PROJECT, LIMIT
+    MODEL_NAME, MODEL_PATH, DEVICE, OUT_PATH, SEED, LIMIT
 ) -> EvalConfig:
     """Create base configuration with global settings."""
     config_globals = EvalConfig(
@@ -115,8 +115,8 @@ def create_base_config(
         batch_size="auto",
         out_path=OUT_PATH,
         seed=f"{SEED},{SEED},{SEED}",  # Three seeds for python's random, numpy and torch respectively",
-        wandb_args=f"project={WANDB_PROJECT}",  # Base wandb config, run name will be added later
         limit=LIMIT,
+        gen_kwargs="temperature=0.0,max_new_tokens=300,do_sample=False",  # Greedy decoding.
     )
 
     return config_globals
@@ -204,15 +204,10 @@ def run_and_save(config: EvalConfig, out_path: str):
             f"Error running command for {config.run_name}:\n{out.stderr}\n Returncode:{out.returncode}"
         )
 
-    out_path = os.path.join(
-        f"{out_path}_{config.tasks}", ""
-    )
-
+    out_path = os.path.join(f"{out_path}_{config.tasks}", "")
 
     try:
-        config.save_json(
-            filepath=f"{out_path}{config.run_name}.json"
-        ) 
+        config.save_json(filepath=f"{out_path}{config.run_name}.json")
     except Exception as e:
         print(f"Warning: Could not save config for {config.run_name}: {e}")
 
@@ -234,7 +229,6 @@ def lm_eval_steered_and_baseline_tasks(
 ):
     # Constants and setup
     TASKS = ["multijail", "global_mmlu", "or_bench"]
-    WANDB_PROJECT = "bachelorarbeit"
     SEED = 1234
     OUT_PATH = ARTIFACT_PATH
 
@@ -261,14 +255,6 @@ def lm_eval_steered_and_baseline_tasks(
 
     seed_everything(SEED)
 
-    # Login to wandb
-    wandb.login()
-
-    wandb_user = wandb.api.default_entity
-    print(f"=== Wandb Information ===")
-    print(f"Logged in as: {wandb_user}")
-    print(f"Project: {WANDB_PROJECT}\n")
-
     # Load steering components
     STEER_DIRECTION = torch.load(STEER_VECTOR_PATH)
     ZEROS_BIAS = torch.zeros(STEER_DIRECTION.shape)
@@ -278,7 +264,7 @@ def lm_eval_steered_and_baseline_tasks(
     for task in TASKS:
         # 1. Base config with globals
         base_config = create_base_config(
-            MODEL_ALIAS, MODEL_PATH, DEVICE, OUT_PATH, SEED, WANDB_PROJECT, LIMIT
+            MODEL_ALIAS, MODEL_PATH, DEVICE, OUT_PATH, SEED, LIMIT
         )
 
         # 2. task specific task config
