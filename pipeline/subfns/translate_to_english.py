@@ -135,7 +135,7 @@ def generate_batched_answers(batch, model, tokenizer):
 
     # predict
     with torch.no_grad():
-        outputs = model.generate(**inputs)
+        outputs = model.generate(**inputs, max_new_tokens=400)
 
     # decode
     decoded_outputs = []
