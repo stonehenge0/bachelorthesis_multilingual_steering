@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/subfns/llm_judge.py", line 178, in <module>
+    tokenizer, model = load_model(args.model)
+  File "/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/subfns/llm_judge.py", line 40, in load_model
+    model = AutoModelForCausalLM.from_pretrained(hf_path, dtype=torch.float16).to(
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/transformers/models/auto/auto_factory.py", line 600, in from_pretrained
+    return model_class.from_pretrained(
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/transformers/modeling_utils.py", line 311, in _wrapper
+    return func(*args, **kwargs)
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/transformers/modeling_utils.py", line 4766, in from_pretrained
+    model = cls(config, *model_args, **model_kwargs)
+TypeError: __init__() got an unexpected keyword argument 'dtype'
