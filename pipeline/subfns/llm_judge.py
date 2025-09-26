@@ -127,7 +127,9 @@ def generate_batched_answers(batch, model, tokenizer):
 
     # predict
     with torch.no_grad():
-        outputs = model.generate(**inputs, max_new_tokens=50, temperature=0.01)
+        outputs = model.generate(
+            **inputs, max_new_tokens=50
+        )  # Took out the temperature here.
 
     # decode
     outputs = tokenizer.batch_decode(
