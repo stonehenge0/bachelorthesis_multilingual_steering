@@ -33,13 +33,13 @@ def load_model(hf_path):
     tokenizer = AutoTokenizer.from_pretrained(hf_path, padding_side="left")
 
     if "aya" in hf_path.lower():
-        model = AutoModelForSeq2SeqLM.from_pretrained(hf_path, dtype=torch.float16).to(
-            DEVICE
-        )
+        model = AutoModelForSeq2SeqLM.from_pretrained(
+            hf_path, torch_dtype=torch.float16
+        ).to(DEVICE)
     else:
-        model = AutoModelForCausalLM.from_pretrained(hf_path, dtype=torch.float16).to(
-            DEVICE
-        )
+        model = AutoModelForCausalLM.from_pretrained(
+            hf_path, torch_dtype=torch.float16
+        ).to(DEVICE)
 
     return tokenizer, model
 
