@@ -100,7 +100,10 @@ def batch_generator(texts, tokenizer, batch_size=16):
         # Format in chat template
         messages = [{"role": "user", "content": f"{JUDGE_INSTRUCTION} {text}"}]
         formated_texts = tokenizer.apply_chat_template(
-            messages, tokenize=False, add_generation_prompt=True
+            messages,
+            tokenize=False,
+            add_generation_prompt=True,
+            enable_thinking=False,  # Qwen3 is a thinking model and won't return properly if not set here.
         )
 
         # batching
