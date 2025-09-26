@@ -1,10 +1,11 @@
 #! /bin/bash
-#SBATCH --job-name=aya-translation
+#SBATCH --job-name=aya-translation-t0.0
 #SBATCH -c 8 
 #SBATCH --mem 40G  
 #SBATCH -p scc-gpu 
-#SBATCH -t 06:00:00 
+#SBATCH -t 08:00:00 
 #SBATCH -G A100:1
+#SBATCH --constraint=inet
 #SBATCH --output=./slurm_files/slurm-%x-%j.out     
 #SBATCH --error=./slurm_files/slurm-%x-%j.err 
      
@@ -35,5 +36,7 @@ echo "Activated Conda environment: $CONDA_DEFAULT_ENV"
 # Changed naming of output path for testing purposes.
 python pipeline/subfns/translate_to_english.py \
     --model "CohereLabs/aya-101" \
-    --out_path "pipeline/runs/new_or_translation" \
+    --out_path "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/t0_translation" \
     --folderpath "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs" \
+
+    
