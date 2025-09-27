@@ -37,7 +37,7 @@ echo "Activated Conda environment: $CONDA_DEFAULT_ENV"
 
 python pipeline/subfns/llm_judge.py \
  --model "Qwen/Qwen3-14B" \
- --out_path "..." \
+ --out_path "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/t0_judge_multijail" \
  --files_to_process_dict '{
   "multijail_baseline": "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-09-25T22-33-47.630820.jsonl",
   "multijail_L11_S0.33": "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail_L11_S0.33/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-09-25T23-48-46.673186.jsonl",

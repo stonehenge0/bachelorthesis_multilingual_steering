@@ -1,0 +1,144 @@
+================================================================================
+JobID = 11159487
+User = u14374, Account = ag_gipp
+Partition = scc-gpu, Nodelist = ggpu145
+================================================================================
+Submitting job with sbatch from directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering
+Home directory: /user/stein65/u14374
+Working directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering
+Current node: ggpu145
+Python 3.12.8
+
+Current Branch: main
+Latest Commit: 2ba496a
+Uncommitted Changes: 3
+
+Activated Conda environment: modified_lm_eval_env
+Loading model Qwen/Qwen3-14B and tokenizer...
+Dict for model files to process:
+{'multijail_baseline': '/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-09-25T22-33-47.630820.jsonl', 'multijail_L11_S0.33': '/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail_L11_S0.33/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-09-25T23-48-46.673186.jsonl', 'multijail_L11_S0.66': '/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail_L11_S0.66/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-09-26T01-16-10.055377.jsonl', 'multijail_L11_S1.0': '/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail_L11_S1.0/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-09-26T03-11-53.025882.jsonl'}
+<class 'dict'>
+
+============Starting processing============
+Task:multijail_baseline
+File: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-09-25T22-33-47.630820.jsonl
+
+Information on the Dataframe being processed:
+Columns: Index(['doc_id', 'doc', 'target', 'arguments', 'resps', 'filtered_resps',
+       'filter', 'metrics', 'doc_hash', 'prompt_hash', 'target_hash', 'bypass',
+       'prompt', 'prompt_and_answer'],
+      dtype='object')
+Number of samples: 3150
+NAs values:
+ doc_id                  0
+doc                     0
+target                  0
+arguments               0
+resps                   0
+filtered_resps          0
+filter                  0
+metrics                 0
+doc_hash                0
+prompt_hash             0
+target_hash             0
+bypass               3150
+prompt                  0
+prompt_and_answer       0
+dtype: int64
+
+Done! Finished dataframe has been written to: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/t0_judge_multijailmultijail_baseline_judged.csv
+
+============Starting processing============
+Task:multijail_L11_S0.33
+File: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail_L11_S0.33/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-09-25T23-48-46.673186.jsonl
+
+Information on the Dataframe being processed:
+Columns: Index(['doc_id', 'doc', 'target', 'arguments', 'resps', 'filtered_resps',
+       'filter', 'metrics', 'doc_hash', 'prompt_hash', 'target_hash', 'bypass',
+       'prompt', 'prompt_and_answer'],
+      dtype='object')
+Number of samples: 3150
+NAs values:
+ doc_id                  0
+doc                     0
+target                  0
+arguments               0
+resps                   0
+filtered_resps          0
+filter                  0
+metrics                 0
+doc_hash                0
+prompt_hash             0
+target_hash             0
+bypass               3150
+prompt                  0
+prompt_and_answer       0
+dtype: int64
+
+Done! Finished dataframe has been written to: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/t0_judge_multijailmultijail_L11_S0.33_judged.csv
+
+============Starting processing============
+Task:multijail_L11_S0.66
+File: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail_L11_S0.66/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-09-26T01-16-10.055377.jsonl
+
+Information on the Dataframe being processed:
+Columns: Index(['doc_id', 'doc', 'target', 'arguments', 'resps', 'filtered_resps',
+       'filter', 'metrics', 'doc_hash', 'prompt_hash', 'target_hash', 'bypass',
+       'prompt', 'prompt_and_answer'],
+      dtype='object')
+Number of samples: 3150
+NAs values:
+ doc_id                  0
+doc                     0
+target                  0
+arguments               0
+resps                   0
+filtered_resps          0
+filter                  0
+metrics                 0
+doc_hash                0
+prompt_hash             0
+target_hash             0
+bypass               3150
+prompt                  0
+prompt_and_answer       0
+dtype: int64
+
+Done! Finished dataframe has been written to: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/t0_judge_multijailmultijail_L11_S0.66_judged.csv
+
+============Starting processing============
+Task:multijail_L11_S1.0
+File: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail_L11_S1.0/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-09-26T03-11-53.025882.jsonl
+
+Information on the Dataframe being processed:
+Columns: Index(['doc_id', 'doc', 'target', 'arguments', 'resps', 'filtered_resps',
+       'filter', 'metrics', 'doc_hash', 'prompt_hash', 'target_hash', 'bypass',
+       'prompt', 'prompt_and_answer'],
+      dtype='object')
+Number of samples: 3150
+NAs values:
+ doc_id                  0
+doc                     0
+target                  0
+arguments               0
+resps                   0
+filtered_resps          0
+filter                  0
+metrics                 0
+doc_hash                0
+prompt_hash             0
+target_hash             0
+bypass               3150
+prompt                  0
+prompt_and_answer       0
+dtype: int64
+
+Done! Finished dataframe has been written to: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/t0_judge_multijailmultijail_L11_S1.0_judged.csv
+============ Job Information ===================================================
+Submitted: 2025-09-26T19:24:38
+Started: 2025-09-26T19:25:44
+Ended: 2025-09-26T19:43:01
+Elapsed: 18 min, Limit: 360 min, Difference: 342 min
+CPUs: 8, Nodes: 1
+Estimated Consumption: 45.00 core-hours
+================================================================================
