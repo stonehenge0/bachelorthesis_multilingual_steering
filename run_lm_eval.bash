@@ -34,15 +34,12 @@ echo "Activated Conda environment: $CONDA_DEFAULT_ENV"
 export PYTHONPATH=/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering:$PYTHONPATH
 
 # Run script
-python pipeline/run_pipeline.py\
-  --model_path "meta-llama/Llama-3.1-8B-Instruct" \
-  --steer_type "layer_wise" \
-  --steering_folder "" \
-  --steering_vector_path "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/data/steer_data_Llama-3.1-8B/Llama-3.1-8B-Instruct-direction.pt" \
+python code/carefully_refactored_lm_eval.py\
+  --model_path "meta-llama/Llama-3.2-8B-Instruct" \
+  --steering_vector_path "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/data/steer_data_Llama-3.1-8B-Instruct/direction.pt" \
   --steering_layer 11 \
-  --steering_token_position -2 \
-  --steering_strengths 0.33 0.66 1.0 \
-  --device "cuda:0" \
+  --steering_strengths 1.0 \
+  --device "cuda:0"
 
 # Scan HF cache
 echo "HF cache:"

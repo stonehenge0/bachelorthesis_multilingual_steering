@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-"""Standalone script to run and evaluate baseline and steered models on different tasks using lm_eval."""
+"""Script to run and evaluate baseline and steered models on different tasks using lm_eval."""
 
 import argparse
 import os
@@ -16,11 +15,7 @@ import numpy as np
 import torch
 
 
-# ============================================================================
-# UTILITY FUNCTIONS
-# ============================================================================
-
-
+# utility fns
 def seed_everything(seed: int):
     """Set random seeds for reproducibility."""
     random.seed(seed)
@@ -36,22 +31,15 @@ def create_or_ensure_output_path(path: str):
     os.makedirs(path, exist_ok=True)
 
 
-# ============================================================================
-# CONFIG CLASS
-# ============================================================================
-
-
+# Config class for summary print
 @dataclass
 class Config:
     """Configuration for the evaluation pipeline."""
 
     model_path: str
     model_alias: str
-    steer_type: str
-    steering_folder: str
     steering_vector_path: str
     steering_layer: int
-    steering_token_position: int
     steering_strengths: List[float]
     debug: bool
     device: str
@@ -64,17 +52,12 @@ class Config:
             "artifacts",
             f"{cfg.model_alias}",
             f"layer_{cfg.steering_layer}",
-            f"token_{cfg.steering_token_position}",
             timestamp,
         )
         return path
 
 
-# ============================================================================
-# EVAL CONFIG
-# ============================================================================
-
-
+# Eval config. This controls what exactly is run over lm-eval-harness
 @dataclass
 class EvalConfig:
     """Configuration for a single evaluation run."""
@@ -159,11 +142,8 @@ class EvalConfig:
             json.dump(config_dict, f, indent=2)
 
 
-# ============================================================================
-# EVALUATION FUNCTIONS
-# ============================================================================
 
-
+# Eval functions
 def create_base_config(
     MODEL_NAME, MODEL_PATH, DEVICE, OUT_PATH, SEED, LIMIT
 ) -> EvalConfig:
@@ -274,10 +254,8 @@ def lm_eval_steered_and_baseline_tasks(
     STEERING_STRENGTHS,
     MODEL_ALIAS,
     MODEL_PATH,
-    STEER_TYPE,
     STEER_VECTOR_PATH,
     STEER_LAYER,
-    TOKEN_POS,
     DEVICE,
     DEBUG,
     ARTIFACT_PATH,
@@ -288,7 +266,7 @@ def lm_eval_steered_and_baseline_tasks(
     SEED = 1234
     OUT_PATH = ARTIFACT_PATH
 
-    # Default MMLU subtasks. These are all langs from MMLU that overlap with Or_bench
+    # Default MMLU subtasks. These are all langs from MMLU that overlap with OR-Bench
     MMLU_SUBTASKS_LANGS = ",".join(
         [
             "global_mmlu_en",
@@ -355,30 +333,13 @@ def lm_eval_steered_and_baseline_tasks(
         run_and_save(config, OUT_PATH)
 
 
-# ============================================================================
-# MAIN PIPELINE
-# ============================================================================
 
-
+# Argparser
 def parse_arguments():
     """Parse model path argument from command line."""
     parser = argparse.ArgumentParser(description="Parse model path argument.")
     parser.add_argument(
         "--model_path", type=str, required=True, help="Path to the model"
-    )
-    parser.add_argument(
-        "--steer_type",
-        choices=["layer_wise", "single_token"],
-        type=str,
-        required=True,
-        help="Type of steering action. Either layer_wise or single_token.",
-    )
-
-    parser.add_argument(
-        "--steering_folder",
-        type=str,
-        default="",
-        help="Path to the folder with results from steering vector extraction.",
     )
 
     parser.add_argument(
@@ -393,13 +354,6 @@ def parse_arguments():
         type=int,
         required=True,
         help="Layer to apply steering to.",
-    )
-
-    parser.add_argument(
-        "--steering_token_position",
-        type=int,
-        required=True,
-        help="Token position for steering (can be negative for indexing from end).",
     )
 
     parser.add_argument(
@@ -432,11 +386,8 @@ def run_pipeline(model_path, args):
     cfg = Config(
         model_path=model_path,
         model_alias=model_alias,
-        steer_type=args.steer_type,
-        steering_folder=args.steering_folder,
         steering_vector_path=args.steering_vector_path,
         steering_layer=args.steering_layer,
-        steering_token_position=args.steering_token_position,
         steering_strengths=args.steering_strengths,
         debug=args.debug,
         device=args.device,
@@ -449,10 +400,8 @@ def run_pipeline(model_path, args):
         STEERING_STRENGTHS=cfg.steering_strengths,
         MODEL_ALIAS=cfg.model_alias,
         MODEL_PATH=cfg.model_path,
-        STEER_TYPE=cfg.steer_type,
         STEER_VECTOR_PATH=cfg.steering_vector_path,
         STEER_LAYER=cfg.steering_layer,
-        TOKEN_POS=cfg.steering_token_position,
         DEVICE=cfg.device,
         DEBUG=cfg.debug,
         ARTIFACT_PATH=artifact_path,
