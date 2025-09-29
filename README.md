@@ -1,5 +1,8 @@
 # Multilingual Refusal Steering
-![Python](https://img.shields.io/badge/python-3.10%2B-blue?logo=python&logoColor=white) ![PyTorch](https://img.shields.io/badge/pytorch-2.2%2B-red?logo=pytorch&logoColor=white) ![Status](https://img.shields.io/badge/status-final-brightgreen) ![Code Style](https://img.shields.io/badge/code%20style-black-black) 
+![Python](https://img.shields.io/badge/python-3.10%2B-blue?logo=python&logoColor=white) ![Status](https://img.shields.io/badge/status-final-brightgreen) ![Code Style](https://img.shields.io/badge/code%20style-black-black) 
+
+![Methodology Overview](methodology.png)
+
 
 This repository contains code and experiments for improving **LLM safety across languages** using steering vectors.  
 
@@ -29,9 +32,6 @@ Moreover, we are the first to extend the analysis of over-refusal of benign prom
 ---
 
 ## Methodology
-![Methodology Overview](images/methodology.png)
-
-
 1. **Steering Vector Extraction**  
    - We follow the approach of *Contrastive Activation Addition*.  
    - Harmful and harmless prompts are passed through the model.  
@@ -74,7 +74,17 @@ The script will prompt you for a HuggingFace token (required to access gated mod
 
 > The script is primarily inteded for setup on an HPC cluster, but you can use environment.yaml to set up wherever you like. 
  
- ## Run main script ## Command Line Arguments | Flag | Type | Required | Default | Description | |------|------|----------|---------|-------------| | --model_path | string | Yes | - | Path to the model (e.g., "meta-llama/Llama-3.1-8B-Instruct") | | --steering_vector_path | string | Yes | - | Path to the steering vector .pt file | | --steering_layer | integer | Yes | - | Layer to apply steering to (e.g., 11) | | --steering_strengths | float(s) | Yes | - | Steering strengths to use, separated by spaces (e.g., 0.33 0.66 1.0) | | --device | string | No | cuda:0 | Device to use for computation (e.g., "cuda:0", "cpu") | | --debug | flag | No | False | Run on a subsample of datasets and tasks for testing | 
+ ## Run main script
+The main script is '''lm_eval_steered_and_baseline_tasks.py'''. You can set the following parameters:
+ 
+ | Flag | Type | Required | Default | Description | 
+ |------|------|----------|---------|-------------|
+ | --model_path | string | Yes | - | Path to the model (e.g., "meta-llama/Llama-3.1-8B-Instruct") | 
+ | --steering_vector_path | string | Yes | - | Path to the steering vector .pt file | 
+ | --steering_layer | integer | Yes | - | Layer to apply steering to (e.g., 11) |
+ | --steering_strengths | float(s) | Yes | - | Steering strengths to use, separated by spaces (e.g., 0.33 0.66 1.0) | 
+ | --device | string | No | cuda:0 | Device to use for computation (e.g., "cuda:0", "cpu") | 
+ | --debug | flag | No | False | Run on a subsample of datasets and tasks for testing | 
  
  
 ### Example Usage
@@ -88,6 +98,5 @@ python /code/lm_eval_steered_and_baseline_tasks.py \
 ```
 
 ## Curious?
-- **Want to read the full thesis?** There you go. [Link to thesis here]  
-- **What else does you Lab do?** More AI Safety, Plagiarism, AI Agents,...
--**How can I contact you?** ```em dot stein29 at gmail dot com```
+- **What else does your Lab research?** More on AI Safety, Plagiarism, AI Agents at [GippLab](https://gipplab.uni-goettingen.de)       
+- **How can I contact you?** ```em dot stein29 at gmail dot com```       
