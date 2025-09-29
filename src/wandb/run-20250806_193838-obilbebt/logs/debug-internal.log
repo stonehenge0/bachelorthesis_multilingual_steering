@@ -1,0 +1,13 @@
+{"time":"2025-08-06T19:38:39.028016819+02:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-08-06T19:38:39.327362439+02:00","level":"INFO","msg":"stream: created new stream","id":"obilbebt"}
+{"time":"2025-08-06T19:38:39.327389469+02:00","level":"INFO","msg":"stream: started","id":"obilbebt"}
+{"time":"2025-08-06T19:38:39.327416619+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"obilbebt"}
+{"time":"2025-08-06T19:38:39.327426538+02:00","level":"INFO","msg":"sender: started","stream_id":"obilbebt"}
+{"time":"2025-08-06T19:38:39.327454228+02:00","level":"INFO","msg":"handler: started","stream_id":"obilbebt"}
+{"time":"2025-08-06T19:43:27.048444098+02:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-08-06T19:43:27.315206889+02:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading summary, console lines 84-122","runtime_seconds":0.266517694}],"total_operations":1}}
+{"time":"2025-08-06T19:43:28.352371727+02:00","level":"INFO","msg":"stream: closing","id":"obilbebt"}
+{"time":"2025-08-06T19:43:28.352387307+02:00","level":"INFO","msg":"handler: closed","stream_id":"obilbebt"}
+{"time":"2025-08-06T19:43:28.352394867+02:00","level":"INFO","msg":"writer: Close: closed","stream_id":"obilbebt"}
+{"time":"2025-08-06T19:43:28.352411257+02:00","level":"INFO","msg":"sender: closed","stream_id":"obilbebt"}
+{"time":"2025-08-06T19:43:28.353959449+02:00","level":"INFO","msg":"stream: closed","id":"obilbebt"}

@@ -1,0 +1,123 @@
+INFO:lm_eval.__main__:Selected Tasks: ['global_mmlu_bn', 'global_mmlu_de', 'global_mmlu_en', 'global_mmlu_zh']
+WARNING:lm_eval.evaluator:Model appears to be an instruct variant but chat template is not applied. Recommend setting `apply_chat_template` (optionally `fewshot_as_multiturn`).
+INFO:lm_eval.evaluator:Setting random seed to 1234 | Setting numpy seed to 1234 | Setting torch manual seed to 1234 | Setting fewshot manual seed to 1234
+INFO:lm_eval.evaluator:Initializing steered model, with arguments: {'pretrained': 'meta-llama/meta-llama-3-8b-instruct', 'steer_path': '/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/2025_08_04.pt'}
+WARNING:accelerate.utils.other:Detected kernel version 4.18.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+INFO:lm_eval.models.huggingface:Using device 'cuda:0'
+INFO:lm_eval.models.huggingface:Model parallel was set to False, max memory was not set, and device map was set to {'': 'cuda:0'}
+Loading checkpoint shards: 100%|██████████| 4/4 [00:01<00:00,  2.04it/s]
+INFO:lm_eval.api.task:Building contexts for global_mmlu_zh_business on rank 0...
+100%|██████████| 58/58 [00:00<00:00, 1516.50it/s]
+INFO:lm_eval.api.task:Building contexts for global_mmlu_zh_humanities on rank 0...
+100%|██████████| 102/102 [00:00<00:00, 1570.68it/s]
+INFO:lm_eval.api.task:Building contexts for global_mmlu_zh_medical on rank 0...
+100%|██████████| 36/36 [00:00<00:00, 1539.13it/s]
+INFO:lm_eval.api.task:Building contexts for global_mmlu_zh_other on rank 0...
+100%|██████████| 56/56 [00:00<00:00, 1557.56it/s]
+INFO:lm_eval.api.task:Building contexts for global_mmlu_zh_stem on rank 0...
+100%|██████████| 46/46 [00:00<00:00, 1540.03it/s]
+INFO:lm_eval.api.task:Building contexts for global_mmlu_zh_social_sciences on rank 0...
+100%|██████████| 102/102 [00:00<00:00, 1550.19it/s]
+INFO:lm_eval.api.task:Building contexts for global_mmlu_en_business on rank 0...
+100%|██████████| 58/58 [00:00<00:00, 1525.41it/s]
+INFO:lm_eval.api.task:Building contexts for global_mmlu_en_humanities on rank 0...
+100%|██████████| 102/102 [00:00<00:00, 1558.38it/s]
+INFO:lm_eval.api.task:Building contexts for global_mmlu_en_medical on rank 0...
+100%|██████████| 36/36 [00:00<00:00, 1542.29it/s]
+INFO:lm_eval.api.task:Building contexts for global_mmlu_en_other on rank 0...
+100%|██████████| 56/56 [00:00<00:00, 1543.21it/s]
+INFO:lm_eval.api.task:Building contexts for global_mmlu_en_stem on rank 0...
+100%|██████████| 46/46 [00:00<00:00, 1502.28it/s]
+INFO:lm_eval.api.task:Building contexts for global_mmlu_en_social_sciences on rank 0...
+100%|██████████| 102/102 [00:00<00:00, 1555.12it/s]
+INFO:lm_eval.api.task:Building contexts for global_mmlu_de_business on rank 0...
+100%|██████████| 58/58 [00:00<00:00, 1537.31it/s]
+INFO:lm_eval.api.task:Building contexts for global_mmlu_de_humanities on rank 0...
+100%|██████████| 102/102 [00:00<00:00, 1524.70it/s]
+INFO:lm_eval.api.task:Building contexts for global_mmlu_de_medical on rank 0...
+100%|██████████| 36/36 [00:00<00:00, 1528.72it/s]
+INFO:lm_eval.api.task:Building contexts for global_mmlu_de_other on rank 0...
+100%|██████████| 56/56 [00:00<00:00, 1556.05it/s]
+INFO:lm_eval.api.task:Building contexts for global_mmlu_de_stem on rank 0...
+100%|██████████| 46/46 [00:00<00:00, 1557.58it/s]
+INFO:lm_eval.api.task:Building contexts for global_mmlu_de_social_sciences on rank 0...
+100%|██████████| 102/102 [00:00<00:00, 1553.86it/s]
+INFO:lm_eval.api.task:Building contexts for global_mmlu_bn_business on rank 0...
+100%|██████████| 58/58 [00:00<00:00, 1560.72it/s]
+INFO:lm_eval.api.task:Building contexts for global_mmlu_bn_humanities on rank 0...
+100%|██████████| 102/102 [00:00<00:00, 1559.55it/s]
+INFO:lm_eval.api.task:Building contexts for global_mmlu_bn_medical on rank 0...
+100%|██████████| 36/36 [00:00<00:00, 1545.84it/s]
+INFO:lm_eval.api.task:Building contexts for global_mmlu_bn_other on rank 0...
+100%|██████████| 56/56 [00:00<00:00, 1550.08it/s]
+INFO:lm_eval.api.task:Building contexts for global_mmlu_bn_stem on rank 0...
+100%|██████████| 46/46 [00:00<00:00, 1566.06it/s]
+INFO:lm_eval.api.task:Building contexts for global_mmlu_bn_social_sciences on rank 0...
+100%|██████████| 102/102 [00:00<00:00, 1553.87it/s]
+INFO:lm_eval.evaluator:Running loglikelihood requests
+Running loglikelihood requests: 100%|██████████| 6400/6400 [01:10<00:00, 90.24it/s] 
+Passed argument batch_size = auto:1. Detecting largest batch size
+Determined largest batch size: 16
+INFO:lm_eval.loggers.evaluation_tracker:Saving results aggregated
+INFO:lm_eval.loggers.evaluation_tracker:Saving per-sample results for: global_mmlu_bn_business
+INFO:lm_eval.loggers.evaluation_tracker:Saving per-sample results for: global_mmlu_bn_humanities
+INFO:lm_eval.loggers.evaluation_tracker:Saving per-sample results for: global_mmlu_bn_medical
+INFO:lm_eval.loggers.evaluation_tracker:Saving per-sample results for: global_mmlu_bn_other
+INFO:lm_eval.loggers.evaluation_tracker:Saving per-sample results for: global_mmlu_bn_social_sciences
+INFO:lm_eval.loggers.evaluation_tracker:Saving per-sample results for: global_mmlu_bn_stem
+INFO:lm_eval.loggers.evaluation_tracker:Saving per-sample results for: global_mmlu_de_business
+INFO:lm_eval.loggers.evaluation_tracker:Saving per-sample results for: global_mmlu_de_humanities
+INFO:lm_eval.loggers.evaluation_tracker:Saving per-sample results for: global_mmlu_de_medical
+INFO:lm_eval.loggers.evaluation_tracker:Saving per-sample results for: global_mmlu_de_other
+INFO:lm_eval.loggers.evaluation_tracker:Saving per-sample results for: global_mmlu_de_social_sciences
+INFO:lm_eval.loggers.evaluation_tracker:Saving per-sample results for: global_mmlu_de_stem
+INFO:lm_eval.loggers.evaluation_tracker:Saving per-sample results for: global_mmlu_en_business
+INFO:lm_eval.loggers.evaluation_tracker:Saving per-sample results for: global_mmlu_en_humanities
+INFO:lm_eval.loggers.evaluation_tracker:Saving per-sample results for: global_mmlu_en_medical
+INFO:lm_eval.loggers.evaluation_tracker:Saving per-sample results for: global_mmlu_en_other
+INFO:lm_eval.loggers.evaluation_tracker:Saving per-sample results for: global_mmlu_en_social_sciences
+INFO:lm_eval.loggers.evaluation_tracker:Saving per-sample results for: global_mmlu_en_stem
+INFO:lm_eval.loggers.evaluation_tracker:Saving per-sample results for: global_mmlu_zh_business
+INFO:lm_eval.loggers.evaluation_tracker:Saving per-sample results for: global_mmlu_zh_humanities
+INFO:lm_eval.loggers.evaluation_tracker:Saving per-sample results for: global_mmlu_zh_medical
+INFO:lm_eval.loggers.evaluation_tracker:Saving per-sample results for: global_mmlu_zh_other
+INFO:lm_eval.loggers.evaluation_tracker:Saving per-sample results for: global_mmlu_zh_social_sciences
+INFO:lm_eval.loggers.evaluation_tracker:Saving per-sample results for: global_mmlu_zh_stem
+steered (pretrained=meta-llama/meta-llama-3-8b-instruct,steer_path=/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/2025_08_04.pt), gen_kwargs: (None), limit: None, num_fewshot: None, batch_size: auto (16)
+|              Tasks              |Version|Filter|n-shot|Metric|   |Value |   |Stderr|
+|---------------------------------|------:|------|-----:|------|---|-----:|---|-----:|
+|global_mmlu_bn                   |      0|none  |      |acc   |↑  |0.2750|±  |0.0224|
+| - global_mmlu_bn_business       |      0|none  |     0|acc   |↑  |0.3103|±  |0.0613|
+| - global_mmlu_bn_humanities     |      0|none  |     0|acc   |↑  |0.2843|±  |0.0449|
+| - global_mmlu_bn_medical        |      0|none  |     0|acc   |↑  |0.3889|±  |0.0824|
+| - global_mmlu_bn_other          |      0|none  |     0|acc   |↑  |0.2500|±  |0.0584|
+| - global_mmlu_bn_social_sciences|      0|none  |     0|acc   |↑  |0.2549|±  |0.0434|
+| - global_mmlu_bn_stem           |      0|none  |     0|acc   |↑  |0.1957|±  |0.0591|
+|global_mmlu_de                   |      0|none  |      |acc   |↑  |0.4325|±  |0.0243|
+| - global_mmlu_de_business       |      0|none  |     0|acc   |↑  |0.4655|±  |0.0661|
+| - global_mmlu_de_humanities     |      0|none  |     0|acc   |↑  |0.4706|±  |0.0497|
+| - global_mmlu_de_medical        |      0|none  |     0|acc   |↑  |0.4722|±  |0.0844|
+| - global_mmlu_de_other          |      0|none  |     0|acc   |↑  |0.6250|±  |0.0653|
+| - global_mmlu_de_social_sciences|      0|none  |     0|acc   |↑  |0.3529|±  |0.0476|
+| - global_mmlu_de_stem           |      0|none  |     0|acc   |↑  |0.2174|±  |0.0615|
+|global_mmlu_en                   |      0|none  |      |acc   |↑  |0.5875|±  |0.0241|
+| - global_mmlu_en_business       |      0|none  |     0|acc   |↑  |0.6379|±  |0.0637|
+| - global_mmlu_en_humanities     |      0|none  |     0|acc   |↑  |0.6569|±  |0.0472|
+| - global_mmlu_en_medical        |      0|none  |     0|acc   |↑  |0.6389|±  |0.0812|
+| - global_mmlu_en_other          |      0|none  |     0|acc   |↑  |0.7143|±  |0.0609|
+| - global_mmlu_en_social_sciences|      0|none  |     0|acc   |↑  |0.5196|±  |0.0497|
+| - global_mmlu_en_stem           |      0|none  |     0|acc   |↑  |0.3261|±  |0.0699|
+|global_mmlu_zh                   |      0|none  |      |acc   |↑  |0.4425|±  |0.0248|
+| - global_mmlu_zh_business       |      0|none  |     0|acc   |↑  |0.5000|±  |0.0662|
+| - global_mmlu_zh_humanities     |      0|none  |     0|acc   |↑  |0.4216|±  |0.0491|
+| - global_mmlu_zh_medical        |      0|none  |     0|acc   |↑  |0.3889|±  |0.0824|
+| - global_mmlu_zh_other          |      0|none  |     0|acc   |↑  |0.5536|±  |0.0670|
+| - global_mmlu_zh_social_sciences|      0|none  |     0|acc   |↑  |0.4412|±  |0.0494|
+| - global_mmlu_zh_stem           |      0|none  |     0|acc   |↑  |0.3261|±  |0.0699|
+
+|    Groups    |Version|Filter|n-shot|Metric|   |Value |   |Stderr|
+|--------------|------:|------|------|------|---|-----:|---|-----:|
+|global_mmlu_bn|      0|none  |      |acc   |↑  |0.2750|±  |0.0224|
+|global_mmlu_de|      0|none  |      |acc   |↑  |0.4325|±  |0.0243|
+|global_mmlu_en|      0|none  |      |acc   |↑  |0.5875|±  |0.0241|
+|global_mmlu_zh|      0|none  |      |acc   |↑  |0.4425|±  |0.0248|

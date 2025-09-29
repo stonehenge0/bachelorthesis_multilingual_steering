@@ -1,8 +1,7 @@
 .env/
 venv/
 __pycache__/
-venv/
-wandb/
 /src/modified_llm_eval_harness/
+/modified_llm_eval_harness/
 archive/
 slurm_files/

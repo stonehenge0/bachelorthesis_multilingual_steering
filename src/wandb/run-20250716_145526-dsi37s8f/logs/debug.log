@@ -1,0 +1,29 @@
+2025-07-16 14:55:26,880 INFO    MainThread:1328330 [wandb_setup.py:_flush():80] Current SDK version is 0.21.0
+2025-07-16 14:55:26,880 INFO    MainThread:1328330 [wandb_setup.py:_flush():80] Configure stats pid to 1328330
+2025-07-16 14:55:26,880 INFO    MainThread:1328330 [wandb_setup.py:_flush():80] Loading settings from /user/stein65/u14374/.config/wandb/settings
+2025-07-16 14:55:26,880 INFO    MainThread:1328330 [wandb_setup.py:_flush():80] Loading settings from /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/code/wandb/settings
+2025-07-16 14:55:26,880 INFO    MainThread:1328330 [wandb_setup.py:_flush():80] Loading settings from environment variables
+2025-07-16 14:55:26,881 INFO    MainThread:1328330 [wandb_init.py:setup_run_log_directory():703] Logging user logs to /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/code/wandb/run-20250716_145526-dsi37s8f/logs/debug.log
+2025-07-16 14:55:26,882 INFO    MainThread:1328330 [wandb_init.py:setup_run_log_directory():704] Logging internal logs to /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/code/wandb/run-20250716_145526-dsi37s8f/logs/debug-internal.log
+2025-07-16 14:55:26,882 INFO    MainThread:1328330 [wandb_init.py:init():830] calling init triggers
+2025-07-16 14:55:26,882 INFO    MainThread:1328330 [wandb_init.py:init():835] wandb.init called with sweep_config: {}
+config: {'_wandb': {}}
+2025-07-16 14:55:26,882 INFO    MainThread:1328330 [wandb_init.py:init():871] starting backend
+2025-07-16 14:55:27,111 INFO    MainThread:1328330 [wandb_init.py:init():874] sending inform_init request
+2025-07-16 14:55:27,144 INFO    MainThread:1328330 [wandb_init.py:init():882] backend started and connected
+2025-07-16 14:55:27,147 INFO    MainThread:1328330 [wandb_init.py:init():953] updated telemetry
+2025-07-16 14:55:27,264 INFO    MainThread:1328330 [wandb_init.py:init():977] communicating run to backend with 90.0 second timeout
+2025-07-16 14:55:27,762 INFO    MainThread:1328330 [wandb_init.py:init():1029] starting run threads in backend
+2025-07-16 14:55:27,925 INFO    MainThread:1328330 [wandb_run.py:_console_start():2458] atexit reg
+2025-07-16 14:55:27,925 INFO    MainThread:1328330 [wandb_run.py:_redirect():2306] redirect: wrap_raw
+2025-07-16 14:55:27,925 INFO    MainThread:1328330 [wandb_run.py:_redirect():2375] Wrapping output streams.
+2025-07-16 14:55:27,925 INFO    MainThread:1328330 [wandb_run.py:_redirect():2398] Redirects installed.
+2025-07-16 14:55:27,931 INFO    MainThread:1328330 [wandb_init.py:init():1075] run started, returning control to user process
+2025-07-16 15:09:38,928 INFO    MainThread:1328330 [wandb_run.py:_config_callback():1363] config_cb None None {'task_configs': {'multijail': {'task': 'multijail', 'tag': ['multilingual', 'safety', 'refusal', 'generation'], 'dataset_path': 'DAMO-NLP-SG/MultiJail', 'test_split': 'train', 'process_docs': 'def process_docs(dataset):\n    """Flatten the MultiJail dataset by extracting prompts from multiple language columns."""\n    language_columns = ["en", "zh", "it", "vi", "ar", "ko", "th", "bn", "sw", "jv"]\n\n    new_rows = []\n    for i, row in enumerate(dataset):\n        # row should be a dict\n        for lang in language_columns:\n            prompt = row.get(lang, "")\n            if not isinstance(prompt, str) or prompt.strip() == "":\n                continue\n            new_rows.append({"prompt": prompt, "id": f"{i}_{lang}"})\n\n    # Convert the list back to a Dataset object\n    dataset_out = Dataset.from_list(new_rows)\n    return dataset_out\n', 'doc_to_text': '{{prompt}}', 'doc_to_target': 'def doc_to_target(doc):\n    """Dummy target. Lm eval requires a target, but we won\'t use it since we are generating completions and not evaluating over the framework here."""\n    return ""\n', 'unsafe_code': False, 'description': '', 'target_delimiter': ' ', 'fewshot_delimiter': '\n\n', 'num_fewshot': 0, 'metric_list': [{'metric': 'bypass'}], 'output_type': 'generate_until', 'generation_kwargs': {'max_gen_toks': 100, 'temperature': 0.7, 'do_sample': True, 'until': ['\n\n']}, 'repeats': 1, 'should_decontaminate': False, 'metadata': {'pretrained': 'meta-llama/meta-llama-3-8b-instruct', 'steer_path': '/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/multijail/meta-llama__meta-llama-3-8b-instruct/multijail_steer_config_layer12_strength0.33.pt'}}}, 'cli_configs': {'model': 'steered', 'model_args': 'pretrained=meta-llama/meta-llama-3-8b-instruct,steer_path=/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/multijail/meta-llama__meta-llama-3-8b-instruct/multijail_steer_config_layer12_strength0.33.pt', 'model_num_parameters': 8030261248, 'model_dtype': 'torch.bfloat16', 'model_revision': 'main', 'model_sha': '8afb486c1db24fe5011ec46dfbe5b5dccdb575c2', 'batch_size': 'auto', 'batch_sizes': [], 'device': 'cuda:0', 'use_cache': None, 'limit': None, 'bootstrap_iters': 100000, 'gen_kwargs': None, 'random_seed': 0, 'numpy_seed': 1234, 'torch_seed': 1234, 'fewshot_seed': 1234}}
+2025-07-16 15:09:54,643 INFO    MainThread:1328330 [wandb_run.py:_finish():2224] finishing run stonehenge0-university-of-goettingen/bachelorarbeit/dsi37s8f
+2025-07-16 15:09:54,644 INFO    MainThread:1328330 [wandb_run.py:_atexit_cleanup():2423] got exitcode: 0
+2025-07-16 15:09:54,648 INFO    MainThread:1328330 [wandb_run.py:_restore():2405] restore
+2025-07-16 15:09:54,648 INFO    MainThread:1328330 [wandb_run.py:_restore():2411] restore done
+2025-07-16 15:10:25,766 INFO    MainThread:1328330 [wandb_run.py:_footer_history_summary_info():3903] rendering history
+2025-07-16 15:10:25,766 INFO    MainThread:1328330 [wandb_run.py:_footer_history_summary_info():3935] rendering summary
+2025-07-16 15:10:25,767 INFO    MainThread:1328330 [wandb_run.py:_footer_sync_info():3864] logging synced files

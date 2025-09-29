@@ -1,0 +1,1087 @@
+_wandb:
+    value:
+        cli_version: 0.21.0
+        e:
+            wmyqqs6bgsir630xor258pbq90noc2vy:
+                args:
+                    - --model
+                    - steered
+                    - --model_args
+                    - pretrained=meta-llama/meta-llama-3-8b-instruct,steer_path=/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt
+                    - --tasks
+                    - global_mmlu_en,global_mmlu_de,global_mmlu_zh,global_mmlu_bn
+                    - --output_path
+                    - /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/multijail_and_global_mmlu_meta-llama/meta-llama-3-8b-instruct_global_mmlu_L12_S1.0.jsonl
+                    - --device
+                    - cuda:0
+                    - --batch_size
+                    - auto
+                    - --seed
+                    - 1234,1234,1234
+                    - --log_samples
+                    - --wandb_args
+                    - project=bachelorarbeit
+                cpu_count: 64
+                cpu_count_logical: 128
+                cudaVersion: "12.4"
+                disk:
+                    /:
+                        total: "270465269760"
+                        used: "6576074752"
+                email: em.stein29@gmail.com
+                executable: /mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/bin/python3.9
+                git:
+                    commit: 9a0d5eda693922697ecdfb0304984c69bceb44e0
+                    remote: https://github.com/stonehenge0/bachelorthesis_multilingual_steering.git
+                gpu: NVIDIA A100-SXM4-80GB
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Ampere
+                      cudaCores: 6912
+                      memoryTotal: "85899345920"
+                      name: NVIDIA A100-SXM4-80GB
+                      uuid: GPU-031aa32a-3781-9174-901f-7a90917d9f39
+                host: ggpu138
+                memory:
+                    total: "540930543616"
+                os: Linux-4.18.0-553.54.1.el8_10.x86_64-x86_64-with-glibc2.28
+                program: /mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/bin/lm_eval
+                python: CPython 3.9.21
+                root: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/src
+                slurm:
+                    cluster_name: emmy
+                    conf: /opt/slurm/etc/slurm.conf
+                    cpus_on_node: "8"
+                    cpus_per_task: "8"
+                    export_env: none
+                    get_user_env: "1"
+                    gpus: A100:1
+                    gpus_on_node: "1"
+                    gtids: "0"
+                    job_account: ag_gipp
+                    job_cpus_per_node: "8"
+                    job_end_time: "1754516030"
+                    job_gid: "29900"
+                    job_gpus: "3"
+                    job_id: "10221132"
+                    job_name: all_tasks
+                    job_nodelist: ggpu138
+                    job_num_nodes: "1"
+                    job_partition: scc-gpu
+                    job_qos: normal
+                    job_start_time: "1754498029"
+                    job_uid: "848826"
+                    job_user: u14374
+                    jobid: "10221132"
+                    localid: "0"
+                    mem_per_node: "81920"
+                    mpi_type: pmi2
+                    nnodes: "1"
+                    nodeid: "0"
+                    nodelist: ggpu138
+                    noinfo: "0"
+                    oom_kill_step: "0"
+                    prio_process: "18"
+                    procid: "0"
+                    script_context: prolog_task
+                    stepmgr: ggpu138
+                    submit_dir: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/src
+                    submit_host: gwdu102
+                    task_pid: "437146"
+                    tasks_per_node: "1"
+                    topology_addr: gwdghpc.gretecore.grete3.ggpu138
+                    topology_addr_pattern: switch.switch.switch.node
+                    tres_per_task: cpu=8
+                startedAt: "2025-08-06T17:53:46.222887Z"
+                writerId: wmyqqs6bgsir630xor258pbq90noc2vy
+        m: []
+        python_version: 3.9.21
+        t:
+            "1":
+                - 1
+                - 5
+                - 11
+                - 41
+                - 49
+                - 51
+                - 53
+                - 71
+                - 98
+                - 100
+            "2":
+                - 1
+                - 5
+                - 11
+                - 41
+                - 49
+                - 51
+                - 53
+                - 71
+                - 98
+                - 100
+            "3":
+                - 2
+                - 62
+            "4": 3.9.21
+            "5": 0.21.0
+            "6": 4.53.1
+            "12": 0.21.0
+            "13": linux-x86_64
+cli_configs:
+    value:
+        batch_size: auto
+        batch_sizes:
+            - 16
+        bootstrap_iters: 100000
+        device: cuda:0
+        fewshot_seed: 1234
+        gen_kwargs: null
+        limit: null
+        model: steered
+        model_args: pretrained=meta-llama/meta-llama-3-8b-instruct,steer_path=/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt
+        model_dtype: torch.bfloat16
+        model_num_parameters: 8030261248
+        model_revision: main
+        model_sha: 8afb486c1db24fe5011ec46dfbe5b5dccdb575c2
+        numpy_seed: 1234
+        random_seed: 1234
+        torch_seed: 1234
+        use_cache: null
+task_configs:
+    value:
+        global_mmlu_bn_business:
+            dataset_name: bn
+            dataset_path: CohereForAI/Global-MMLU-Lite
+            description: ""
+            doc_to_choice:
+                - A
+                - B
+                - C
+                - D
+            doc_to_target: answer
+            doc_to_text: |-
+                {{question.strip()}}
+                A. {{option_a}}
+                B. {{option_b}}
+                C. {{option_c}}
+                D. {{option_d}}
+                Answer:
+            fewshot_config:
+                sampler: default
+            fewshot_delimiter: |4+
+
+            fewshot_split: dev
+            metadata:
+                pretrained: meta-llama/meta-llama-3-8b-instruct
+                steer_path: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt
+                version: 0
+            metric_list:
+                - aggregation: mean
+                  higher_is_better: true
+                  metric: acc
+            num_fewshot: 0
+            output_type: multiple_choice
+            process_docs: functools.partial(<function process_docs at 0x1522b03f3ca0>, category='Business')
+            repeats: 1
+            should_decontaminate: false
+            target_delimiter: ' '
+            task: global_mmlu_bn_business
+            test_split: test
+            unsafe_code: false
+        global_mmlu_bn_humanities:
+            dataset_name: bn
+            dataset_path: CohereForAI/Global-MMLU-Lite
+            description: ""
+            doc_to_choice:
+                - A
+                - B
+                - C
+                - D
+            doc_to_target: answer
+            doc_to_text: |-
+                {{question.strip()}}
+                A. {{option_a}}
+                B. {{option_b}}
+                C. {{option_c}}
+                D. {{option_d}}
+                Answer:
+            fewshot_config:
+                sampler: default
+            fewshot_delimiter: |4+
+
+            fewshot_split: dev
+            metadata:
+                pretrained: meta-llama/meta-llama-3-8b-instruct
+                steer_path: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt
+                version: 0
+            metric_list:
+                - aggregation: mean
+                  higher_is_better: true
+                  metric: acc
+            num_fewshot: 0
+            output_type: multiple_choice
+            process_docs: functools.partial(<function process_docs at 0x1522b04d8f70>, category='Humanities')
+            repeats: 1
+            should_decontaminate: false
+            target_delimiter: ' '
+            task: global_mmlu_bn_humanities
+            test_split: test
+            unsafe_code: false
+        global_mmlu_bn_medical:
+            dataset_name: bn
+            dataset_path: CohereForAI/Global-MMLU-Lite
+            description: ""
+            doc_to_choice:
+                - A
+                - B
+                - C
+                - D
+            doc_to_target: answer
+            doc_to_text: |-
+                {{question.strip()}}
+                A. {{option_a}}
+                B. {{option_b}}
+                C. {{option_c}}
+                D. {{option_d}}
+                Answer:
+            fewshot_config:
+                sampler: default
+            fewshot_delimiter: |4+
+
+            fewshot_split: dev
+            metadata:
+                pretrained: meta-llama/meta-llama-3-8b-instruct
+                steer_path: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt
+                version: 0
+            metric_list:
+                - aggregation: mean
+                  higher_is_better: true
+                  metric: acc
+            num_fewshot: 0
+            output_type: multiple_choice
+            process_docs: functools.partial(<function process_docs at 0x1522b04d83a0>, category='Medical')
+            repeats: 1
+            should_decontaminate: false
+            target_delimiter: ' '
+            task: global_mmlu_bn_medical
+            test_split: test
+            unsafe_code: false
+        global_mmlu_bn_other:
+            dataset_name: bn
+            dataset_path: CohereForAI/Global-MMLU-Lite
+            description: ""
+            doc_to_choice:
+                - A
+                - B
+                - C
+                - D
+            doc_to_target: answer
+            doc_to_text: |-
+                {{question.strip()}}
+                A. {{option_a}}
+                B. {{option_b}}
+                C. {{option_c}}
+                D. {{option_d}}
+                Answer:
+            fewshot_config:
+                sampler: default
+            fewshot_delimiter: |4+
+
+            fewshot_split: dev
+            metadata:
+                pretrained: meta-llama/meta-llama-3-8b-instruct
+                steer_path: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt
+                version: 0
+            metric_list:
+                - aggregation: mean
+                  higher_is_better: true
+                  metric: acc
+            num_fewshot: 0
+            output_type: multiple_choice
+            process_docs: functools.partial(<function process_docs at 0x1522c5a62700>, category='Other')
+            repeats: 1
+            should_decontaminate: false
+            target_delimiter: ' '
+            task: global_mmlu_bn_other
+            test_split: test
+            unsafe_code: false
+        global_mmlu_bn_social_sciences:
+            dataset_name: bn
+            dataset_path: CohereForAI/Global-MMLU-Lite
+            description: ""
+            doc_to_choice:
+                - A
+                - B
+                - C
+                - D
+            doc_to_target: answer
+            doc_to_text: |-
+                {{question.strip()}}
+                A. {{option_a}}
+                B. {{option_b}}
+                C. {{option_c}}
+                D. {{option_d}}
+                Answer:
+            fewshot_config:
+                sampler: default
+            fewshot_delimiter: |4+
+
+            fewshot_split: dev
+            metadata:
+                pretrained: meta-llama/meta-llama-3-8b-instruct
+                steer_path: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt
+                version: 0
+            metric_list:
+                - aggregation: mean
+                  higher_is_better: true
+                  metric: acc
+            num_fewshot: 0
+            output_type: multiple_choice
+            process_docs: functools.partial(<function process_docs at 0x1522bb473040>, category='Social Sciences')
+            repeats: 1
+            should_decontaminate: false
+            target_delimiter: ' '
+            task: global_mmlu_bn_social_sciences
+            test_split: test
+            unsafe_code: false
+        global_mmlu_bn_stem:
+            dataset_name: bn
+            dataset_path: CohereForAI/Global-MMLU-Lite
+            description: ""
+            doc_to_choice:
+                - A
+                - B
+                - C
+                - D
+            doc_to_target: answer
+            doc_to_text: |-
+                {{question.strip()}}
+                A. {{option_a}}
+                B. {{option_b}}
+                C. {{option_c}}
+                D. {{option_d}}
+                Answer:
+            fewshot_config:
+                sampler: default
+            fewshot_delimiter: |4+
+
+            fewshot_split: dev
+            metadata:
+                pretrained: meta-llama/meta-llama-3-8b-instruct
+                steer_path: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt
+                version: 0
+            metric_list:
+                - aggregation: mean
+                  higher_is_better: true
+                  metric: acc
+            num_fewshot: 0
+            output_type: multiple_choice
+            process_docs: functools.partial(<function process_docs at 0x1522c5a62f70>, category='STEM')
+            repeats: 1
+            should_decontaminate: false
+            target_delimiter: ' '
+            task: global_mmlu_bn_stem
+            test_split: test
+            unsafe_code: false
+        global_mmlu_de_business:
+            dataset_name: de
+            dataset_path: CohereForAI/Global-MMLU-Lite
+            description: ""
+            doc_to_choice:
+                - A
+                - B
+                - C
+                - D
+            doc_to_target: answer
+            doc_to_text: |-
+                {{question.strip()}}
+                A. {{option_a}}
+                B. {{option_b}}
+                C. {{option_c}}
+                D. {{option_d}}
+                Answer:
+            fewshot_config:
+                sampler: default
+            fewshot_delimiter: |4+
+
+            fewshot_split: dev
+            metadata:
+                pretrained: meta-llama/meta-llama-3-8b-instruct
+                steer_path: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt
+                version: 0
+            metric_list:
+                - aggregation: mean
+                  higher_is_better: true
+                  metric: acc
+            num_fewshot: 0
+            output_type: multiple_choice
+            process_docs: functools.partial(<function process_docs at 0x1522b02be310>, category='Business')
+            repeats: 1
+            should_decontaminate: false
+            target_delimiter: ' '
+            task: global_mmlu_de_business
+            test_split: test
+            unsafe_code: false
+        global_mmlu_de_humanities:
+            dataset_name: de
+            dataset_path: CohereForAI/Global-MMLU-Lite
+            description: ""
+            doc_to_choice:
+                - A
+                - B
+                - C
+                - D
+            doc_to_target: answer
+            doc_to_text: |-
+                {{question.strip()}}
+                A. {{option_a}}
+                B. {{option_b}}
+                C. {{option_c}}
+                D. {{option_d}}
+                Answer:
+            fewshot_config:
+                sampler: default
+            fewshot_delimiter: |4+
+
+            fewshot_split: dev
+            metadata:
+                pretrained: meta-llama/meta-llama-3-8b-instruct
+                steer_path: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt
+                version: 0
+            metric_list:
+                - aggregation: mean
+                  higher_is_better: true
+                  metric: acc
+            num_fewshot: 0
+            output_type: multiple_choice
+            process_docs: functools.partial(<function process_docs at 0x1522b02be4c0>, category='Humanities')
+            repeats: 1
+            should_decontaminate: false
+            target_delimiter: ' '
+            task: global_mmlu_de_humanities
+            test_split: test
+            unsafe_code: false
+        global_mmlu_de_medical:
+            dataset_name: de
+            dataset_path: CohereForAI/Global-MMLU-Lite
+            description: ""
+            doc_to_choice:
+                - A
+                - B
+                - C
+                - D
+            doc_to_target: answer
+            doc_to_text: |-
+                {{question.strip()}}
+                A. {{option_a}}
+                B. {{option_b}}
+                C. {{option_c}}
+                D. {{option_d}}
+                Answer:
+            fewshot_config:
+                sampler: default
+            fewshot_delimiter: |4+
+
+            fewshot_split: dev
+            metadata:
+                pretrained: meta-llama/meta-llama-3-8b-instruct
+                steer_path: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt
+                version: 0
+            metric_list:
+                - aggregation: mean
+                  higher_is_better: true
+                  metric: acc
+            num_fewshot: 0
+            output_type: multiple_choice
+            process_docs: functools.partial(<function process_docs at 0x1522b03f3790>, category='Medical')
+            repeats: 1
+            should_decontaminate: false
+            target_delimiter: ' '
+            task: global_mmlu_de_medical
+            test_split: test
+            unsafe_code: false
+        global_mmlu_de_other:
+            dataset_name: de
+            dataset_path: CohereForAI/Global-MMLU-Lite
+            description: ""
+            doc_to_choice:
+                - A
+                - B
+                - C
+                - D
+            doc_to_target: answer
+            doc_to_text: |-
+                {{question.strip()}}
+                A. {{option_a}}
+                B. {{option_b}}
+                C. {{option_c}}
+                D. {{option_d}}
+                Answer:
+            fewshot_config:
+                sampler: default
+            fewshot_delimiter: |4+
+
+            fewshot_split: dev
+            metadata:
+                pretrained: meta-llama/meta-llama-3-8b-instruct
+                steer_path: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt
+                version: 0
+            metric_list:
+                - aggregation: mean
+                  higher_is_better: true
+                  metric: acc
+            num_fewshot: 0
+            output_type: multiple_choice
+            process_docs: functools.partial(<function process_docs at 0x1522b02b0550>, category='Other')
+            repeats: 1
+            should_decontaminate: false
+            target_delimiter: ' '
+            task: global_mmlu_de_other
+            test_split: test
+            unsafe_code: false
+        global_mmlu_de_social_sciences:
+            dataset_name: de
+            dataset_path: CohereForAI/Global-MMLU-Lite
+            description: ""
+            doc_to_choice:
+                - A
+                - B
+                - C
+                - D
+            doc_to_target: answer
+            doc_to_text: |-
+                {{question.strip()}}
+                A. {{option_a}}
+                B. {{option_b}}
+                C. {{option_c}}
+                D. {{option_d}}
+                Answer:
+            fewshot_config:
+                sampler: default
+            fewshot_delimiter: |4+
+
+            fewshot_split: dev
+            metadata:
+                pretrained: meta-llama/meta-llama-3-8b-instruct
+                steer_path: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt
+                version: 0
+            metric_list:
+                - aggregation: mean
+                  higher_is_better: true
+                  metric: acc
+            num_fewshot: 0
+            output_type: multiple_choice
+            process_docs: functools.partial(<function process_docs at 0x1522b04d80d0>, category='Social Sciences')
+            repeats: 1
+            should_decontaminate: false
+            target_delimiter: ' '
+            task: global_mmlu_de_social_sciences
+            test_split: test
+            unsafe_code: false
+        global_mmlu_de_stem:
+            dataset_name: de
+            dataset_path: CohereForAI/Global-MMLU-Lite
+            description: ""
+            doc_to_choice:
+                - A
+                - B
+                - C
+                - D
+            doc_to_target: answer
+            doc_to_text: |-
+                {{question.strip()}}
+                A. {{option_a}}
+                B. {{option_b}}
+                C. {{option_c}}
+                D. {{option_d}}
+                Answer:
+            fewshot_config:
+                sampler: default
+            fewshot_delimiter: |4+
+
+            fewshot_split: dev
+            metadata:
+                pretrained: meta-llama/meta-llama-3-8b-instruct
+                steer_path: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt
+                version: 0
+            metric_list:
+                - aggregation: mean
+                  higher_is_better: true
+                  metric: acc
+            num_fewshot: 0
+            output_type: multiple_choice
+            process_docs: functools.partial(<function process_docs at 0x1522b03f2790>, category='STEM')
+            repeats: 1
+            should_decontaminate: false
+            target_delimiter: ' '
+            task: global_mmlu_de_stem
+            test_split: test
+            unsafe_code: false
+        global_mmlu_en_business:
+            dataset_name: en
+            dataset_path: CohereForAI/Global-MMLU-Lite
+            description: ""
+            doc_to_choice:
+                - A
+                - B
+                - C
+                - D
+            doc_to_target: answer
+            doc_to_text: |-
+                {{question.strip()}}
+                A. {{option_a}}
+                B. {{option_b}}
+                C. {{option_c}}
+                D. {{option_d}}
+                Answer:
+            fewshot_config:
+                sampler: default
+            fewshot_delimiter: |4+
+
+            fewshot_split: dev
+            metadata:
+                pretrained: meta-llama/meta-llama-3-8b-instruct
+                steer_path: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt
+                version: 0
+            metric_list:
+                - aggregation: mean
+                  higher_is_better: true
+                  metric: acc
+            num_fewshot: 0
+            output_type: multiple_choice
+            process_docs: functools.partial(<function process_docs at 0x1522b02beee0>, category='Business')
+            repeats: 1
+            should_decontaminate: false
+            target_delimiter: ' '
+            task: global_mmlu_en_business
+            test_split: test
+            unsafe_code: false
+        global_mmlu_en_humanities:
+            dataset_name: en
+            dataset_path: CohereForAI/Global-MMLU-Lite
+            description: ""
+            doc_to_choice:
+                - A
+                - B
+                - C
+                - D
+            doc_to_target: answer
+            doc_to_text: |-
+                {{question.strip()}}
+                A. {{option_a}}
+                B. {{option_b}}
+                C. {{option_c}}
+                D. {{option_d}}
+                Answer:
+            fewshot_config:
+                sampler: default
+            fewshot_delimiter: |4+
+
+            fewshot_split: dev
+            metadata:
+                pretrained: meta-llama/meta-llama-3-8b-instruct
+                steer_path: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt
+                version: 0
+            metric_list:
+                - aggregation: mean
+                  higher_is_better: true
+                  metric: acc
+            num_fewshot: 0
+            output_type: multiple_choice
+            process_docs: functools.partial(<function process_docs at 0x1522a0c78dc0>, category='Humanities')
+            repeats: 1
+            should_decontaminate: false
+            target_delimiter: ' '
+            task: global_mmlu_en_humanities
+            test_split: test
+            unsafe_code: false
+        global_mmlu_en_medical:
+            dataset_name: en
+            dataset_path: CohereForAI/Global-MMLU-Lite
+            description: ""
+            doc_to_choice:
+                - A
+                - B
+                - C
+                - D
+            doc_to_target: answer
+            doc_to_text: |-
+                {{question.strip()}}
+                A. {{option_a}}
+                B. {{option_b}}
+                C. {{option_c}}
+                D. {{option_d}}
+                Answer:
+            fewshot_config:
+                sampler: default
+            fewshot_delimiter: |4+
+
+            fewshot_split: dev
+            metadata:
+                pretrained: meta-llama/meta-llama-3-8b-instruct
+                steer_path: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt
+                version: 0
+            metric_list:
+                - aggregation: mean
+                  higher_is_better: true
+                  metric: acc
+            num_fewshot: 0
+            output_type: multiple_choice
+            process_docs: functools.partial(<function process_docs at 0x1522c59dbdc0>, category='Medical')
+            repeats: 1
+            should_decontaminate: false
+            target_delimiter: ' '
+            task: global_mmlu_en_medical
+            test_split: test
+            unsafe_code: false
+        global_mmlu_en_other:
+            dataset_name: en
+            dataset_path: CohereForAI/Global-MMLU-Lite
+            description: ""
+            doc_to_choice:
+                - A
+                - B
+                - C
+                - D
+            doc_to_target: answer
+            doc_to_text: |-
+                {{question.strip()}}
+                A. {{option_a}}
+                B. {{option_b}}
+                C. {{option_c}}
+                D. {{option_d}}
+                Answer:
+            fewshot_config:
+                sampler: default
+            fewshot_delimiter: |4+
+
+            fewshot_split: dev
+            metadata:
+                pretrained: meta-llama/meta-llama-3-8b-instruct
+                steer_path: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt
+                version: 0
+            metric_list:
+                - aggregation: mean
+                  higher_is_better: true
+                  metric: acc
+            num_fewshot: 0
+            output_type: multiple_choice
+            process_docs: functools.partial(<function process_docs at 0x1522b02b0820>, category='Other')
+            repeats: 1
+            should_decontaminate: false
+            target_delimiter: ' '
+            task: global_mmlu_en_other
+            test_split: test
+            unsafe_code: false
+        global_mmlu_en_social_sciences:
+            dataset_name: en
+            dataset_path: CohereForAI/Global-MMLU-Lite
+            description: ""
+            doc_to_choice:
+                - A
+                - B
+                - C
+                - D
+            doc_to_target: answer
+            doc_to_text: |-
+                {{question.strip()}}
+                A. {{option_a}}
+                B. {{option_b}}
+                C. {{option_c}}
+                D. {{option_d}}
+                Answer:
+            fewshot_config:
+                sampler: default
+            fewshot_delimiter: |4+
+
+            fewshot_split: dev
+            metadata:
+                pretrained: meta-llama/meta-llama-3-8b-instruct
+                steer_path: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt
+                version: 0
+            metric_list:
+                - aggregation: mean
+                  higher_is_better: true
+                  metric: acc
+            num_fewshot: 0
+            output_type: multiple_choice
+            process_docs: functools.partial(<function process_docs at 0x1522b04b0820>, category='Social Sciences')
+            repeats: 1
+            should_decontaminate: false
+            target_delimiter: ' '
+            task: global_mmlu_en_social_sciences
+            test_split: test
+            unsafe_code: false
+        global_mmlu_en_stem:
+            dataset_name: en
+            dataset_path: CohereForAI/Global-MMLU-Lite
+            description: ""
+            doc_to_choice:
+                - A
+                - B
+                - C
+                - D
+            doc_to_target: answer
+            doc_to_text: |-
+                {{question.strip()}}
+                A. {{option_a}}
+                B. {{option_b}}
+                C. {{option_c}}
+                D. {{option_d}}
+                Answer:
+            fewshot_config:
+                sampler: default
+            fewshot_delimiter: |4+
+
+            fewshot_split: dev
+            metadata:
+                pretrained: meta-llama/meta-llama-3-8b-instruct
+                steer_path: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt
+                version: 0
+            metric_list:
+                - aggregation: mean
+                  higher_is_better: true
+                  metric: acc
+            num_fewshot: 0
+            output_type: multiple_choice
+            process_docs: functools.partial(<function process_docs at 0x1522a0c78550>, category='STEM')
+            repeats: 1
+            should_decontaminate: false
+            target_delimiter: ' '
+            task: global_mmlu_en_stem
+            test_split: test
+            unsafe_code: false
+        global_mmlu_zh_business:
+            dataset_name: zh
+            dataset_path: CohereForAI/Global-MMLU-Lite
+            description: ""
+            doc_to_choice:
+                - A
+                - B
+                - C
+                - D
+            doc_to_target: answer
+            doc_to_text: |-
+                {{question.strip()}}
+                A. {{option_a}}
+                B. {{option_b}}
+                C. {{option_c}}
+                D. {{option_d}}
+                Answer:
+            fewshot_config:
+                sampler: default
+            fewshot_delimiter: |4+
+
+            fewshot_split: dev
+            metadata:
+                pretrained: meta-llama/meta-llama-3-8b-instruct
+                steer_path: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt
+                version: 0
+            metric_list:
+                - aggregation: mean
+                  higher_is_better: true
+                  metric: acc
+            num_fewshot: 0
+            output_type: multiple_choice
+            process_docs: functools.partial(<function process_docs at 0x1522a0b53160>, category='Business')
+            repeats: 1
+            should_decontaminate: false
+            target_delimiter: ' '
+            task: global_mmlu_zh_business
+            test_split: test
+            unsafe_code: false
+        global_mmlu_zh_humanities:
+            dataset_name: zh
+            dataset_path: CohereForAI/Global-MMLU-Lite
+            description: ""
+            doc_to_choice:
+                - A
+                - B
+                - C
+                - D
+            doc_to_target: answer
+            doc_to_text: |-
+                {{question.strip()}}
+                A. {{option_a}}
+                B. {{option_b}}
+                C. {{option_c}}
+                D. {{option_d}}
+                Answer:
+            fewshot_config:
+                sampler: default
+            fewshot_delimiter: |4+
+
+            fewshot_split: dev
+            metadata:
+                pretrained: meta-llama/meta-llama-3-8b-instruct
+                steer_path: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt
+                version: 0
+            metric_list:
+                - aggregation: mean
+                  higher_is_better: true
+                  metric: acc
+            num_fewshot: 0
+            output_type: multiple_choice
+            process_docs: functools.partial(<function process_docs at 0x1522b058b3a0>, category='Humanities')
+            repeats: 1
+            should_decontaminate: false
+            target_delimiter: ' '
+            task: global_mmlu_zh_humanities
+            test_split: test
+            unsafe_code: false
+        global_mmlu_zh_medical:
+            dataset_name: zh
+            dataset_path: CohereForAI/Global-MMLU-Lite
+            description: ""
+            doc_to_choice:
+                - A
+                - B
+                - C
+                - D
+            doc_to_target: answer
+            doc_to_text: |-
+                {{question.strip()}}
+                A. {{option_a}}
+                B. {{option_b}}
+                C. {{option_c}}
+                D. {{option_d}}
+                Answer:
+            fewshot_config:
+                sampler: default
+            fewshot_delimiter: |4+
+
+            fewshot_split: dev
+            metadata:
+                pretrained: meta-llama/meta-llama-3-8b-instruct
+                steer_path: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt
+                version: 0
+            metric_list:
+                - aggregation: mean
+                  higher_is_better: true
+                  metric: acc
+            num_fewshot: 0
+            output_type: multiple_choice
+            process_docs: functools.partial(<function process_docs at 0x1522b03f3b80>, category='Medical')
+            repeats: 1
+            should_decontaminate: false
+            target_delimiter: ' '
+            task: global_mmlu_zh_medical
+            test_split: test
+            unsafe_code: false
+        global_mmlu_zh_other:
+            dataset_name: zh
+            dataset_path: CohereForAI/Global-MMLU-Lite
+            description: ""
+            doc_to_choice:
+                - A
+                - B
+                - C
+                - D
+            doc_to_target: answer
+            doc_to_text: |-
+                {{question.strip()}}
+                A. {{option_a}}
+                B. {{option_b}}
+                C. {{option_c}}
+                D. {{option_d}}
+                Answer:
+            fewshot_config:
+                sampler: default
+            fewshot_delimiter: |4+
+
+            fewshot_split: dev
+            metadata:
+                pretrained: meta-llama/meta-llama-3-8b-instruct
+                steer_path: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt
+                version: 0
+            metric_list:
+                - aggregation: mean
+                  higher_is_better: true
+                  metric: acc
+            num_fewshot: 0
+            output_type: multiple_choice
+            process_docs: functools.partial(<function process_docs at 0x1522c5939160>, category='Other')
+            repeats: 1
+            should_decontaminate: false
+            target_delimiter: ' '
+            task: global_mmlu_zh_other
+            test_split: test
+            unsafe_code: false
+        global_mmlu_zh_social_sciences:
+            dataset_name: zh
+            dataset_path: CohereForAI/Global-MMLU-Lite
+            description: ""
+            doc_to_choice:
+                - A
+                - B
+                - C
+                - D
+            doc_to_target: answer
+            doc_to_text: |-
+                {{question.strip()}}
+                A. {{option_a}}
+                B. {{option_b}}
+                C. {{option_c}}
+                D. {{option_d}}
+                Answer:
+            fewshot_config:
+                sampler: default
+            fewshot_delimiter: |4+
+
+            fewshot_split: dev
+            metadata:
+                pretrained: meta-llama/meta-llama-3-8b-instruct
+                steer_path: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt
+                version: 0
+            metric_list:
+                - aggregation: mean
+                  higher_is_better: true
+                  metric: acc
+            num_fewshot: 0
+            output_type: multiple_choice
+            process_docs: functools.partial(<function process_docs at 0x1522b03f3ee0>, category='Social Sciences')
+            repeats: 1
+            should_decontaminate: false
+            target_delimiter: ' '
+            task: global_mmlu_zh_social_sciences
+            test_split: test
+            unsafe_code: false
+        global_mmlu_zh_stem:
+            dataset_name: zh
+            dataset_path: CohereForAI/Global-MMLU-Lite
+            description: ""
+            doc_to_choice:
+                - A
+                - B
+                - C
+                - D
+            doc_to_target: answer
+            doc_to_text: |-
+                {{question.strip()}}
+                A. {{option_a}}
+                B. {{option_b}}
+                C. {{option_c}}
+                D. {{option_d}}
+                Answer:
+            fewshot_config:
+                sampler: default
+            fewshot_delimiter: |4+
+
+            fewshot_split: dev
+            metadata:
+                pretrained: meta-llama/meta-llama-3-8b-instruct
+                steer_path: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/tmp/steer_config_multijail_and_global_mmlu.pt
+                version: 0
+            metric_list:
+                - aggregation: mean
+                  higher_is_better: true
+                  metric: acc
+            num_fewshot: 0
+            output_type: multiple_choice
+            process_docs: functools.partial(<function process_docs at 0x1522c594bf70>, category='STEM')
+            repeats: 1
+            should_decontaminate: false
+            target_delimiter: ' '
+            task: global_mmlu_zh_stem
+            test_split: test
+            unsafe_code: false

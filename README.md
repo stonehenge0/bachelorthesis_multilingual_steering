@@ -79,7 +79,7 @@ The script will prompt you for a HuggingFace token (required to access gated mod
  
 ### Example Usage
 ```bash
-python /code/lm_eval_steered_and_baseline_tasks.py \
+python code/run_pipeline.py \
   --model_path "meta-llama/Llama-3.1-8B-Instruct" \
   --steering_vector_path "/path/to/steering-vector.pt" \
   --steering_layer 11 \

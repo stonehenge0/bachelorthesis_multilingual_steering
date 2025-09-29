@@ -1,0 +1,13 @@
+{"time":"2025-08-04T17:41:22.662705326+02:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-08-04T17:41:22.995207356+02:00","level":"INFO","msg":"stream: created new stream","id":"gbii0fk6"}
+{"time":"2025-08-04T17:41:22.995231077+02:00","level":"INFO","msg":"stream: started","id":"gbii0fk6"}
+{"time":"2025-08-04T17:41:22.995295137+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"gbii0fk6"}
+{"time":"2025-08-04T17:41:22.995302327+02:00","level":"INFO","msg":"sender: started","stream_id":"gbii0fk6"}
+{"time":"2025-08-04T17:41:22.995315877+02:00","level":"INFO","msg":"handler: started","stream_id":"gbii0fk6"}
+{"time":"2025-08-04T17:45:35.53407809+02:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading artifact results","runtime_seconds":1.917374794},{"desc":"uploading artifact run-gbii0fk6-multijail_eval_results","runtime_seconds":1.6776296990000001},{"desc":"uploading artifact multijail","runtime_seconds":1.396790782}],"total_operations":3}}
+{"time":"2025-08-04T17:45:36.114439509+02:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-08-04T17:45:36.580659088+02:00","level":"INFO","msg":"stream: closing","id":"gbii0fk6"}
+{"time":"2025-08-04T17:45:36.580753449+02:00","level":"INFO","msg":"sender: closed","stream_id":"gbii0fk6"}
+{"time":"2025-08-04T17:45:36.582268063+02:00","level":"INFO","msg":"handler: closed","stream_id":"gbii0fk6"}
+{"time":"2025-08-04T17:45:36.582268463+02:00","level":"INFO","msg":"writer: Close: closed","stream_id":"gbii0fk6"}
+{"time":"2025-08-04T17:45:36.69186761+02:00","level":"INFO","msg":"stream: closed","id":"gbii0fk6"}

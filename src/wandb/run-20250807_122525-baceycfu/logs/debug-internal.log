@@ -1,0 +1,13 @@
+{"time":"2025-08-07T12:25:25.595594047+02:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-08-07T12:25:25.887738523+02:00","level":"INFO","msg":"stream: created new stream","id":"baceycfu"}
+{"time":"2025-08-07T12:25:25.887757303+02:00","level":"INFO","msg":"stream: started","id":"baceycfu"}
+{"time":"2025-08-07T12:25:25.887767973+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"baceycfu"}
+{"time":"2025-08-07T12:25:25.887779113+02:00","level":"INFO","msg":"sender: started","stream_id":"baceycfu"}
+{"time":"2025-08-07T12:25:25.887801793+02:00","level":"INFO","msg":"handler: started","stream_id":"baceycfu"}
+{"time":"2025-08-07T12:28:36.690120407+02:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading artifact results","runtime_seconds":1.751407505},{"desc":"uploading artifact run-baceycfu-multijail_eval_results","runtime_seconds":1.5406644109999998},{"desc":"uploading artifact multijail","runtime_seconds":1.265433449}],"total_operations":3}}
+{"time":"2025-08-07T12:28:37.405363032+02:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-08-07T12:28:37.835755909+02:00","level":"INFO","msg":"stream: closing","id":"baceycfu"}
+{"time":"2025-08-07T12:28:37.835767478+02:00","level":"INFO","msg":"handler: closed","stream_id":"baceycfu"}
+{"time":"2025-08-07T12:28:37.835780808+02:00","level":"INFO","msg":"sender: closed","stream_id":"baceycfu"}
+{"time":"2025-08-07T12:28:37.835773858+02:00","level":"INFO","msg":"writer: Close: closed","stream_id":"baceycfu"}
+{"time":"2025-08-07T12:28:37.855507792+02:00","level":"INFO","msg":"stream: closed","id":"baceycfu"}

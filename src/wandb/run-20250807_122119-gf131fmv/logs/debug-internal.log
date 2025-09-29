@@ -1,0 +1,13 @@
+{"time":"2025-08-07T12:21:20.94588696+02:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-08-07T12:21:21.350124628+02:00","level":"INFO","msg":"stream: created new stream","id":"gf131fmv"}
+{"time":"2025-08-07T12:21:21.350145098+02:00","level":"INFO","msg":"stream: started","id":"gf131fmv"}
+{"time":"2025-08-07T12:21:21.350155988+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"gf131fmv"}
+{"time":"2025-08-07T12:21:21.350165958+02:00","level":"INFO","msg":"sender: started","stream_id":"gf131fmv"}
+{"time":"2025-08-07T12:21:21.350184608+02:00","level":"INFO","msg":"handler: started","stream_id":"gf131fmv"}
+{"time":"2025-08-07T12:25:10.614200258+02:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading artifact run-gf131fmv-multijail_eval_results","runtime_seconds":1.783330536},{"desc":"uploading artifact multijail","runtime_seconds":1.5435274570000002}],"total_operations":2}}
+{"time":"2025-08-07T12:25:11.081250085+02:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-08-07T12:25:11.291096954+02:00","level":"INFO","msg":"stream: closing","id":"gf131fmv"}
+{"time":"2025-08-07T12:25:11.291105784+02:00","level":"INFO","msg":"handler: closed","stream_id":"gf131fmv"}
+{"time":"2025-08-07T12:25:11.291111134+02:00","level":"INFO","msg":"writer: Close: closed","stream_id":"gf131fmv"}
+{"time":"2025-08-07T12:25:11.291120304+02:00","level":"INFO","msg":"sender: closed","stream_id":"gf131fmv"}
+{"time":"2025-08-07T12:25:11.292564661+02:00","level":"INFO","msg":"stream: closed","id":"gf131fmv"}

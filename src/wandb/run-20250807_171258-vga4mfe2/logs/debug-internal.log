@@ -1,0 +1,13 @@
+{"time":"2025-08-07T17:12:58.983915476+02:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-08-07T17:12:59.282768277+02:00","level":"INFO","msg":"stream: created new stream","id":"vga4mfe2"}
+{"time":"2025-08-07T17:12:59.282794186+02:00","level":"INFO","msg":"stream: started","id":"vga4mfe2"}
+{"time":"2025-08-07T17:12:59.282824906+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"vga4mfe2"}
+{"time":"2025-08-07T17:12:59.282866306+02:00","level":"INFO","msg":"handler: started","stream_id":"vga4mfe2"}
+{"time":"2025-08-07T17:12:59.282882946+02:00","level":"INFO","msg":"sender: started","stream_id":"vga4mfe2"}
+{"time":"2025-08-07T18:06:00.030774997+02:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-08-07T18:06:00.422068382+02:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading summary, console lines 19-22","runtime_seconds":0.391209245}],"total_operations":1}}
+{"time":"2025-08-07T18:06:01.291966965+02:00","level":"INFO","msg":"stream: closing","id":"vga4mfe2"}
+{"time":"2025-08-07T18:06:01.291989414+02:00","level":"INFO","msg":"handler: closed","stream_id":"vga4mfe2"}
+{"time":"2025-08-07T18:06:01.292000874+02:00","level":"INFO","msg":"writer: Close: closed","stream_id":"vga4mfe2"}
+{"time":"2025-08-07T18:06:01.292035974+02:00","level":"INFO","msg":"sender: closed","stream_id":"vga4mfe2"}
+{"time":"2025-08-07T18:06:01.293714049+02:00","level":"INFO","msg":"stream: closed","id":"vga4mfe2"}

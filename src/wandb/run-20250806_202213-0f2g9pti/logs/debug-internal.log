@@ -1,0 +1,14 @@
+{"time":"2025-08-06T20:22:13.646886971+02:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-08-06T20:22:13.944913134+02:00","level":"INFO","msg":"stream: created new stream","id":"0f2g9pti"}
+{"time":"2025-08-06T20:22:13.944943714+02:00","level":"INFO","msg":"stream: started","id":"0f2g9pti"}
+{"time":"2025-08-06T20:22:13.944966934+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"0f2g9pti"}
+{"time":"2025-08-06T20:22:13.945000903+02:00","level":"INFO","msg":"handler: started","stream_id":"0f2g9pti"}
+{"time":"2025-08-06T20:22:13.945041443+02:00","level":"INFO","msg":"sender: started","stream_id":"0f2g9pti"}
+{"time":"2025-08-06T20:28:02.571661393+02:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading artifact run-0f2g9pti-evaluationeval_results-c3e373629d86260f8e4fb527ca7188d0","runtime_seconds":13.194700114}],"total_operations":1}}
+{"time":"2025-08-06T20:28:21.390716577+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": context deadline exceeded"}
+{"time":"2025-08-06T20:28:24.099644502+02:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-08-06T20:28:24.352717987+02:00","level":"INFO","msg":"stream: closing","id":"0f2g9pti"}
+{"time":"2025-08-06T20:28:24.352748167+02:00","level":"INFO","msg":"handler: closed","stream_id":"0f2g9pti"}
+{"time":"2025-08-06T20:28:24.352756476+02:00","level":"INFO","msg":"writer: Close: closed","stream_id":"0f2g9pti"}
+{"time":"2025-08-06T20:28:24.352764056+02:00","level":"INFO","msg":"sender: closed","stream_id":"0f2g9pti"}
+{"time":"2025-08-06T20:28:24.355413485+02:00","level":"INFO","msg":"stream: closed","id":"0f2g9pti"}

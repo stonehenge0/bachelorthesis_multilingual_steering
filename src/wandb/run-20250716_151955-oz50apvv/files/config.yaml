@@ -1,0 +1,205 @@
+_wandb:
+    value:
+        cli_version: 0.21.0
+        e:
+            fu0x8sh3nl4jt5ko7q09dodovzb43p1n:
+                args:
+                    - --model
+                    - steered
+                    - --model_args
+                    - pretrained=meta-llama/meta-llama-3-8b-instruct,steer_path=/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/multijail/meta-llama__meta-llama-3-8b-instruct/multijail_steer_config_layer12_strength1.0.pt
+                    - --tasks
+                    - multijail
+                    - --output_path
+                    - /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/multijail
+                    - --device
+                    - cuda:0
+                    - --batch_size
+                    - auto
+                    - --apply_chat_template
+                    - --seed
+                    - 0,1234,1234
+                    - --predict_only
+                    - --wandb_args
+                    - project=bachelorarbeit,name=steered_layer12_strength1.0
+                    - --log_samples
+                cpu_count: 64
+                cpu_count_logical: 128
+                cudaVersion: "12.4"
+                disk:
+                    /:
+                        total: "270465269760"
+                        used: "6699126784"
+                email: em.stein29@gmail.com
+                executable: /mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/bin/python3.9
+                git:
+                    commit: 5a96e015d6e4f221e1513e388cf6aa3cdeb52dcf
+                    remote: https://github.com/stonehenge0/bachelorthesis_multilingual_steering.git
+                gpu: NVIDIA A100-SXM4-80GB
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Ampere
+                      cudaCores: 6912
+                      memoryTotal: "85899345920"
+                      name: NVIDIA A100-SXM4-80GB
+                      uuid: GPU-d10c9669-72a9-44c4-b52f-ed8682e3c1d5
+                host: ggpu151
+                memory:
+                    total: "540930543616"
+                os: Linux-4.18.0-553.54.1.el8_10.x86_64-x86_64-with-glibc2.28
+                program: /mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/bin/lm_eval
+                python: CPython 3.9.21
+                root: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/code
+                slurm:
+                    cluster_name: emmy
+                    conf: /opt/slurm/etc/slurm.conf
+                    cpus_on_node: "8"
+                    cpus_per_task: "8"
+                    export_env: none
+                    get_user_env: "1"
+                    gpus: A100:1
+                    gpus_on_node: "1"
+                    gtids: "0"
+                    job_account: ag_gipp
+                    job_cpus_per_node: "8"
+                    job_end_time: "1752683464"
+                    job_gid: "29900"
+                    job_gpus: "3"
+                    job_id: "9807332"
+                    job_name: true_multijail
+                    job_nodelist: ggpu151
+                    job_num_nodes: "1"
+                    job_partition: scc-gpu
+                    job_qos: normal
+                    job_start_time: "1752669064"
+                    job_uid: "848826"
+                    job_user: u14374
+                    jobid: "9807332"
+                    localid: "0"
+                    mem_per_node: "51200"
+                    mpi_type: pmi2
+                    nnodes: "1"
+                    nodeid: "0"
+                    nodelist: ggpu151
+                    noinfo: "0"
+                    oom_kill_step: "0"
+                    prio_process: "0"
+                    procid: "0"
+                    script_context: prolog_task
+                    stepmgr: ggpu151
+                    submit_dir: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/code
+                    submit_host: gwdu102
+                    task_pid: "1325043"
+                    tasks_per_node: "1"
+                    topology_addr: gwdghpc.gretecore.grete4.ggpu151
+                    topology_addr_pattern: switch.switch.switch.node
+                    tres_per_task: cpu=8
+                startedAt: "2025-07-16T13:19:55.107855Z"
+                writerId: fu0x8sh3nl4jt5ko7q09dodovzb43p1n
+        m: []
+        python_version: 3.9.21
+        t:
+            "1":
+                - 1
+                - 5
+                - 11
+                - 41
+                - 49
+                - 51
+                - 53
+                - 71
+                - 98
+                - 100
+            "2":
+                - 1
+                - 5
+                - 11
+                - 41
+                - 49
+                - 51
+                - 53
+                - 71
+                - 98
+                - 100
+            "3":
+                - 2
+                - 13
+                - 62
+            "4": 3.9.21
+            "5": 0.21.0
+            "6": 4.53.1
+            "12": 0.21.0
+            "13": linux-x86_64
+cli_configs:
+    value:
+        batch_size: auto
+        batch_sizes: []
+        bootstrap_iters: 100000
+        device: cuda:0
+        fewshot_seed: 1234
+        gen_kwargs: null
+        limit: null
+        model: steered
+        model_args: pretrained=meta-llama/meta-llama-3-8b-instruct,steer_path=/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/multijail/meta-llama__meta-llama-3-8b-instruct/multijail_steer_config_layer12_strength1.0.pt
+        model_dtype: torch.bfloat16
+        model_num_parameters: 8030261248
+        model_revision: main
+        model_sha: 8afb486c1db24fe5011ec46dfbe5b5dccdb575c2
+        numpy_seed: 1234
+        random_seed: 0
+        torch_seed: 1234
+        use_cache: null
+task_configs:
+    value:
+        multijail:
+            dataset_path: DAMO-NLP-SG/MultiJail
+            description: ""
+            doc_to_target: |
+                def doc_to_target(doc):
+                    """Dummy target. Lm eval requires a target, but we won't use it since we are generating completions and not evaluating over the framework here."""
+                    return ""
+            doc_to_text: '{{prompt}}'
+            fewshot_delimiter: |4+
+
+            generation_kwargs:
+                do_sample: true
+                max_gen_toks: 100
+                temperature: 0.7
+                until:
+                    - |4+
+
+            metadata:
+                pretrained: meta-llama/meta-llama-3-8b-instruct
+                steer_path: /scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/results/multijail/meta-llama__meta-llama-3-8b-instruct/multijail_steer_config_layer12_strength1.0.pt
+            metric_list:
+                - metric: bypass
+            num_fewshot: 0
+            output_type: generate_until
+            process_docs: |
+                def process_docs(dataset):
+                    """Flatten the MultiJail dataset by extracting prompts from multiple language columns."""
+                    language_columns = ["en", "zh", "it", "vi", "ar", "ko", "th", "bn", "sw", "jv"]
+
+                    new_rows = []
+                    for i, row in enumerate(dataset):
+                        # row should be a dict
+                        for lang in language_columns:
+                            prompt = row.get(lang, "")
+                            if not isinstance(prompt, str) or prompt.strip() == "":
+                                continue
+                            new_rows.append({"prompt": prompt, "id": f"{i}_{lang}"})
+
+                    # Convert the list back to a Dataset object
+                    dataset_out = Dataset.from_list(new_rows)
+                    return dataset_out
+            repeats: 1
+            should_decontaminate: false
+            tag:
+                - multilingual
+                - safety
+                - refusal
+                - generation
+            target_delimiter: ' '
+            task: multijail
+            test_split: train
+            unsafe_code: false

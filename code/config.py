@@ -14,10 +14,10 @@ class Config:
     debug: bool = False
     device: str = "cuda:0"
 
-    #  outpath for pipe results in: pipeline/runs/{model_alias}
+    #  outpath for pipe results in: /runs/{model_alias}
     def artifact_path(self) -> str:
         return os.path.join(
-            os.path.dirname(os.path.realpath(__file__)),
+            os.path.dirname(os.path.dirname(os.path.realpath(__file__))),  # one parent up
             "runs",
             f"{self.model_alias}",
         )

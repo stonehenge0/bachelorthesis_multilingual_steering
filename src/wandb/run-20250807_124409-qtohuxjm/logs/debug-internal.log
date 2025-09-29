@@ -1,0 +1,16 @@
+{"time":"2025-08-07T12:44:10.367739964+02:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
+{"time":"2025-08-07T12:44:10.690536057+02:00","level":"INFO","msg":"stream: created new stream","id":"qtohuxjm"}
+{"time":"2025-08-07T12:44:10.690562467+02:00","level":"INFO","msg":"stream: started","id":"qtohuxjm"}
+{"time":"2025-08-07T12:44:10.690578897+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"qtohuxjm"}
+{"time":"2025-08-07T12:44:10.690593467+02:00","level":"INFO","msg":"sender: started","stream_id":"qtohuxjm"}
+{"time":"2025-08-07T12:44:10.690604887+02:00","level":"INFO","msg":"handler: started","stream_id":"qtohuxjm"}
+{"time":"2025-08-07T12:48:37.49546793+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/stonehenge0-university-of-goettingen/bachelorarbeit/qtohuxjm/file_stream\": dial tcp 35.186.228.49:443: connect: connection timed out"}
+{"time":"2025-08-07T14:03:51.287542278+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/stonehenge0-university-of-goettingen/bachelorarbeit/qtohuxjm/file_stream\": dial tcp 35.186.228.49:443: connect: connection timed out"}
+{"time":"2025-08-07T14:16:37.239527679+02:00","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/files/stonehenge0-university-of-goettingen/bachelorarbeit/qtohuxjm/file_stream\": dial tcp 35.186.228.49:443: connect: connection timed out"}
+{"time":"2025-08-07T15:05:58.81624665+02:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-08-07T15:05:59.015967139+02:00","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading summary, console lines 20-23","runtime_seconds":0.19956138}],"total_operations":1}}
+{"time":"2025-08-07T15:05:59.041655883+02:00","level":"INFO","msg":"stream: closing","id":"qtohuxjm"}
+{"time":"2025-08-07T15:05:59.041680483+02:00","level":"INFO","msg":"handler: closed","stream_id":"qtohuxjm"}
+{"time":"2025-08-07T15:05:59.041692783+02:00","level":"INFO","msg":"writer: Close: closed","stream_id":"qtohuxjm"}
+{"time":"2025-08-07T15:05:59.041731343+02:00","level":"INFO","msg":"sender: closed","stream_id":"qtohuxjm"}
+{"time":"2025-08-07T15:05:59.044628443+02:00","level":"INFO","msg":"stream: closed","id":"qtohuxjm"}
