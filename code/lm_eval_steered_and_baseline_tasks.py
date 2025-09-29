@@ -29,7 +29,7 @@ from copy import deepcopy
 
 import torch
 
-from .utils import seed_everything, create_or_ensure_output_path
+from utils import seed_everything, create_or_ensure_output_path
 
 
 @dataclass
@@ -219,10 +219,8 @@ def lm_eval_steered_and_baseline_tasks(
     STEERING_STRENGTHS,
     MODEL_ALIAS,
     MODEL_PATH,
-    STEER_TYPE,
     STEER_VECTOR_PATH,
     STEER_LAYER,
-    TOKEN_POS,
     DEVICE,
     DEBUG,
     ARTIFACT_PATH,

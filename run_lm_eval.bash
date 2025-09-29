@@ -1,5 +1,5 @@
 #! /bin/bash
-#SBATCH --job-name=greedy_llama
+#SBATCH --job-name=debög
 #SBATCH -c 8 
 #SBATCH -p scc-gpu 
 #SBATCH -t 6:00:00 
@@ -18,7 +18,7 @@ echo "Current node: ${SLURM_NODELIST}"
 
 # Python and torch info. Uncomment for debugging
 python --version
-# python -m torch.utils.collect_env 2> /dev/null
+python -m torch.utils.collect_env 2> /dev/null
 
 # Print out some git info.
 module load git
@@ -34,12 +34,13 @@ echo "Activated Conda environment: $CONDA_DEFAULT_ENV"
 export PYTHONPATH=/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering:$PYTHONPATH
 
 # Run script
-python code/carefully_refactored_lm_eval.py\
+python code/run_pipeline.py\
   --model_path "meta-llama/Llama-3.2-8B-Instruct" \
   --steering_vector_path "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/data/steer_data_Llama-3.1-8B-Instruct/direction.pt" \
   --steering_layer 11 \
   --steering_strengths 1.0 \
-  --device "cuda:0"
+  --device "cuda:0" \
+  --debug
 
 # Scan HF cache
 echo "HF cache:"

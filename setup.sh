@@ -72,12 +72,15 @@ setup_eval_harness() {
     pip install -e modified_llm_eval_harness
 }
 
+
 # ------------------------
 # Main script execution
 # ------------------------
 
+# Conda and setup
 check_conda_installed
 setup_env
+setup_hf
 
 # Initialize conda for current shell
 eval "$(conda shell.bash hook)"
@@ -85,9 +88,6 @@ conda activate $ENV_NAME
 
 echo "Installing packages from environment.yml..."
 conda env update -n $ENV_NAME -f environment.yml --prune
-
-# Hugging Face login
-setup_hf
 
 # Install eval harness
 setup_eval_harness
