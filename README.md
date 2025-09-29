@@ -81,13 +81,13 @@ The main script is '''lm_eval_steered_and_baseline_tasks.py'''. You can set the 
 ```bash
 python /code/lm_eval_steered_and_baseline_tasks.py \
   --model_path "meta-llama/Llama-3.1-8B-Instruct" \
-  --steering_vector_path "/path/to/steering-vector.pt" \
+  --steering_vector_path "PATH/TO/STEERING/VECTOR.PT" \
   --steering_layer 11 \
   --steering_strengths 0.33 1.0 \
   --device "cuda:0" \
 ```
 
-> You will need access to an A100 with 40GB VRAM or comparable harware to run our scripts. This depends on the model size you want to run though, larger model (>14B) might require more.
+> You will need access to an A100 with 40GB VRAM or comparable harware to run our scripts. This depends on the model size you want to run though, larger models (>14B) might require more.
 
 ## Curious?
 - **What else does your Lab research?** More on AI Safety, Plagiarism, AI Agents at [GippLab](https://gipplab.uni-goettingen.de)       
