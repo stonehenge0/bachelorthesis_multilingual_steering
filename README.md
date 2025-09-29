@@ -50,16 +50,6 @@ Moreover, we are the first to extend the analysis of over-refusal of benign prom
 4. **Languages Covered**  
    - Core: English, Chinese, Italian, Arabic, Korean.  
    - Additional: Vietnamese, Thai, Bengali, Swahili, Javanese.  
-
----
-
-## Technical Setup
-
-- **Base Model:** Llama-3.1-8B-Instruct  
-- **Evaluation Harness:** [lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness) with custom tasks for MultiJail and OR-Bench  
-- **Compute:** Single NVIDIA A100 GPU 40GB
-- **Translation Model:** [X-ALMA](https://huggingface.co/x-alma), used for preparing multilingual datasets  
-
 ---
 
 ## Setup
@@ -96,6 +86,8 @@ python /code/lm_eval_steered_and_baseline_tasks.py \
   --steering_strengths 0.33 1.0 \
   --device "cuda:0" \
 ```
+
+> You will need access to an A100 with 40GB VRAM or comparable harware to run our scripts. This depends on the model size you want to run though, larger model (>14B) might require more.
 
 ## Curious?
 - **What else does your Lab research?** More on AI Safety, Plagiarism, AI Agents at [GippLab](https://gipplab.uni-goettingen.de)       
