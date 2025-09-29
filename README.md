@@ -60,7 +60,9 @@ cd safety_steering
 bash setup.sh
 ```
 
-The script will prompt you for a HuggingFace token (required to access gated models). It will then set up a Conda environment, install the required packages. For evaluation we use a modified_lm_eval_harness. It is exactly the same as the [original](https://github.com/EleutherAI/lm-evaluation-harness), but with two added tasks (MultiJail and OR-Bench).
+The script will prompt you for a HuggingFace token (required to access gated models). It will then set up a Conda environment and install all required packages.
+
+It also installs modified_lm_eval_harness for evaluation. It is exactly the same as the [original](https://github.com/EleutherAI/lm-evaluation-harness), but with two added tasks (MultiJail and OR-Bench).
 
 > The script is primarily inteded for setup on an HPC cluster, but you can use environment.yaml to set up wherever you like. 
  
