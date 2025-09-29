@@ -6,7 +6,7 @@
 
 This repository contains code and experiments for improving **LLM safety across languages** using steering vectors.  
 
-Current state-of-the-art safety methods often perform well in English but fail to generalize to other languages. For example if you ask a model to build a bomb in English it will refuse to answer. If you ask the exact same question in Bengali however, it might answer you. Unsafety rates are up to 8 times higher for low-resource languages than for English. This is a problem!
+Current state-of-the-art safety methods often perform well in English but fail to generalize to other languages.
 
 Our project explores a lightweight and scalable approach: deriving **refusal steering vectors** from contrastive prompts (harmful vs. harmless) and applying them during inference to encourage safer model behavior across multiple languages.  
 
