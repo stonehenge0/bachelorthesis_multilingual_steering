@@ -1,13 +1,17 @@
 #! /bin/bash
-#SBATCH --job-name=qwen_judge_t0
+#SBATCH --job-name=proxy_2days_qwen3.5_judget0
 #SBATCH -c 8 #
 #SBATCH --mem 40G  
 #SBATCH -p scc-gpu 
-#SBATCH -t 06:00:00 
+#SBATCH -t 47:00:00 
 #SBATCH -G A100:1 
-#SBATCH --constraint=inet
 #SBATCH --output=./slurm_files/slurm-%x-%j.out     
-#SBATCH --error=./slurm_files/slurm-%x-%j.err      
+#SBATCH --error=./slurm_files/slurm-%x-%j.err 
+
+# GWDG changed network setup, so need to set here 
+export HTTP_PROXY="http://www-cache.gwdg.de:3128"
+export HTTPS_PROXY="http://www-cache.gwdg.de:3128"
+
 
 # Printing out some info on filepaths.
 echo "Submitting job with sbatch from directory: ${SLURM_SUBMIT_DIR}"
@@ -37,11 +41,11 @@ echo "Activated Conda environment: $CONDA_DEFAULT_ENV"
 
 python pipeline/subfns/llm_judge.py \
  --model "Qwen/Qwen3-14B" \
- --out_path "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/t0_judge_multijail" \
+ --out_path "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/new_runs_27ter_2days" \
  --files_to_process_dict '{
-  "multijail_baseline": "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-09-25T22-33-47.630820.jsonl",
-  "multijail_L11_S0.33": "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail_L11_S0.33/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-09-25T23-48-46.673186.jsonl",
-  "multijail_L11_S0.66": "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail_L11_S0.66/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-09-26T01-16-10.055377.jsonl",
-  "multijail_L11_S1.0": "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/runs/Llama-3.1-8B-Instruct_multijail_L11_S1.0/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-09-26T03-11-53.025882.jsonl"
+  "multijail_baseline": "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/Llama-8B-t0.7/Llama-3.1-8B-Instruct_multijail/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-08-27T18-43-45.557071.jsonl",
+  "multijail_L11_S0.33": "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/Llama-8B-t0.7/Llama-3.1-8B-Instruct_multijail_L11_S0.33/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-08-27T19-49-04.453854.jsonl",
+  "multijail_L11_S0.66": "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/Llama-8B-t0.7/Llama-3.1-8B-Instruct_multijail_L11_S0.66/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-08-27T20-38-10.344474.jsonl",
+  "multijail_L11_S1.0": "/scratch1/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/Llama-8B-t0.7/Llama-3.1-8B-Instruct_multijail_L11_S1.0/meta-llama__Llama-3.1-8B-Instruct/samples_multijail_2025-08-27T21-28-38.452631.jsonl"
 }'
 

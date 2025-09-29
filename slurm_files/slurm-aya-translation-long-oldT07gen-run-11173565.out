@@ -1,0 +1,25 @@
+================================================================================
+JobID = 11173565
+User = u14374, Account = ag_gipp
+Partition = scc-gpu, Nodelist = ggpu139
+================================================================================
+Submitting job with sbatch from directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering
+Home directory: /user/stein65/u14374
+Working directory: /scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering
+Current node: ggpu139
+Python 3.12.8
+
+Current Branch: main
+Latest Commit: 9dc15e4
+Uncommitted Changes: 10
+
+Activated Conda environment: modified_lm_eval_env
+Loading model CohereLabs/aya-101 and tokenizer...
+============ Job Information ===================================================
+Submitted: 2025-09-27T10:13:27
+Started: 2025-09-27T10:13:28
+Ended: 2025-09-27T18:13:39
+Elapsed: 481 min, Limit: 480 min, Difference: -1 min
+CPUs: 8, Nodes: 1
+Estimated Consumption: 1202.50 core-hours
+================================================================================

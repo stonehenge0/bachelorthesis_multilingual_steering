@@ -235,10 +235,7 @@ if __name__ == "__main__":
         df = read_in_jsonl_to_df(filepath)
 
         # 2. Setup generators for batches
-        ### Not sure if we should keep it at also translating the prompts.
-        #  It's a nice quality check and does make things easier, but also
-        # just like takes more time.
-        generator_prompts = batch_generator(
+        generator_prompts = batch_generator(  # We also translate prompts for insights into translation quality.
             df["prompt"], tokenizer=tokenizer, batch_size=BATCH_SIZE
         )
         generator_answers = batch_generator(

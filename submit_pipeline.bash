@@ -2,7 +2,7 @@
 #SBATCH --job-name=greedy_llama
 #SBATCH -c 8 
 #SBATCH -p scc-gpu 
-#SBATCH -t 20:00:00 
+#SBATCH -t 6:00:00 
 #SBATCH -G A100
 #SBATCH --constraint=inet
 #SBATCH --output=./slurm_files/slurm-%x-%j.out     

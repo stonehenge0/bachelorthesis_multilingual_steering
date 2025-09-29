@@ -1,0 +1,83 @@
+Loading checkpoint shards:   0%|          | 0/8 [00:00<?, ?it/s]Loading checkpoint shards:  12%|█▎        | 1/8 [00:03<00:23,  3.34s/it]Loading checkpoint shards:  25%|██▌       | 2/8 [00:06<00:20,  3.38s/it]Loading checkpoint shards:  38%|███▊      | 3/8 [00:10<00:17,  3.41s/it][2025-09-27T18:58:06.242] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T18:58:06.242] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T18:59:36.239] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T18:59:36.239] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:01:06.241] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:01:06.241] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:02:36.240] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:02:36.240] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:04:06.240] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:04:06.240] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:05:36.242] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:05:36.242] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:07:06.240] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:07:06.240] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:08:36.240] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:08:36.240] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:10:06.243] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:10:06.243] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:11:36.239] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:11:36.239] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:13:06.240] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:13:06.240] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:14:36.242] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:14:36.242] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:16:06.238] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:16:06.238] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:17:36.240] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:17:36.240] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:19:06.241] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:19:06.241] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:20:36.241] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:20:36.241] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:22:06.241] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:22:06.241] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:23:36.241] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:23:36.241] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:25:06.240] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:25:06.240] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:26:36.239] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:26:36.239] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:28:06.240] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:28:06.241] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:29:36.240] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:29:36.240] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:31:06.241] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:31:06.241] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:32:36.238] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:32:36.238] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:34:06.239] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:34:06.239] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:35:36.240] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:35:36.240] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:37:06.241] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:37:06.241] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:38:36.242] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:38:36.242] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:40:06.241] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:40:06.242] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:41:36.240] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:41:36.240] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:43:06.240] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:43:06.240] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:44:36.240] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:44:36.240] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:46:06.240] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:46:06.240] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:47:36.240] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:47:36.240] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:49:06.242] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:49:06.242] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:50:36.238] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:50:36.238] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:52:06.240] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:52:06.240] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:53:36.239] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:53:36.239] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:55:06.240] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:55:06.240] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:56:36.241] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-27T19:56:36.241] error: _get_joules_task: can't get info from slurmd
+[2025-09-27T19:58:06.239] error: slurm_get_node_energy: Socket timed out on send/recv operation
+[2025-09-29T09:54:47.618] error: _get_joules_task: can't get info from slurmd
+[2025-09-29T09:54:47.760] error: *** JOB 11178171 ON ggpu139 CANCELLED AT 2025-09-29T09:54:47 DUE TO TIME LIMIT ***

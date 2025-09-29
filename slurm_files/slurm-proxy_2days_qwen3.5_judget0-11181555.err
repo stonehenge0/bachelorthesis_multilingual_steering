@@ -1,0 +1,67 @@
+Traceback (most recent call last):
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/urllib3/connection.py", line 198, in _new_conn
+    sock = connection.create_connection(
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/urllib3/util/connection.py", line 85, in create_connection
+    raise err
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/urllib3/util/connection.py", line 73, in create_connection
+    sock.connect(sa)
+TimeoutError: [Errno 110] Connection timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/urllib3/connectionpool.py", line 773, in urlopen
+    self._prepare_proxy(conn)
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/urllib3/connectionpool.py", line 1042, in _prepare_proxy
+    conn.connect()
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/urllib3/connection.py", line 753, in connect
+    self.sock = sock = self._new_conn()
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/urllib3/connection.py", line 213, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x146fc1b895e0>: Failed to establish a new connection: [Errno 110] Connection timed out
+
+The above exception was the direct cause of the following exception:
+
+urllib3.exceptions.ProxyError: ('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x146fc1b895e0>: Failed to establish a new connection: [Errno 110] Connection timed out'))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/urllib3/connectionpool.py", line 841, in urlopen
+    retries = retries.increment(
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/urllib3/util/retry.py", line 519, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /api/models/Qwen/Qwen3-14B/tree/main/additional_chat_templates?recursive=False&expand=False (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x146fc1b895e0>: Failed to establish a new connection: [Errno 110] Connection timed out')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/subfns/llm_judge.py", line 183, in <module>
+    tokenizer, model = load_model(args.model)
+  File "/scratch-scc/users/u14374/bachelorarbeit/bachelorthesis_multilingual_steering/pipeline/subfns/llm_judge.py", line 33, in load_model
+    tokenizer = AutoTokenizer.from_pretrained(hf_path, padding_side="left")
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/transformers/models/auto/tokenization_auto.py", line 1049, in from_pretrained
+    return tokenizer_class.from_pretrained(pretrained_model_name_or_path, *inputs, **kwargs)
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/transformers/tokenization_utils_base.py", line 1957, in from_pretrained
+    for template in list_repo_templates(
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/transformers/utils/hub.py", line 161, in list_repo_templates
+    return [
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/transformers/utils/hub.py", line 161, in <listcomp>
+    return [
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/huggingface_hub/hf_api.py", line 3171, in list_repo_tree
+    for path_info in paginate(path=tree_url, headers=headers, params={"recursive": recursive, "expand": expand}):
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/huggingface_hub/utils/_pagination.py", line 36, in paginate
+    r = session.get(path, params=params, headers=headers)
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/requests/sessions.py", line 602, in get
+    return self.request("GET", url, **kwargs)
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/huggingface_hub/utils/_http.py", line 96, in send
+    return super().send(request, *args, **kwargs)
+  File "/mnt/vast-standard/home/stein65/u14374/miniforge3/envs/modified_lm_eval_env/lib/python3.9/site-packages/requests/adapters.py", line 694, in send
+    raise ProxyError(e, request=request)
+requests.exceptions.ProxyError: (MaxRetryError("HTTPSConnectionPool(host='huggingface.co', port=443): Max retries exceeded with url: /api/models/Qwen/Qwen3-14B/tree/main/additional_chat_templates?recursive=False&expand=False (Caused by ProxyError('Unable to connect to proxy', NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x146fc1b895e0>: Failed to establish a new connection: [Errno 110] Connection timed out')))"), '(Request ID: f3cb0779-31d2-452e-8e65-00e1980bf456)')
