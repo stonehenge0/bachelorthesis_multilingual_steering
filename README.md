@@ -67,7 +67,7 @@ It also installs modified_lm_eval_harness for evaluation. It is exactly the same
 > The script is primarily inteded for setup on an HPC cluster, but you can use environment.yaml to set up wherever you like. 
  
  ## Run main script
-The main script is '''lm_eval_steered_and_baseline_tasks.py'''. You can set the following parameters:
+The main script is ```lm_eval_steered_and_baseline_tasks.py```. You can set the following parameters:
  
  | Flag | Type | Required | Default | Description | 
  |------|------|----------|---------|-------------|
@@ -77,9 +77,9 @@ The main script is '''lm_eval_steered_and_baseline_tasks.py'''. You can set the 
  | --steering_strengths | float(s) | Yes | - | Steering strengths to use, separated by spaces (e.g., 0.33 0.66 1.0) | 
  | --device | string | No | cuda:0 | Device to use for computation (e.g., "cuda:0", "cpu") | 
  | --debug | flag | No | False | Run on a subsample of datasets and tasks for testing | 
- 
- 
-### Example Usage
+
+**Example Usage**      
+The script is called over ```run_pipeline.py```
 ```bash
 python code/run_pipeline.py \
   --model_path "meta-llama/Llama-3.1-8B-Instruct" \
@@ -88,10 +88,32 @@ python code/run_pipeline.py \
   --steering_strengths 0.33 1.0 \
   --device "cuda:0" \
 ```
-
 > You will need access to an A100 with 40GB VRAM or comparable harware to run our scripts. This depends on the model size you want to run though, larger models (>14B) might require more.
+
+ 
+We provide steering vectors for Llama3.1-8B-Instruct, but if you want to extract your own steering vectors for another model this is done over Andy Arditi's repository [here](https://github.com/andyrdt/refusal_direction). 
+
+```bash
+git clone https://github.com/andyrdt/refusal_direction.git
+cd refusal_direction
+source setup.sh
+```
+Extract steering vectors for a given model with:
+```bash
+python3 -m pipeline.run_pipeline --model_path {model_path}
+```
+
+
 
 ## Curious?
 - **Where can I read the full thesis?** [Right here](2025-09-29-Emma-Stein-BA-thesis.pdf)
 - **What else does your Lab research?** More on AI Safety, Plagiarism, AI Agents at [GippLab](https://gipplab.uni-goettingen.de)       
-- **How can I contact you?** ```em dot stein29 at gmail dot com```       
+- **How can I contact you?** ```em dot stein29 at gmail dot com```
+
+## References
+- [Refusal direction](https://arxiv.org/abs/2406.11717)
+- [Global MMLU](https://aclanthology.org/2025.acl-long.919)
+- [OR-Bench](https://arxiv.org/abs/2405.20947)
+- [Multilingual Safety Gap & MultiJail](https://openreview.net/pdf?id=vESNKdEMGp)
+
+> Many more in the [thesis](2025-09-29-Emma-Stein-BA-thesis.pdf).
