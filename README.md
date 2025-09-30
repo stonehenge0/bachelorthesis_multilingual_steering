@@ -92,6 +92,6 @@ python code/run_pipeline.py \
 > You will need access to an A100 with 40GB VRAM or comparable harware to run our scripts. This depends on the model size you want to run though, larger models (>14B) might require more.
 
 ## Curious?
-- **Where can I read the full thesis?** [Right here](safety_steering)
+- **Where can I read the full thesis?** [Right here](2025-09-29-Emma-Stein-BA-thesis.pdf)
 - **What else does your Lab research?** More on AI Safety, Plagiarism, AI Agents at [GippLab](https://gipplab.uni-goettingen.de)       
 - **How can I contact you?** ```em dot stein29 at gmail dot com```       
