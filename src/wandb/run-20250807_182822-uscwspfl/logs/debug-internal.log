@@ -1,6 +1,0 @@
-{"time":"2025-08-07T18:28:22.917835732+02:00","level":"INFO","msg":"stream: starting","core version":"0.21.0"}
-{"time":"2025-08-07T18:28:23.212670225+02:00","level":"INFO","msg":"stream: created new stream","id":"uscwspfl"}
-{"time":"2025-08-07T18:28:23.212691805+02:00","level":"INFO","msg":"stream: started","id":"uscwspfl"}
-{"time":"2025-08-07T18:28:23.212708835+02:00","level":"INFO","msg":"writer: Do: started","stream_id":"uscwspfl"}
-{"time":"2025-08-07T18:28:23.212718795+02:00","level":"INFO","msg":"sender: started","stream_id":"uscwspfl"}
-{"time":"2025-08-07T18:28:23.212742215+02:00","level":"INFO","msg":"handler: started","stream_id":"uscwspfl"}

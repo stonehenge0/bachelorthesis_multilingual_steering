@@ -1,1 +1,0 @@
-{"columns": ["Groups", "Version", "Filter", "num_fewshot", "Metric", "Value", "Stderr"], "data": [["global_mmlu_bn", 0.0, "none", null, "acc", "0.4", "0.0245"], ["global_mmlu_de", 0.0, "none", null, "acc", "0.555", "0.0249"], ["global_mmlu_en", 0.0, "none", null, "acc", "0.7075", "0.0226"], ["global_mmlu_zh", 0.0, "none", null, "acc", "0.565", "0.0248"]]}

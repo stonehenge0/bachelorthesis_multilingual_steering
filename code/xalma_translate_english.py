@@ -172,7 +172,7 @@ def translate_batch(texts, source_lang, target_lang, model, tokenizer):
                 input_ids=input_ids,
                 num_beams=5,
                 max_new_tokens=100,
-                do_sample=True,  ## Took out top p and temp. for sampling
+                do_sample=True,  
             )
             outputs = tokenizer.batch_decode(generated_ids, skip_special_tokens=True)
 

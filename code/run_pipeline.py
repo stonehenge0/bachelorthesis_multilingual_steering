@@ -7,6 +7,7 @@ from lm_eval_steered_and_baseline_tasks import (
 )
 from utils import create_or_ensure_output_path
 
+
 def parse_arguments():
     """Parse model path argument from command line."""
     parser = argparse.ArgumentParser(description="Parse model path argument.")
